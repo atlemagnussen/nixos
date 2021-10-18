@@ -8,8 +8,9 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./modules/sway.nix
-      ./modules/neovim
+      ../../modules/global.nix
+      ../../modules/sway.nix
+      ../../modules/neovim
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -23,14 +24,6 @@
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;
-  
-  users.users.atle = {
-    isNormalUser = true;
-    home = "/home/atle";
-    description = "Atle";
-    extraGroups = [ "wheel" "networkmanager" ];
-    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBmSfC7UYFcvvRWVM9hxAGSwqYDGCwj29Aeh2kOym+ih atle@ATLE-WORKTOP" ];
-  };
   
   # Set your time zone.
   # time.timeZone = "Europe/Amsterdam";
