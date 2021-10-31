@@ -4,13 +4,15 @@ let
 in
 {
     time.timeZone = "Europe/Oslo";
-
+    nixpkgs.config = {
+      allowUnfree = true;
+    };
     users.users.atle = {
-        isNormalUser = true;
-        home = "/home/atle";
-        description = "Atle";
-        extraGroups = [ "wheel" "networkmanager" ];
-        openssh.authorizedKeys.keys = [ keys.atleLaptop keys.atleWorktopWslUbuntu ];
+      isNormalUser = true;
+      home = "/home/atle";
+      description = "Atle";
+      extraGroups = [ "wheel" "networkmanager" ];
+      openssh.authorizedKeys.keys = [ keys.atleLaptop keys.atleWorktopWslUbuntu ];
     };
 }
 
