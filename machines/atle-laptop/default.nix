@@ -67,6 +67,7 @@
     wget
     firefox
     chromium
+    google-chrome
     st
     git
     htop
