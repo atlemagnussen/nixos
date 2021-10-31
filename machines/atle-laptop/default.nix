@@ -32,7 +32,7 @@
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
   networking.useDHCP = false;
-  networking.interfaces.enp0s29u1u2.useDHCP = true;
+  # networking.interfaces.enp0s29u1u2.useDHCP = true;
   networking.interfaces.enp3s0.useDHCP = true;
   networking.interfaces.wlp2s0.useDHCP = true;
 
