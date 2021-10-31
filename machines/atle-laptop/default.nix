@@ -71,6 +71,8 @@
     git
     htop
     pavucontrol
+    nodejs-16_x
+    dotnet-sdk_5
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
