@@ -126,7 +126,7 @@
     git
     htop
     pavucontrol
-    nodejs-16_x
+    nodejs
     dotnet-sdk_5
   ];
 
