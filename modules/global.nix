@@ -12,7 +12,7 @@ in
       home = "/home/atle";
       description = "Atle";
       extraGroups = [ "wheel" "networkmanager" ];
-      openssh.authorizedKeys.keys = [ keys.atleLaptop keys.atleWorktopWslUbuntu ];
+      openssh.authorizedKeys.keys = keys.trustedKeys;
     };
 }
 

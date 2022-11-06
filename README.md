@@ -17,3 +17,11 @@ add a user with password
 add the user to group wheel
 then you can go from SSH on another machine
 
+## build
+
+```sh
+# just compile
+nixos-rebuild build
+# build and switch, then work after reboot
+nixos-rebuild boot
+```
