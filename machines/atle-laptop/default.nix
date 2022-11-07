@@ -8,7 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ../../modules/global.nix
+      ../../config/global.nix
       ../../config/udev.nix
       ../../modules/sway.nix
       ../../modules/neovim

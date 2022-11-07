@@ -4,7 +4,7 @@
 {
   imports =
     [
-      ../../modules/global.nix
+      ../../config/global.nix
       ../../config/udev.nix
       ./hardware-configuration.nix
     ];
