@@ -5,6 +5,7 @@
   imports =
     [
       ../../modules/global.nix
+      ../../config/udev.nix
       ./hardware-configuration.nix
     ];
 
