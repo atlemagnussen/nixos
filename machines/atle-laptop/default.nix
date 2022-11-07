@@ -1,6 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
 
@@ -10,7 +7,7 @@
       ./hardware-configuration.nix
       ../../config/global.nix
       ../../config/udev.nix
-      ../../modules/sway.nix
+      ../../config/desktop.nix
       ../../modules/neovim
     ];
 
@@ -46,19 +43,6 @@
   #   keyMap = "us";
   # };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.layout = "no";
-  # services.xserver.xkbOptions = "eurosign:e";
-
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
   
   # List packages installed in system profile. To search, run:
   # $ nix search wget
