@@ -10,7 +10,11 @@
   services.xserver = {
     enable = true;
     layout = "no";
-    displayManager.sddm.enable = true;
+    displayManager.lightdm.enable = false;
+    displayManager.gdm.enable = true;
+    displayManager.gdm.wayland = false;
+    desktopManager.plasma5.enable = true;
+    #displayManager.sddm.enable = true;
     # xkbOptions = "eurosign:e";
     libinput.enable = false;
   };
