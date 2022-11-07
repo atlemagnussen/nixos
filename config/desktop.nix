@@ -12,7 +12,7 @@
     layout = "no";
     displayManager.lightdm.enable = false;
     displayManager.gdm.enable = true;
-    displayManager.gdm.wayland = false;
+    displayManager.gdm.wayland = true;
     desktopManager.plasma5.enable = true;
     #displayManager.sddm.enable = true;
     # xkbOptions = "eurosign:e";

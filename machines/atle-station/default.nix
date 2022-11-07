@@ -31,6 +31,8 @@
     nodejs
     dotnet-sdk
     dotnet-runtime
+    firefox
+    chromium
   ];
 
   # Enable the OpenSSH daemon.
