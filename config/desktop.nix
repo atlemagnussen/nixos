@@ -11,9 +11,9 @@
     enable = true;
     layout = "no";
     # xkbOptions = "eurosign:e";
-    libinput.enable = true;
+    libinput.enable = false;
   };
 
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  sound.enable = false;
+  hardware.pulseaudio.enable = false;
 }
