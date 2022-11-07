@@ -10,6 +10,7 @@
   services.xserver = {
     enable = true;
     layout = "no";
+    displayManager.sddm.enable = true;
     # xkbOptions = "eurosign:e";
     libinput.enable = false;
   };
