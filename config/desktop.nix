@@ -3,7 +3,7 @@
 {
   imports =
   [
-    ../../modules/sway.nix
+    ../modules/sway.nix
   ];
 
   # Enable the X11 windowing system.
