@@ -24,4 +24,7 @@ then you can go from SSH on another machine
 nixos-rebuild build
 # build and switch, then work after reboot
 nixos-rebuild boot
+# build and switch immediately
+nixos-rebuild switch
+
 ```
