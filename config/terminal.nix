@@ -15,7 +15,7 @@
 
       hostname = {
         ssh_only = false;
-        style = "#2b51ab"; #6495ed cornflower bluye
+        style = "#5f87ff"; #2b51ab color picker #5f87ff termincal color 69  #6495ed cornflower bluy according to web
       };
       username = {
         style_user = "#c41e3a"; #e74856
