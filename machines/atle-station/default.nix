@@ -8,7 +8,7 @@
     ../../config/udev.nix
     ../../config/terminal.nix
     ../../config/development.nix
-    ../../config/desktop.nix
+    # ../../config/desktop.nix
     ./hardware-configuration.nix
   ];
 
