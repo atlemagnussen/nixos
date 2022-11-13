@@ -15,10 +15,10 @@
 
       hostname = {
         ssh_only = false;
-        style = "#6495ed";
+        style = "#2b51ab"; #6495ed cornflower bluye
       };
       username = {
-        style_user = "#c41e3a";
+        style_user = "#c41e3a"; #e74856
         style_root = "red";
       };
     };
