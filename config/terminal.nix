@@ -17,6 +17,9 @@
         ssh_only = false;
         style = "blue";
       };
+      username = {
+        style = "#c41e3a";
+      };
     };
   };
   environment.systemPackages = with pkgs; [
