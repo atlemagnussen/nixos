@@ -12,6 +12,11 @@
       # };
 
       # package.disabled = true;
+
+      hostname = {
+        ssh_only = false
+        style = "blue"
+      }
     };
   };
   environment.systemPackages = with pkgs; [
