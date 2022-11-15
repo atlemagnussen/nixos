@@ -6,6 +6,7 @@
     python39Full
     python39Packages.pynvim
     vimPlugins.vim-packer
+    vimPlugins.nvim-lspconfig
     nodePackages.typescript-language-server
     omnisharp-roslyn
     #pkgs.sumneko-lua-language-server
