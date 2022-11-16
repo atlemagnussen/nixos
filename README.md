@@ -17,6 +17,12 @@ add a user with password
 add the user to group wheel
 then you can go from SSH on another machine
 
+## home-manager
+
+See [documentation](https://nix-community.github.io/home-manager/index.html#idm140737328806976)
+
+Must add channel and so on ...
+
 ## build
 
 ```sh
