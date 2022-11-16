@@ -28,6 +28,7 @@
     wget
     git
     htop
+    screen
     silver-searcher
     fzf
     ripgrep
