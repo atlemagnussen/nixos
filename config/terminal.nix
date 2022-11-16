@@ -34,5 +34,6 @@
     ripgrep
     bat
     fd
+    monero-cli
   ];
 }
