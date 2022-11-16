@@ -12,13 +12,13 @@
       packages = [ pkgs.fortune ];
       sessionVariables = {
         NPM_PACKAGES = "$HOME/.npm-packages";
-        PATH = "$PATH:$HOME/.npm-packages/bin";
+        PATH = "$PATH:$NPM_PACKAGES/bin";
       };
     };
     programs.bash = {
       enable = true;
       initExtra = ''
-          npm set prefix $HOME/.npm-packages
+          npm set prefix $NPM_PACKAGES
         '';
     };
 
