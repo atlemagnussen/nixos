@@ -15,5 +15,3 @@ in
       openssh.authorizedKeys.keys = keys.trustedKeys;
     };
 }
-
-  
