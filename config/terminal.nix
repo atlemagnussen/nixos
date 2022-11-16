@@ -28,5 +28,10 @@
     wget
     git
     htop
+    silver-searcher
+    fzf
+    ripgrep
+    bat
+    fd
   ];
 }
