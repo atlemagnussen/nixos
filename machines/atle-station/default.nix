@@ -8,7 +8,7 @@
     ../../config/udev.nix
     ../../config/terminal.nix
     ../../config/development.nix
-    ../../config/home.nix
+    ../../config/home-manager.nix
     ../../modules/neovim/with-user-config.nix
     # ../../config/desktop.nix
     ./hardware-configuration.nix
