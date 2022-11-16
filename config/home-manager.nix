@@ -13,7 +13,7 @@
       sessionVariables = {
         NPM_PACKAGES = "$HOME/.npm-packages";
         PATH = "$PATH:${config.home.sessionVariables.NPM_PACKAGES}/bin";
-      }
+      };
     };
     programs.bash = {
       enable = true;
