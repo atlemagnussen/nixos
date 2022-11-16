@@ -12,7 +12,7 @@
       packages = [ pkgs.fortune ];
       sessionVariables = {
         NPM_PACKAGES = "$HOME/.npm-packages";
-        PATH = "$PATH:$NPM_PACKAGES/bin";
+        PATH = "$PATH:$HOME/bin:$NPM_PACKAGES/bin";
       };
     };
     programs.bash = {
