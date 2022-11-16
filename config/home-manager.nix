@@ -8,7 +8,13 @@
 #   };
 
   home-manager.users.atle = { pkgs, ... }: {
-    home.packages = [ pkgs.fortune ];
+    home = {
+      packages = [ pkgs.fortune ];
+      sessionVariables = {
+        NPM_PACKAGES = "$HOME/.npm-packages";
+        PATH = "$PATH:${config.home.sessionVariables.NPM_PACKAGES}/bin";
+      }
+    };
     programs.bash = {
       enable = true;
       initExtra = ''
@@ -21,5 +27,7 @@
       userName  = "Atle Magnussen";
       userEmail = "atlemagnussen@gmail.com";
     };
+
+
   };
 }
