@@ -18,7 +18,7 @@
       bash = {
         enable = true;
         initExtra = ''
-          npm set prefix ${config.home.sessionVariables.NPM_PACKAGES}
+          npm set prefix $HOME/.npm-packages
         '';
       };
     };
