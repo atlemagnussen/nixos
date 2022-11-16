@@ -12,6 +12,7 @@
     ../../modules/neovim/with-user-config.nix
     # ../../config/desktop.nix
     ./hardware-configuration.nix
+    ./mdadm.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
