@@ -35,5 +35,6 @@
     bat
     fd
     monero-cli
+    tmux
   ];
 }
