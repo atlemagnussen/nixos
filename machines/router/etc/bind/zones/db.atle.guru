@@ -1,0 +1,22 @@
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     ns1.atle.guru. admin.atle.guru. (
+                              3         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+
+; name servers - NS records
+    IN      NS      ns1.atle.guru.
+    IN      NS      ns2.atle.guru.
+
+; name servers - A records
+ns1.atle.guru.          IN      A       192.168.1.1
+ns2.atle.guru.          IN      A       192.168.1.3
+
+; 10.128.0.0/16 - A records
+nuc.atle.guru.        IN      A      192.168.1.19
+srv.atle.guru.        IN      A      192.168.1.21;
