@@ -9,7 +9,12 @@
 
   home-manager.users.atle = { pkgs, ... }: {
     home = {
-      packages = [ pkgs.fortune ];
+      packages = with pkgs; [
+        fortune
+        zip
+        unzip
+      ];
+      
       sessionVariables = {
         NPM_PACKAGES = "$HOME/.npm-packages";
         PATH = "$PATH:$HOME/bin:$NPM_PACKAGES/bin";
