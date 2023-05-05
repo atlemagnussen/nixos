@@ -14,4 +14,9 @@ in
     extraGroups = [ "wheel" "networkmanager" ];
     openssh.authorizedKeys.keys = keys.trustedKeys;
   };
+  nix = {
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+  };
 }
