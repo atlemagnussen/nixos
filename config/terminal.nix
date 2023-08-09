@@ -36,5 +36,7 @@
     fd
     monero-cli
     tmux
+    ncdu
+    mongosh
   ];
 }
