@@ -34,3 +34,18 @@ nixos-rebuild boot
 nixos-rebuild switch
 
 ```
+
+
+## dist-upgrade
+```sh
+sudo nix-channel --list
+
+sudo nix-channel --remove nixos
+sudo nix-channel --add https://nixos.org/channels/nixos-23.05 nixos
+
+sudo nix-channel --remove home-manager
+sudo nix-channel --add https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz home-manager
+
+sudo nix-channel --update
+
+```

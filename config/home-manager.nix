@@ -6,7 +6,7 @@
 #   programs = {
 #     home-manager.enable = true;
 #   };
-
+# home-manager.users.atle.home.stateVersion'
   home-manager.users.atle = { pkgs, ... }: {
     home = {
       packages = with pkgs; [
@@ -33,6 +33,6 @@
       userEmail = "atlemagnussen@gmail.com";
     };
 
-
+    stateVersion = "23.05";
   };
 }
