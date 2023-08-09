@@ -19,6 +19,8 @@
         NPM_PACKAGES = "$HOME/.npm-packages";
         PATH = "$PATH:$HOME/bin:$NPM_PACKAGES/bin";
       };
+
+      stateVersion = "23.05";
     };
     programs.bash = {
       enable = true;
@@ -32,7 +34,5 @@
       userName  = "Atle Magnussen";
       userEmail = "atlemagnussen@gmail.com";
     };
-
-    stateVersion = "23.05";
   };
 }
