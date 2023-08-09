@@ -19,7 +19,7 @@
             exe 'source' a:file
           endif
         endfunction
-        call SourceIfExists("~/.config/nvim/init.vim")
+        call SourceIfExists("~/.config/nvim/init.lua")
       '';
     };
   };
