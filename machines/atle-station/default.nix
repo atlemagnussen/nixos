@@ -108,7 +108,7 @@
   }
 
   users.users.atle = {
-    extraGroups = [ "docker", "libvirtd" ];
+    extraGroups = [ "docker" "libvirtd" ];
   };
 
   # This value determines the NixOS release from which the default
