@@ -10,7 +10,7 @@
     ../../config/development.nix
     ../../config/home-manager.nix
     ../../modules/neovim/with-user-config.nix
-    # ../../config/desktop.nix
+    ../../config/desktop.nix
     ./hardware-configuration.nix
     ./mdadm.nix
   ];
