@@ -31,6 +31,7 @@
   environment.systemPackages = with pkgs; [
     firefox
     chromium
+    virt-manager
   ];
 
   # Enable the OpenSSH daemon.
@@ -107,7 +108,6 @@
   }
 
   programs.dconf.enable = true;
-  environment.systemPackages = with pkgs; [ virt-manager ];
 
   users.users.atle = {
     extraGroups = [ "docker", "libvirtd" ];
