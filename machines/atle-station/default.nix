@@ -101,9 +101,11 @@
   # accidentally delete configuration.nix.
   # system.copySystemConfiguration = true;
 
-  virtualisation.docker.enable = true;
+  virtualisation = {
+    docker.enable = true;
+    libvirtd.enable = true;
+  }
 
-  virtualisation.libvirtd.enable = true;
   programs.dconf.enable = true;
   environment.systemPackages = with pkgs; [ virt-manager ];
 
