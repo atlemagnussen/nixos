@@ -107,10 +107,6 @@
     libvirtd.enable = true;
   }
 
-  programs.dconf = {
-    enable = true;
-  }
-
   users.users.atle = {
     extraGroups = [ "docker", "libvirtd" ];
   };

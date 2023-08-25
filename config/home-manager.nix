@@ -28,6 +28,10 @@
           npm set prefix $NPM_PACKAGES
         '';
     };
+    
+    programs.dconf = {
+      enable = true;
+    };
 
     programs.git = {
       enable = true;
