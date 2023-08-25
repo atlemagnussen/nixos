@@ -105,7 +105,7 @@
   virtualisation = {
     docker.enable = true;
     libvirtd.enable = true;
-  }
+  };
 
   users.users.atle = {
     extraGroups = [ "docker" "libvirtd" ];
