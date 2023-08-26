@@ -38,5 +38,6 @@
     tmux
     ncdu
     mongosh
+    bridge-utils
   ];
 }
