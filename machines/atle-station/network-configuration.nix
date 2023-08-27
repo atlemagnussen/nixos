@@ -21,9 +21,9 @@
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
 
-  networking.bridges = {
-    "br0" = {
-      interfaces = [ "enp4s0" ];
-    };
-  };
+  #networking.bridges = {
+  #  "br0" = {
+  #    interfaces = [ "enp4s0" ];
+  #  };
+  #};
 }
