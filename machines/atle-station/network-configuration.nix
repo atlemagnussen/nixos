@@ -8,7 +8,7 @@ in
   networking = {
     hostName = "atle-station";
     networkmanager.enable = true;
-    useDHCP = false #lib.mkDefault true;
+    useDHCP = false; #lib.mkDefault true;
     firewall.enable = false;
     interfaces = {
       ${lan_interface}.useDHCP = false;
