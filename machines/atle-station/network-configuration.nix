@@ -2,7 +2,7 @@
 { config, pkgs, lib, ... }:
 let
   bridge_interface = "br0";
-  lan_interface = "enp4s0";
+  lan_interface = "enp10s0";
 in
 {
   networking = {
