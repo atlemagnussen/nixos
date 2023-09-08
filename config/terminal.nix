@@ -39,5 +39,6 @@
     ncdu
     mongosh
     bridge-utils
+    smartmontools
   ];
 }
