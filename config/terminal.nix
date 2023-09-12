@@ -40,5 +40,6 @@
     mongosh
     bridge-utils
     smartmontools
+    parted
   ];
 }
