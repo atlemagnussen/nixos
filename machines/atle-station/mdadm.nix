@@ -8,7 +8,7 @@ in
   systemd.services.mdadm-monitor = {
     description = "Monitor RAID disks";
     wantedBy = [ "multi-user.target" ];
-    script = "${pkgs.mdadm}/bin/mdadm --monitor /dev/md/atle-pc:0";
+    script = "${pkgs.mdadm}/bin/mdadm --monitor /dev/md/atle-pc:0 /dev/md/atle-station:1";
   };
   environment.etc.mdadmconf = {
     target = "mdadm/mdadm.conf";
@@ -23,6 +23,10 @@ in
   fileSystems = {
     "/mnt/md0" = {
       device = "/dev/md/atle-pc:0";
+      fsType = "ext4";
+    };
+    "/mnt/md1" = {
+      device = "/dev/md/atle-station:1";
       fsType = "ext4";
     };
   };
