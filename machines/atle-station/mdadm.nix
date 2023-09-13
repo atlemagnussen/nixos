@@ -2,7 +2,7 @@
 let
   mdadmconf = ''
     ARRAY /dev/md/atle-pc:0 metadata=1.2 name=atle-pc:0 UUID=69e33663:d1a088c1:ac0a7739:1d05b0d7
-    ARRAY /dev/md/atle-station:1 metadata=1.2 name=atle-pc:0 UUID=FIXTHIS
+    ARRAY /dev/md/atle-station:1 metadata=1.2 name=atle-station:1 UUID=067378a8:3b31e8ab:42cbe7a3:e15a4a84
   '';
 in
 {
