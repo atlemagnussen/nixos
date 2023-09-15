@@ -21,15 +21,16 @@
       };
 
       file = {
-      syncMediaFiles = {
-        executable = true;
-        target = "bin/syncMediaFiles";
-        text = ''
-          #!${pkgs.bash}/bin/bash
-          set -e
-          echo "Sync books"
-          rsync -vrcz -e 'ssh -p 2258' --progress atle@atle.guru:/mnt/md1/Media/Books /mnt/md1/Media
-        '';
+        syncMediaFiles = {
+          executable = true;
+          target = "bin/syncMediaFiles";
+          text = ''
+            #!${pkgs.bash}/bin/bash
+            set -e
+            echo "Sync books"
+            rsync -vrcz -e 'ssh -p 2258' --progress atle@atle.guru:/mnt/md1/Media/Books /mnt/md1/Media
+          '';
+        };
       };
 
       stateVersion = "23.05";
