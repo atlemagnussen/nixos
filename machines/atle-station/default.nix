@@ -26,6 +26,7 @@
     firefox
     chromium
     virt-manager
+    virtiofsd
   ];
 
   # Enable the OpenSSH daemon.
