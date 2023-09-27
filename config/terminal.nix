@@ -41,5 +41,6 @@
     bridge-utils
     smartmontools
     parted
+    lm_sensors
   ];
 }
