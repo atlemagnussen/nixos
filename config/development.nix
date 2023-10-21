@@ -5,5 +5,6 @@
     deno
     dotnet-sdk
     dotnet-runtime
+    azure-functions-core-tools
   ];
 }

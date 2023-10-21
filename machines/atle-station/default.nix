@@ -25,6 +25,7 @@
   environment.systemPackages = with pkgs; [
     firefox
     chromium
+    tor-browser-bundle-bin
     virt-manager
     virtiofsd
   ];
