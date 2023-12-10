@@ -23,6 +23,12 @@
       };
     };
   };
+  programs.gnupg = {
+    agent = {
+      enable = true;
+      pinentryFlavor = "gnome3";
+    };
+  };
   environment.systemPackages = with pkgs; [
     vim
     wget
