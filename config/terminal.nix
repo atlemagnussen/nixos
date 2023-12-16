@@ -27,7 +27,7 @@
     agent = {
       enable = true;
       enableSSHSupport = true;
-      pinentryFlavor = "curses";
+      pinentryFlavor = "qt";
     };
   };
   services.pcscd.enable = true;
