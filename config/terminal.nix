@@ -27,7 +27,7 @@
     agent = {
       enable = true;
       enableSSHSupport = true;
-      pinentryFlavor = "tty";
+      pinentryFlavor = "curses";
     };
   };
   services.pcscd.enable = true;
@@ -50,5 +50,6 @@
     smartmontools
     parted
     lm_sensors
+    pinentry-curses
   ];
 }
