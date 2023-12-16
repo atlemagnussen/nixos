@@ -29,6 +29,7 @@
       enableSSHSupport = true;
     };
   };
+  services.pcscd.enable = true;
   environment.systemPackages = with pkgs; [
     vim
     wget
