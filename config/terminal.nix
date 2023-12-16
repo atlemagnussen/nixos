@@ -27,6 +27,7 @@
     agent = {
       enable = true;
       enableSSHSupport = true;
+      pinentryFlavor = "tty";
     };
   };
   services.pcscd.enable = true;
