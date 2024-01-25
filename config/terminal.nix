@@ -23,6 +23,14 @@
       };
     };
   };
+  programs.gnupg = {
+    agent = {
+      enable = true;
+      enableSSHSupport = true;
+      pinentryFlavor = "qt";
+    };
+  };
+  services.pcscd.enable = true;
   environment.systemPackages = with pkgs; [
     vim
     wget
@@ -42,5 +50,6 @@
     smartmontools
     parted
     lm_sensors
+    pinentry-curses
   ];
 }
