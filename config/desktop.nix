@@ -14,7 +14,7 @@
     displayManager.gdm.enable = true;
     displayManager.gdm.wayland = true;
     desktopManager.plasma5.enable = true;
-    displayManager.sddm.enable = true;
+    # displayManager.sddm.enable = true;
     # xkbOptions = "eurosign:e";
     libinput.enable = false;
   };
