@@ -32,6 +32,7 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  services.openssh.ports = [22 2256];
   services.openssh.settings.X11Forwarding = true;
 
   # Select internationalisation properties.
