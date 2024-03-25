@@ -12,11 +12,13 @@ in
     firewall.enable = false;
     interfaces = {
       ${lan_interface}.useDHCP = false;
-      ${bridge_interface}.useDHCP = true;
-      ${bridge_interface}.ipv6.addresses = [{
-        address = "fda9:9699:faa:cda5::21";
-        prefixLength = 64;
-      }];
+      ${bridge_interface} = {
+        useDHCP = true;
+        ipv6.addresses = [{
+          address = "fda9:9699:faa:cda5::21";
+          prefixLength = 64;
+        }];
+      };
     };
     bridges = {
       ${bridge_interface} = {
