@@ -3,8 +3,8 @@
   environment.systemPackages = with pkgs; [ 
     gcc
     cmake
-    python312Full
-    python312Packages.pynvim
+    python311Full
+    python311Packages.pynvim
     omnisharp-roslyn
   ];
   programs.neovim = {
