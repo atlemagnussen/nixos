@@ -19,6 +19,7 @@ in
       ${mdadmconf}
     '';
   };
+  boot.swraid.enable = true;
   boot.swraid.mdadmConf = mdadmconf;
 
   fileSystems = {
