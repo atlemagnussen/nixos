@@ -48,4 +48,8 @@ sudo nix-channel --add https://github.com/nix-community/home-manager/archive/rel
 
 sudo nix-channel --update
 
+sudo vim /etc/nixos/configuration.nix # set to latest version
+
+nixos-rebuild boot
+
 ```
