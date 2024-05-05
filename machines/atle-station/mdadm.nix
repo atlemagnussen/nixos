@@ -22,15 +22,15 @@ in
   boot.swraid.enable = true;
   boot.swraid.mdadmConf = mdadmconf;
 
-  fileSystems = {
-    "/mnt/md0" = {
-      device = "/dev/md/atle-station:0";
-      fsType = "ext4";
-    };
-    "/mnt/md1" = {
-      device = "/dev/md/atle-station:1";
-      fsType = "ext4";
-    };
-  };
+  #fileSystems = {
+  #  "/mnt/md0" = {
+  #    device = "/dev/md/atle-station:0";
+  #    fsType = "ext4";
+  #  };
+  #  "/mnt/md1" = {
+  #    device = "/dev/md/atle-station:1";
+  #    fsType = "ext4";
+  #  };
+  #};
   # boot.initrd.mdadmConf = mdadmconf;
 }
