@@ -19,7 +19,7 @@ in
       ${mdadmconf}
     '';
   };
-  boot.initrd.services.swraid.mdadmConf = mdadmconf;
+  boot.swraid.mdadmConf = mdadmconf;
 
   fileSystems = {
     "/mnt/md0" = {
