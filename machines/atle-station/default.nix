@@ -14,6 +14,7 @@
     ./hardware-configuration.nix
     ./network-configuration.nix
     ./mdadm.nix
+    ./systemd.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
