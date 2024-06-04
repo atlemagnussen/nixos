@@ -3,10 +3,17 @@
 
 {
     systemd = {
+
         targets = {
             sleep = {
                 enable = false;
                 unitConfig.DefaultDependencies = "no";
+                extraConfig = ''
+                  AllowSuspend=no
+                  AllowHibernation=no
+                  AllowHybridSleep=no
+                  AllowSuspendThenHibernate=no
+                '';
             };
             suspend = {
                 enable = false;
