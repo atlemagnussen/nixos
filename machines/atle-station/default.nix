@@ -32,9 +32,12 @@
   ];
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-  services.openssh.ports = [22 2256];
-  services.openssh.settings.X11Forwarding = true;
+  services.openssh = {
+    enable = true;
+    ports = [22 2256];
+    allowSFTP = true;
+    settings.X11Forwarding = true;
+  };
 
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";
