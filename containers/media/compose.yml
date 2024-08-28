@@ -40,7 +40,7 @@ services:
   
   # SABnzbd
   SABnzbd:
-    image: cr.hotio.dev/hotio/sabnzbd
+    image: ghcr.io/hotio/sabnzbd
     volumes:
         - /mnt/md1/config/sabnzbd:/config
         - /mnt/md1/data/usenet:/data/usenet
