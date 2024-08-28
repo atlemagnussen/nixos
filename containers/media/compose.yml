@@ -28,7 +28,6 @@ services:
   # deluge / torrents
   deluge:
     image: lscr.io/linuxserver/deluge:latest
-    container_name: deluge
     environment:
       - PUID=1003
       - PGID=1000
@@ -63,7 +62,7 @@ services:
   SABnzbd:
     image: ghcr.io/hotio/sabnzbd
     ports:
-      - "8080:8080"
+      - "8097:8080"
     environment:
       - PUID=1004
       - PGID=1000
