@@ -46,7 +46,7 @@ services:
       - DELUGE_LOGLEVEL=error #optional
     volumes:
       - /mnt/md1/config/deluge:/config
-      - /mnt/md1/data/downloads:/downloads
+      - /mnt/md1/data/downloads:/data/downloads
     networks:
       media_network:
         ipv4_address: 172.23.0.4
