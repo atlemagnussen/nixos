@@ -26,22 +26,38 @@ services:
       - /mnt/md1/data:/data
   
   # deluge / torrents
-  
   deluge:
-    image: binhex/arch-delugevpn
-    ports:
-      - "8112:8112"
-      - "8118:8118"
-      - "58846:58846"
-      - "58946:58946"
-      - "58946:58946/udp"
+    image: lscr.io/linuxserver/deluge:latest
+    container_name: deluge
     environment:
       - PUID=1003
       - PGID=1000
-      - UMASK=002
+      - TZ=Etc/UTC
+      - DELUGE_LOGLEVEL=error #optional
     volumes:
       - /mnt/md1/config/deluge:/config
-      - /mnt/md1/data/torrents:/data/torrents
+      - /mnt/md1/data/downloads:/downloads
+    ports:
+      - 8112:8112
+      - 6881:6881
+      - 6881:6881/udp
+      - 58846:58846 #optional
+  # with vpn
+  # deluge:
+  #   image: binhex/arch-delugevpn
+  #   ports:
+  #     - "8112:8112"
+  #     - "8118:8118"
+  #     - "58846:58846"
+  #     - "58946:58946"
+  #     - "58946:58946/udp"
+  #   environment:
+  #     - PUID=1003
+  #     - PGID=1000
+  #     - UMASK=002
+  #   volumes:
+  #     - /mnt/md1/config/deluge:/config
+  #     - /mnt/md1/data/torrents:/data/torrents
   
   # SABnzbd
   SABnzbd:
@@ -52,6 +68,8 @@ services:
       - PUID=1004
       - PGID=1000
       - UMASK=002
+      - WEBUI_PORTS="8080/tcp,8080/udp"
+      - TZ="Etc/UTC"
     volumes:
       - /mnt/md1/config/sabnzbd:/config
       - /mnt/md1/data/usenet:/data/usenet
