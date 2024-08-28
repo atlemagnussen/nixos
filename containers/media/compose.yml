@@ -10,6 +10,9 @@ services:
       - /mnt/md1/config/jellyfin:/config
       - /mnt/ssd1/cache:/cache
       - /mnt/md1/data/media:/media
+    networks:
+      media_network:
+        ipv4_address: 172.23.0.2
   
   # sonarr / sonarr
   sonarr:
@@ -24,10 +27,18 @@ services:
     volumes:
       - /mnt/md1/config/sonarr:/config
       - /mnt/md1/data:/data
+    networks:
+      media_network:
+        ipv4_address: 172.23.0.3
   
   # deluge / torrents
   deluge:
     image: lscr.io/linuxserver/deluge:latest
+    ports:
+      - 8112:8112
+      - 6881:6881
+      - 6881:6881/udp
+      - 58846:58846 #optional
     environment:
       - PUID=1003
       - PGID=1000
@@ -36,11 +47,9 @@ services:
     volumes:
       - /mnt/md1/config/deluge:/config
       - /mnt/md1/data/downloads:/downloads
-    ports:
-      - 8112:8112
-      - 6881:6881
-      - 6881:6881/udp
-      - 58846:58846 #optional
+    networks:
+      media_network:
+        ipv4_address: 172.23.0.4
   # with vpn
   # deluge:
   #   image: binhex/arch-delugevpn
@@ -71,3 +80,14 @@ services:
     volumes:
       - /mnt/md1/config/sabnzbd:/config
       - /mnt/md1/data/usenet:/data/usenet
+    networks:
+      media_network:
+        ipv4_address: 172.23.0.5
+# network
+networks:
+  media_network:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 172.23.0.0/16
+         gateway: 172.23.0.1
