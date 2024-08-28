@@ -1,0 +1,50 @@
+services:
+  # jellyfin / media
+  jellyfin:
+    container_name: jellyfin
+    image: jellyfin/jellyfin
+    ports:
+      - "8096:8096"
+    environment:
+      - user 1001:1000
+    volumes:
+      - /mnt/md1/config/jellyfin:/config
+      - /mnt/ssd1/cache:/cache
+      - /mnt/md1/data/media:/media
+  
+  # sonarr / sonarr
+  sonarr:
+    container_name: sonarr
+    image: ghcr.io/hotio/sonarr
+    ports:
+      - "8989:8989"
+    environment:
+      - PUID=1002
+      - PGID=1000
+      - UMASK=002
+      - TZ=Etc/UTC
+    volumes:
+      - /mnt/md1/config/sonarr:/config
+      - /mnt/md1/data:/data
+  
+  # deluge / torrents
+  deluge:
+    image: binhex/arch-delugevpn
+    volumes:
+        - /mnt/md1/config/deluge:/config
+        - /mnt/md1/data/torrents:/data/torrents
+    environment:
+        - PUID=1003
+        - PGID=1000
+        - UMASK=002
+  
+  # SABnzbd
+  SABnzbd:
+    image: cr.hotio.dev/hotio/sabnzbd
+    volumes:
+        - /mnt/md1/config/sabnzbd:/config
+        - /mnt/md1/data/usenet:/data/usenet
+    environment:
+        - PUID=1004
+        - PGID=1000
+        - UMASK=002
