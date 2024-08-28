@@ -11,3 +11,8 @@ useradd -m -g media sonarr
 useradd -m -g media torrents
 useradd -m -g media usenet
 ```
+
+```sh
+docker-compose pull
+docker-compose up -d
+```

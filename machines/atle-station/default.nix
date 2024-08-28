@@ -29,6 +29,7 @@
     tor-browser-bundle-bin
     virt-manager
     virtiofsd
+    docker-compose
   ];
 
   # Enable the OpenSSH daemon.
