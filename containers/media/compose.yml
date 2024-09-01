@@ -68,21 +68,21 @@ services:
   #     - /mnt/md1/data/torrents:/data/torrents
   
   # SABnzbd
-  SABnzbd:
-    image: ghcr.io/hotio/sabnzbd
-    ports:
-      - "8080:8080"
-    environment:
-      - PUID=1004
-      - PGID=1000
-      - UMASK=002
-      - TZ="Etc/UTC"
-    volumes:
-      - /mnt/md1/config/sabnzbd:/config
-      - /mnt/md1/data/usenet:/data/usenet
-    networks:
-      media_network:
-        ipv4_address: 172.23.0.5
+  # SABnzbd:
+  #   image: ghcr.io/hotio/sabnzbd
+  #   ports:
+  #     - "8080:8080"
+  #   environment:
+  #     - PUID=1004
+  #     - PGID=1000
+  #     - UMASK=002
+  #     - TZ="Etc/UTC"
+  #   volumes:
+  #     - /mnt/md1/config/sabnzbd:/config
+  #     - /mnt/md1/data/usenet:/data/usenet
+  #   networks:
+  #     media_network:
+  #       ipv4_address: 172.23.0.5
   
   # prowlarr
   prowlarr:
@@ -98,6 +98,24 @@ services:
     networks:
       media_network:
         ipv4_address: 172.23.0.6
+  
+  #readarr
+  readarr:
+    image: ghcr.io/hotio/readarr
+    ports:
+      - 8787:8787
+    environment:
+      - PUID=1005
+      - PGID=1000
+      - UMASK=002
+      - TZ="Etc/UTC" 
+    volumes:
+      - /mnt/md1/config/readarr:/config
+      - /mnt/md1/data:/data
+    networks:
+      media_network:
+        ipv4_address: 172.23.0.7
+
 # network
 networks:
   media_network:
