@@ -10,20 +10,9 @@ spec:
     port: 6443
     sans:
     - 192.168.1.2
-    - 10.244.0.1
     - 2a01:799:422:e701:6d4:c4ff:fed2:816f
     - fda9:9699:faa:cda5::2
     - fe80::6d4:c4ff:fed2:816f
-    - fe80::f432:b9ff:fe0b:879c
-    - fe80::c0c9:7aff:fe99:47dc
-    - fe80::7849:47ff:fecc:ff60
-    - fe80::a09a:35ff:fec1:393e
-    - fe80::1423:9bff:fe22:c06c
-    - fe80::6422:beff:fef6:4a55
-    - fe80::c436:7cff:fe8f:499
-    - fe80::386e:52ff:fefc:d19
-    - fe80::94ca:2fff:fe1e:ad0e
-    - fe80::5487:dfff:fed7:3d39
   controllerManager: {}
   extensions:
     helm:
@@ -53,33 +42,3 @@ spec:
         syncPeriod: 0s
       ipvs:
         minSyncPeriod: 0s
-        syncPeriod: 0s
-        tcpFinTimeout: 0s
-        tcpTimeout: 0s
-        udpTimeout: 0s
-      metricsBindAddress: 0.0.0.0:10249
-      mode: iptables
-    kuberouter:
-      autoMTU: true
-      hairpin: Enabled
-      ipMasq: false
-      metricsPort: 8080
-      mtu: 0
-      peerRouterASNs: ""
-      peerRouterIPs: ""
-    nodeLocalLoadBalancing:
-      envoyProxy:
-        apiServerBindPort: 7443
-        konnectivityServerBindPort: 7132
-      type: EnvoyProxy
-    podCIDR: 10.244.0.0/16
-    provider: kuberouter
-    serviceCIDR: 10.96.0.0/12
-  scheduler: {}
-  storage:
-    etcd:
-      externalCluster: null
-      peerAddress: 192.168.1.2
-    type: etcd
-  telemetry:
-    enabled: true
