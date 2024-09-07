@@ -34,3 +34,29 @@ kubectl delete deploy nginx
 ## NGINX ingress controller
 
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.11.2/deploy/static/provider/baremetal/deploy.yaml
+
+
+## Create from file
+
+k create -f kube-deploy.yaml 
+
+Delete:
+k delete -f kube-deploy.yaml 
+
+## k3d
+
+k3d cluster create atle-cluster
+
+import image:
+k3d image import test-net8-web -c atle-cluster
+
+k3d cluster edit atle-cluster --port-add 30080-30085:30080-30085@loadbalancer
+
+
+
+
+
+# docker hub
+
+docker image tag test-net8-web atlmag/test-net8-web
+docker push atlmag/test-net8-web:latest
