@@ -19,6 +19,10 @@ https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-nati
 
 copy cat `/var/lib/k0s/pki/admin.conf` to same or another machine `.kube/config`
 
+```sh
+sudo cp /var/lib/k0s/pki/admin.conf ~/.kube/config
+```
+
 kubectl create deploy hello-world --image=hello-world
 
 kubectl create deploy nginx --image=nginx
