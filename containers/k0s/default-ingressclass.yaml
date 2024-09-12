@@ -3,7 +3,7 @@ kind: IngressClass
 metadata:
   labels:
     app.kubernetes.io/component: controller
-  name: nginx-example
+  name: nginx
   annotations:
     ingressclass.kubernetes.io/is-default-class: "true"
 spec:
