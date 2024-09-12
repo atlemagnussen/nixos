@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-net8-web-deployment
+  namespace: test
+  labels:
+    app: test-net8-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: test-net8-web
+  template:
+    metadata:
+      labels:
+        name: test-net8-web
+    spec:
+      containers:
+      - name: test-net8-web
+        image: atlmag/test-net8-web:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-net8-web-service
+spec:
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    name: test-net8-web
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: test-net8-web-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: kube.atle.guru
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: test-net8-web-service
+            port:
+              number: 8080
