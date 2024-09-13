@@ -3,19 +3,19 @@ kind: Deployment
 metadata:
   name: test-net8-web-deployment
   labels:
-    app: test-net8
+    app: test-net8-web
 spec:
   selector:
     matchLabels:
-      app: test-net8
-  replicas: 1
+      app: test-net8-web
+  replicas: 2
   template:
     metadata:
       labels:
-        app: test-net8
+        app: test-net8-web
     spec:
       containers:
-      - name: test-net8
+      - name: test-net8-web
         image: atlmag/test-net8-web:latest
         ports:
         - containerPort: 8080
@@ -30,13 +30,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: test-net8
+  name: test-net8-web-service
 spec:
   selector:
-    app: test-net8
+    app: test-net8-web
   ports:
   - protocol: TCP
-    port: 8080
+    port: 80
     targetPort: 8080
-    nodePort: 30081
-  type: NodePort

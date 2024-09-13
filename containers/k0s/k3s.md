@@ -28,6 +28,10 @@ k create namespace test
 
 k apply -f k3s.test.yaml --namespace test
 
+kubectl -n ingress-nginx port-forward --address 0.0.0.0 svc/ingress-nginx-controller 443
+
+sudo kubectl -n ingress-nginx port-forward --address 0.0.0.0 svc/ingress-nginx-controller-loadbalancer 443
+
 ## try helm
 
 helm upgrade --install ingress-nginx ingress-nginx \
