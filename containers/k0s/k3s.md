@@ -32,6 +32,11 @@ kubectl -n ingress-nginx port-forward --address 0.0.0.0 svc/ingress-nginx-contro
 
 sudo kubectl -n ingress-nginx port-forward --address 0.0.0.0 svc/ingress-nginx-controller-loadbalancer 443
 
+## metallb
+
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.8/config/manifests/metallb-native.yaml
+
+
 ## try helm
 
 helm upgrade --install ingress-nginx ingress-nginx \
