@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webdir-listing-deployment
+  labels:
+    app: webdir-listing
+spec:
+  selector:
+    matchLabels:
+      app: webdir-listing
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: webdir-listing
+    spec:
+      containers:
+      - name: webdir-listing
+        image: atlmag/webdir-listing:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: TITLE
+          value: "web.atle.guru"
+        - name: LIBPATHS
+          value: "Audio,AudioBooks,Books,Music"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webdir-listing-service
+spec:
+  selector:
+    app: webdir-listing
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8000
