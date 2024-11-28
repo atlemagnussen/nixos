@@ -1,0 +1,16 @@
+meta {
+  name: List DNS
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseApiUrl}}/domains/1844163/dns
+  body: none
+  auth: basic
+}
+
+auth:basic {
+  username: {{user}}
+  password: {{secret}}
+}

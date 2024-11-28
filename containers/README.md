@@ -17,3 +17,11 @@ useradd -m -g media usenet
 docker-compose pull
 docker-compose up -d
 ```
+
+
+https://certbot.eff.org/instructions?ws=nginx&os=pip&commit=%3E
+
+
+sudo certbot certonly --manual --preferred-challenges dns
+
+sudo openssl x509 -in /etc/letsencrypt/live/atle.guru/fullchain.pem

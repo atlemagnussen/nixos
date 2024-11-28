@@ -1,0 +1,16 @@
+meta {
+  name: List domains
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseApiUrl}}/domains
+  body: none
+  auth: basic
+}
+
+auth:basic {
+  username: {{user}}
+  password: {{secret}}
+}
