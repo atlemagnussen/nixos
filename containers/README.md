@@ -14,8 +14,8 @@ useradd -m -g media usenet
 ```
 
 ```sh
-docker-compose pull
-docker-compose up -d
+docker compose pull
+docker compose up -d
 ```
 
 
