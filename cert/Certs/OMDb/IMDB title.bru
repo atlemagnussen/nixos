@@ -1,0 +1,16 @@
+meta {
+  name: IMDB title
+  type: http
+  seq: 2
+}
+
+get {
+  url: https://www.omdbapi.com/?apikey={{omdb_key}}&t=dune
+  body: none
+  auth: none
+}
+
+params:query {
+  apikey: {{omdb_key}}
+  t: dune
+}

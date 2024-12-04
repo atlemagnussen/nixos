@@ -1,0 +1,16 @@
+meta {
+  name: IMDB tag
+  type: http
+  seq: 1
+}
+
+get {
+  url: https://www.omdbapi.com/?apikey={{omdb_key}}&i=tt15239678
+  body: none
+  auth: none
+}
+
+params:query {
+  apikey: {{omdb_key}}
+  i: tt15239678
+}
