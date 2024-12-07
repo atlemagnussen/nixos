@@ -1,6 +1,7 @@
 # Upgrades
 
 Started with adding nvidia driver stuff
+hardware.nvidia-container-toolkit.enable
 
 ## Upgraded to 24.11
 
