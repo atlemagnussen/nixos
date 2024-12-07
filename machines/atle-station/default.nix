@@ -29,7 +29,6 @@
     tor-browser-bundle-bin
     virt-manager
     virtiofsd
-    docker-compose
   ];
 
   # Enable the OpenSSH daemon.
@@ -97,6 +96,7 @@
 
   virtualisation = {
     docker.enable = true;
+    enableNvidia = true;
     libvirtd.enable = true;
   };
 
