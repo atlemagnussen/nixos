@@ -1,0 +1,5 @@
+evaluation warning: The option `services.xserver.layout' defined in `/home/atle/nixos-config/config/desktop.nix' has been renamed to `services.xserver.xkb.layout'.
+evaluation warning: The option `services.xserver.libinput.enable' defined in `/home/atle/nixos-config/config/desktop.nix' has been renamed to `services.libinput.enable'.
+evaluation warning: You have set virtualisation.docker.enableNvidia. This option is deprecated, please set hardware.nvidia-container-toolkit.enable instead.
+evaluation warning: mdadm: Neither MAILADDR nor PROGRAM has been set. This will cause the `mdmon` service to crash.
+
