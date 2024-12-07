@@ -1,8 +1,8 @@
 { config, pkgs, lib, ... }:
 let
   mdadmconf = ''
-    ARRAY /dev/md/md2g metadata=1.2 name=atle-pc:0 UUID=69e33663:d1a088c1:ac0a7739:1d05b0d7
-    ARRAY /dev/md/md8g metadata=1.2 name=atle-station:1 UUID=e323b6d5:c29ed9bd:5f752e08:50e69e21
+    ARRAY /dev/md/md2g metadata=1.2 UUID=69e33663:d1a088c1:ac0a7739:1d05b0d7
+    ARRAY /dev/md/md8g metadata=1.2 UUID=e323b6d5:c29ed9bd:5f752e08:50e69e21
   '';
 in
 {
