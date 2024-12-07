@@ -18,6 +18,10 @@ docker compose pull
 docker compose up -d
 ```
 
+works
+docker run --rm -it --device=nvidia.com/gpu=all ubuntu:latest nvidia-smi
+
+sudo nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs-unstable
 
 https://certbot.eff.org/instructions?ws=nginx&os=pip&commit=%3E
 
