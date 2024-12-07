@@ -25,7 +25,6 @@
   services.xrdp.defaultWindowManager = "startplasma-x11";
   services.xrdp.openFirewall = true;
 
-  sound.enable = false;
   hardware.pulseaudio.enable = false;
 
   environment.systemPackages = with pkgs; [  
