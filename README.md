@@ -35,20 +35,22 @@ nixos-rebuild switch
 
 ```
 
+[UpgradeLog](./UPGRADE-log.md)
 
 ## dist-upgrade
 ```sh
 sudo nix-channel --list
 
 sudo nix-channel --remove nixos
-sudo nix-channel --add https://nixos.org/channels/nixos-23.11 nixos
+sudo nix-channel --add https://nixos.org/channels/nixos-24.11 nixos
 
 sudo nix-channel --remove home-manager
-sudo nix-channel --add https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz home-manager
+sudo nix-channel --add https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz home-manager
 
 sudo nix-channel --update
 
 sudo vim /etc/nixos/configuration.nix # set to latest version
+sudo vim machines/atle-station/default.nix # set to latest version
 
 nixos-rebuild boot
 
