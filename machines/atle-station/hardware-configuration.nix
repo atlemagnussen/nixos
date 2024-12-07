@@ -13,6 +13,7 @@
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
+
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/a83045d7-1a04-4b66-aea6-bcb20e1fd224";
       fsType = "ext4";
@@ -37,4 +38,7 @@
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  services.xserver.videoDrivers = [ "nvidia" ];
+
 }
