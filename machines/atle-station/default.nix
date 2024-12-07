@@ -95,8 +95,10 @@
   # system.copySystemConfiguration = true;
 
   virtualisation = {
-    docker.enable = true;
-    enableNvidia = true;
+    docker = {
+      enable = true;
+      enableNvidia = true;
+    };
     libvirtd.enable = true;
   };
 
