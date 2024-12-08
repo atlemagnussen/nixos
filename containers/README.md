@@ -27,7 +27,7 @@ sudo nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs-unsta
 
 nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixpkgs-unstable.tar.gz -p docker-compose
 
-nix-shell -I nixpkgs=channel:nixos-unstable -p docker-compose
+nix-shell -I nixpkgs=channel:nixpkgs-unstable -p docker-compose
 
 
 https://certbot.eff.org/instructions?ws=nginx&os=pip&commit=%3E
