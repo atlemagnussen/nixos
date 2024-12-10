@@ -46,3 +46,7 @@ docker run --rm -it --device=nvidia.com/gpu=all \
 -v /mnt/md0/stable-diffusion-workspace/stable-diffusion-webui:/home/user/workspace \
 stable-diff:1.3.0-12.6.0 
 ```
+
+## find models
+
+https://github.com/stability-ai/generative-models
