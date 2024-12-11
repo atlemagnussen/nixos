@@ -50,3 +50,9 @@ stable-diff:1.3.0-12.6.0
 ## find models
 
 https://github.com/stability-ai/generative-models
+
+https://civitai.com/models/4384/dreamshaper
+
+## styles
+
+https://github.com/AUTOMATIC1111/stable-diffusion-webui/files/11423539/styles.csv

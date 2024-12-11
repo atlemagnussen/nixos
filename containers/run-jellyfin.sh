@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 docker run -d \
   --user 1000:100 \
  -p 8096:8096 --name jellyfin-atle \
