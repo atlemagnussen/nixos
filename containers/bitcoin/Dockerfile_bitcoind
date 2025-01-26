@@ -26,13 +26,12 @@ ENV BITCOIN_DATA=$datadir
 ENV PATH=/opt/bitcoin-${BITCOIN_VERSION}/bin:$PATH
 
 RUN groupadd --gid ${GID} bitcoin \
-  && useradd --create-home --no-log-init -u ${UID} -g ${GID} bitcoin \
-  && apt-get update -y \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+  && useradd --create-home --no-log-init -u ${UID} -g ${GID} bitcoin
 
-RUN mkdir -p /home/bitcoin/.bitcoin
-RUN chown bitcoin:bitcoin /home/bitcoin/.bitcoin
+RUN mkdir -p "${BITCOIN_DATA}"
+RUN chown bitcoin:bitcoin "${BITCOIN_DATA}"
+
+RUN chmod 700 "${BITCOIN_DATA}"
 
 COPY --from=base /opt/bitcoin-${BITCOIN_VERSION} /opt/bitcoin-${BITCOIN_VERSION}
 
