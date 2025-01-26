@@ -5,8 +5,8 @@ services:
     ports:
       - "8333:8333"
     environment:
-      - PUID=1000
-      - PGID=1000
+      - UID=1000
+      - GID=1000
     volumes:
       - /mnt/ssd2/blockchain/bitcoin:/home/bitcoin/.bitcoin
     networks:
