@@ -7,7 +7,7 @@ services:
     volumes:
       - /mnt/ssd2/blockchain/bitcoin:/home/bitcoin/.bitcoin
     networks:
-      media_network:
+      bitcoin_network:
         ipv4_address: 172.24.0.2
 # network
 networks:
