@@ -1,4 +1,4 @@
-ARG defult_version=28.1
+ARG version_default=28.1
 
 FROM debian:bookworm-slim AS base
 ARG version_default
