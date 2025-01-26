@@ -26,7 +26,7 @@ ENV BITCOIN_DATA=$datadir
 ENV PATH=/opt/bitcoin-${BITCOIN_VERSION}/bin:$PATH
 
 RUN groupadd bitcoin \
-  && useradd -m -g bitcoin -s /bin/bash bitcoin
+  && useradd --create-home -g bitcoin -s /bin/bash bitcoin
 
 RUN mkdir -p "${BITCOIN_DATA}"
 RUN chown -R bitcoin:bitcoin "${BITCOIN_DATA}"
