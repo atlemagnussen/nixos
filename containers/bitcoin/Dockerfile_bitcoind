@@ -2,7 +2,7 @@ ARG version_default=28.1
 
 FROM debian:bookworm-slim AS base
 ARG version_default
-ENV BITCOIN_VERSION=version_default
+ENV BITCOIN_VERSION=$version_default
 
 RUN apt update \
   && apt upgrade \
@@ -18,7 +18,7 @@ ARG version_default
 ARG UID=1000
 ARG GID=1000
 
-ENV BITCOIN_VERSION=version_default
+ENV BITCOIN_VERSION=$version_default
 
 ENV BITCOIN_DATA=/home/bitcoin/.bitcoin
 ENV PATH=/opt/bitcoin-${BITCOIN_VERSION}/bin:$PATH
