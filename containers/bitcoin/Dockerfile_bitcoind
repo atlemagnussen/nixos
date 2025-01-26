@@ -14,7 +14,7 @@ RUN wget https://bitcoincore.org/bin/bitcoin-core-${BITCOIN_VERSION}/bitcoin-${B
 RUN tar xvf bitcoin-${BITCOIN_VERSION}-x86_64-linux-gnu.tar.gz
 RUN rm bitcoin-${BITCOIN_VERSION}-x86_64-linux-gnu.tar.gz
 
-COPY container_run.sh .
+COPY entrypoint.sh .
 
 # data folder and user
 ENV BITCOIN_DATA=$datadir
@@ -32,4 +32,4 @@ VOLUME ["/home/bitcoin/.bitcoin"]
 EXPOSE 8332 8333 18332 18333 18443 18444 38333 38332
 
 USER bitcoin
-ENTRYPOINT ["./container_run.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
