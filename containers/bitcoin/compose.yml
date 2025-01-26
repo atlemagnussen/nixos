@@ -1,7 +1,7 @@
 services:
   # bitcoincore
   bitcoind:
-    image: bitcoin/bitcoin
+    image: atlmag/bitcoin:latest
     ports:
       - "8333:8333"
     environment:
