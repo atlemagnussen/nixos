@@ -18,7 +18,7 @@ FROM debian:bookworm-slim AS final
 ARG version
 ARG datadir
 ARG UID=1000
-ARG GID=1000
+ARG GID=100
 
 ENV BITCOIN_VERSION=$version
 
