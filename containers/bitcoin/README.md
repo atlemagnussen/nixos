@@ -24,4 +24,15 @@ docker compose up -d
 ## inspect
 ```sh
 docker exec -it bitcoin-bitcoind-1 bash
-````
+```
+
+## bitcoin-cli
+
+```sh
+docker exec -it bitcoin-bitcoind-1 bitcoin-cli getpeerinfo
+docker exec -it bitcoin-bitcoind-1 bitcoin-cli getblockchaininfo
+docker exec -it bitcoin-bitcoind-1 bitcoin-cli getnetworkinfo
+docker exec -it bitcoin-bitcoind-1 bitcoin-cli getwalletinfo
+
+docker exec -it bitcoin-bitcoind-1 bitcoin-cli loadwallet wallet.dat
+```
