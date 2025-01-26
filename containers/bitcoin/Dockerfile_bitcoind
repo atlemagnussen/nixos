@@ -31,5 +31,7 @@ RUN chmod 770 "${BITCOIN_DATA}"
 VOLUME ["/home/bitcoin/.bitcoin"]
 EXPOSE 8332 8333 18332 18333 18443 18444 38333 38332
 
-USER bitcoin
 ENTRYPOINT ["./entrypoint.sh"]
+
+USER bitcoin
+CMD ["bitcoind"]
