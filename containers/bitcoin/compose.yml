@@ -1,0 +1,19 @@
+services:
+  # bitcoincore
+  bitcoind:
+    image: bitcoin/bitcoin
+    ports:
+      - "8333:8333"
+    volumes:
+      - /mnt/ssd2/blockchain/bitcoin:/home/bitcoin/.bitcoin
+    networks:
+      media_network:
+        ipv4_address: 172.24.0.2
+# network
+networks:
+  media_network:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 172.24.0.0/16
+         gateway: 172.24.0.1
