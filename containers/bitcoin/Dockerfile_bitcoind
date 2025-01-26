@@ -30,8 +30,6 @@ RUN chown -R bitcoin:bitcoin "${BITCOIN_DATA}"
 
 RUN chmod 770 "${BITCOIN_DATA}"
 
-COPY --from=base /opt/bitcoin-${BITCOIN_VERSION} /opt/bitcoin-${BITCOIN_VERSION}
-
 VOLUME ["/home/bitcoin/.bitcoin"]
 EXPOSE 8332 8333 18332 18333 18443 18444 38333 38332
 
