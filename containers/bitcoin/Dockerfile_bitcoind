@@ -1,6 +1,8 @@
 FROM debian:bookworm-slim as builder
 
-RUN apt update && apt upgrade
+RUN apt update && \
+  && apt upgrade \
+  && apt install -y wget
 
 ARG TARGETPLATFORM
 ENV BITCOIN_VERSION=28.1
