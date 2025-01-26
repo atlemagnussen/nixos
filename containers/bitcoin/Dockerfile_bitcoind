@@ -31,7 +31,7 @@ RUN groupadd --gid ${GID} bitcoin \
 RUN mkdir -p "${BITCOIN_DATA}"
 RUN chown bitcoin:bitcoin "${BITCOIN_DATA}"
 
-RUN chmod 700 "${BITCOIN_DATA}"
+RUN chmod 770 "${BITCOIN_DATA}"
 
 COPY --from=base /opt/bitcoin-${BITCOIN_VERSION} /opt/bitcoin-${BITCOIN_VERSION}
 
