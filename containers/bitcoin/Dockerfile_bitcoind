@@ -31,6 +31,9 @@ RUN groupadd --gid ${GID} bitcoin \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+RUN mkdir -p /home/bitcoin/.bitcoin
+RUN chown bitcoin:bitcoin /home/bitcoin/.bitcoin
+
 COPY --from=base /opt/bitcoin-${BITCOIN_VERSION} /opt/bitcoin-${BITCOIN_VERSION}
 
 VOLUME ["/home/bitcoin/.bitcoin"]
