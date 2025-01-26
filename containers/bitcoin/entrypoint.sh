@@ -20,7 +20,7 @@ fi
 
 if [ "$(echo "$1" | cut -c1)" = "-" ] || [ "$1" = "bitcoind" ]; then
   mkdir -p "$BITCOIN_DATA"
-  chmod 700 "$BITCOIN_DATA"
+  chmod 770 "$BITCOIN_DATA"
   # Fix permissions for home dir.
   chown -R bitcoin:bitcoin "$(getent passwd bitcoin | cut -d: -f6)"
   # Fix permissions for bitcoin data dir.
