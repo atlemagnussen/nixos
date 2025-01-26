@@ -1,4 +1,4 @@
-FROM debian:bookworm-slim as base
+FROM debian:bookworm-slim AS base
 
 RUN apt update \
   && apt upgrade \
@@ -12,7 +12,7 @@ RUN wget https://bitcoincore.org/bin/bitcoin-core-${BITCOIN_VERSION}/bitcoin-${B
 RUN tar xvf bitcoin-${BITCOIN_VERSION}-x86_64-linux-gnu.tar.gz
 
 # Second stage
-FROM debian:bookworm-slim as final
+FROM debian:bookworm-slim AS final
 
 ARG UID=1000
 ARG GID=1000
@@ -32,5 +32,5 @@ COPY --from=base /opt/bitcoin-${BITCOIN_VERSION} /opt/bitcoin-${BITCOIN_VERSION}
 VOLUME ["/home/bitcoin/.bitcoin"]
 EXPOSE 8332 8333 18332 18333 18443 18444 38333 38332
 
-RUN bitcoind -version"
+RUN bitcoind -version
 CMD ["bitcoind"]
