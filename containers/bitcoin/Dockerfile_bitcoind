@@ -17,7 +17,7 @@ RUN tar xvf bitcoin-${BITCOIN_VERSION}-x86_64-linux-gnu.tar.gz
 FROM debian:bookworm-slim AS final
 ARG version
 ARG datadir
-ARG UID=1000
+ARG UID=1006
 ARG GID=1001
 
 ENV BITCOIN_VERSION=$version
