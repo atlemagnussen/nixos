@@ -2,6 +2,9 @@ FROM debian:bookworm-slim
 ARG version=28.1
 ARG datadir=/home/bitcoin/.bitcoin
 
+ARG UID=101
+ARG GID=101
+
 ENV BITCOIN_VERSION=$version
 
 # untar and remove tar
@@ -25,8 +28,8 @@ COPY entrypoint.sh .
 ENV BITCOIN_DATA=$datadir
 ENV PATH=/opt/bitcoin-${BITCOIN_VERSION}/bin:$PATH
 
-RUN groupadd bitcoin \
-  && useradd --create-home -g bitcoin -s /bin/bash bitcoin
+RUN groupadd --gid ${GID} bitcoin \
+  && useradd --create-home --no-log-init -u ${UID} -g ${GID} bitcoin
 
 RUN mkdir -p "${BITCOIN_DATA}"
 RUN chown -R bitcoin:bitcoin "${BITCOIN_DATA}"
