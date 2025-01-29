@@ -4,6 +4,7 @@ services:
     image: atlmag/bitcoin:latest
     ports:
       - "8333:8333"
+      - "8332:8332"
     environment:
       - UID=1006
       - GID=1001
