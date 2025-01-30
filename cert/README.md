@@ -15,6 +15,8 @@ verify:
 
 dig -t txt +short _acme-challenge.atle.guru
 
+dig +nocmd +noall +answer @8.8.8.8 api.digilean.tools
+
 
 Certificate is saved at: /etc/letsencrypt/live/atle.guru/fullchain.pem
 Key is saved at:         /etc/letsencrypt/live/atle.guru/privkey.pem
