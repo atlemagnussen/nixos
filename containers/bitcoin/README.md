@@ -23,16 +23,17 @@ docker compose up -d
 
 ## inspect
 ```sh
-docker exec -it bitcoin-bitcoind-1 bash
+docker exec -it -u bitcoin bitcoin-bitcoind-1 bash
 ```
 
 ## bitcoin-cli
 
 ```sh
-docker exec -it bitcoin-bitcoind-1 bitcoin-cli getpeerinfo
-docker exec -it bitcoin-bitcoind-1 bitcoin-cli getblockchaininfo
-docker exec -it bitcoin-bitcoind-1 bitcoin-cli getnetworkinfo
-docker exec -it bitcoin-bitcoind-1 bitcoin-cli getwalletinfo
+docker exec -it -u bitcoin bitcoin-bitcoind-1 bitcoin-cli -getinfo
+docker exec -it -u bitcoin bitcoin-bitcoind-1 bitcoin-cli -getpeerinfo
+docker exec -it -u bitcoin bitcoin-bitcoind-1 bitcoin-cli -getblockchaininfo
+docker exec -it -u bitcoin bitcoin-bitcoind-1 bitcoin-cli -getnetworkinfo
+docker exec -it -u bitcoin bitcoin-bitcoind-1 bitcoin-cli -getwalletinfo
 
 bitcoin-cli -rpcconnect=192.168.1.203 -rpcport=8332 -rpcuser=<user_name> -rpcpassword=<password> -getinfo
 
