@@ -12,11 +12,11 @@ fi
 
 echo "$0: UID:GID for bitcoin:bitcoin is $(id -u bitcoin):$(id -g bitcoin)"
 
-if [ "$(echo "$1" | cut -c1)" = "-" ]; then
-  echo "$0: assuming arguments for bitcoind"
+# if [ "$(echo "$1" | cut -c1)" = "-" ]; then
+#   echo "$0: assuming arguments for bitcoind"
 
-  set -- bitcoind "$@"
-fi
+#   set -- bitcoind "$@"
+# fi
 
 if [ "$(echo "$1" | cut -c1)" = "-" ] || [ "$1" = "bitcoind" ]; then
   # Fix permissions for home dir.
