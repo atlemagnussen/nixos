@@ -37,7 +37,7 @@ RUN chown -R bitcoin:bitcoin "${BITCOIN_DATA}"
 RUN chmod 770 "${BITCOIN_DATA}"
 
 VOLUME ["/home/bitcoin/.bitcoin"]
-EXPOSE 8332 8333
+EXPOSE 8332 8333 28332 28333
 
 ENTRYPOINT ["./entrypoint.sh"]
 RUN bitcoind -version | grep "Bitcoin Core version v${BITCOIN_VERSION}"
