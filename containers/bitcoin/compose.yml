@@ -16,7 +16,10 @@ services:
   lnd:
     image: lightninglabs/lnd:v0.18.4-beta
     ports:
-      - "8000:8000"
+      - "9735:9735"
+      - "10009:10009"
+    volumes:
+      - /mnt/ssd2/blockchain/lnd:/root/.lnd
     networks:
       bitcoin_network:
         ipv4_address: 172.24.0.3
