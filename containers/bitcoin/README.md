@@ -27,6 +27,8 @@ docker exec -it -u bitcoin bitcoin-bitcoind-1 bash
 docker exec -it bitcoin-lnd-1 bash
 ```
 
+~/.lnd/data/chain/bitcoin/mainnet
+
 ## bitcoin-cli
 
 ```sh
