@@ -20,7 +20,7 @@ RUN rm bitcoin-${BITCOIN_VERSION}-x86_64-linux-gnu.tar.gz
 
 RUN apt-get remove -y wget
 RUN apt-get install -y gosu --no-install-recommends
-RUN apt-get autoremove
+RUN apt-get autoremove -y
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
