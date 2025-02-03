@@ -24,6 +24,7 @@ docker compose up -d
 ## inspect
 ```sh
 docker exec -it -u bitcoin bitcoin-bitcoind-1 bash
+docker exec -it bitcoin-lnd-1 bash
 ```
 
 ## bitcoin-cli
