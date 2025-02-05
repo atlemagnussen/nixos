@@ -42,3 +42,5 @@ bitcoin-cli -rpcconnect=192.168.1.203 -rpcport=8332 -rpcuser=<user_name> -rpcpas
 
 docker exec -it bitcoin-bitcoind-1 bitcoin-cli loadwallet wallet.dat
 ```
+
+moneyprintergobrrr
