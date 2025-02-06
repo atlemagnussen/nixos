@@ -16,4 +16,8 @@ docker run -it \
  atlmag/bitcoin bash
 
 
+docker run -d \
+ -p 9050:9050 -p 9051:9051 --name tor-bridge \
+ --mount type=bind,source=/home/atle/tor/config,target=/home/tor/config \
+ atlmag/tor-bridge
  #--mount type=bind,source=/mnt/ssd2/blockchain/bitcoin,target=/home/bitcoin/.bitcoin \

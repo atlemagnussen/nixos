@@ -28,7 +28,10 @@ RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN groupadd --gid ${GID} tor \
   && useradd --create-home --no-log-init -u ${UID} -g ${GID} tor
 
-USER tor
-EXPOSE 8853/udp 9150/tcp
+VOLUME ["/home/tor/config"]
 
-CMD ["/usr/bin/tor", "-f", "/etc/tor/torrc"]
+EXPOSE 8853 9050 9051
+
+USER tor
+
+CMD ["/usr/bin/tor", "-f", "/home/tor/config/torrc"]

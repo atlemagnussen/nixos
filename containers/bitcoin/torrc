@@ -1,8 +1,15 @@
 SocksPort 0.0.0.0:9050
 ControlPort 0.0.0.0:9051
+
+## debug
+# Log debug stdout
 Log notice stdout
-CookieAuthentication 1
-CookieAuthFileGroupReadable 1
+
+# CookieAuthentication 1
+# CookieAuthFileGroupReadable 1
+
+# ORPort 9001
+NickName TestSmallDocker
 
 ## Entry policies to allow/deny SOCKS requests based on IP address.
 ## First entry that matches wins. If no SocksPolicy is set, we accept
@@ -13,7 +20,7 @@ SocksPolicy accept 192.168.1.0/16
 SocksPolicy reject *
 
 ## Send all messages of level 'notice' or higher to /var/log/tor/notices.log
-#Log notice file /var/log/tor/notices.log
+# Log notice file /var/log/tor/notices.log
 ## Send every possible message to /var/log/tor/debug.log
 # Log debug file /var/log/tor/debug.log
 ## Use the system log instead of Tor's logfiles
@@ -28,7 +35,7 @@ SocksPolicy reject *
 
 ## If you enable the controlport, be sure to enable one of these
 ## authentication methods, to prevent attackers from accessing it.
-# HashedControlPassword 16:2E145AA4CFF0FF4960D9B49DAB4D99ABBA6257FF00C84CE4732C46862D
+HashedControlPassword 16:ø
 # CookieAuthentication 1
 
 # ExitPolicy accept *:6660-6667,reject *:* # allow irc ports but no more

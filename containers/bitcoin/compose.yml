@@ -9,7 +9,7 @@ services:
       - EMAIL=${EMAIL:?Env var EMAIL is not set.}
       - NICKNAME=torbtclnd666
     volumes:
-      - /mnt/ssd2/tor:/var/lib/tor
+      - /mnt/ssd2/tor:/home/tor/config
     ports:
       - ${OR_PORT}:${OR_PORT}
       - ${PT_PORT}:${PT_PORT}
