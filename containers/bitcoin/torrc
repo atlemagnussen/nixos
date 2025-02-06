@@ -1,6 +1,8 @@
 SocksPort 0.0.0.0:9050
 ControlPort 0.0.0.0:9051
 
+DataDirectory /home/tor/data
+
 ## debug
 # Log debug stdout
 Log notice stdout

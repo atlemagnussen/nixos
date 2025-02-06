@@ -28,6 +28,7 @@ RUN groupadd --gid ${GID} tor \
   && useradd --create-home --no-log-init -u ${UID} -g ${GID} tor
 
 VOLUME ["/home/tor/config"]
+VOLUME ["/home/tor/data"]
 
 EXPOSE 9050 9051
 
