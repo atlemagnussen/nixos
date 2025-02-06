@@ -27,6 +27,11 @@ RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN groupadd --gid ${GID} tor \
   && useradd --create-home --no-log-init -u ${UID} -g ${GID} tor
 
+RUN mkdir /home/tor/config
+RUN chown tor:tor /home/tor/config
+RUN mkdir /home/tor/data
+RUN chmod 700 /home/tor/data
+
 VOLUME ["/home/tor/config"]
 VOLUME ["/home/tor/data"]
 
