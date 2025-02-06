@@ -1,16 +1,4 @@
 services:
-  tor-bridge:
-    image: atlmag/tor-bridge:latest
-    ports:
-      - "9050:9050"
-      - "9051:9051"
-    volumes:
-      - /mnt/ssd2/tor/config:/home/tor/config
-      - /mnt/ssd2/tor/data:/home/tor/data
-    restart: unless-stopped
-    networks:
-      bitcoin_network:
-        ipv4_address: 172.24.0.3
   # bitcoincore
   bitcoind:
     image: atlmag/bitcoin:latest
@@ -35,6 +23,18 @@ services:
     networks:
       bitcoin_network:
         ipv4_address: 172.24.0.3
+  tor-bridge:
+    image: atlmag/tor-bridge:latest
+    ports:
+      - "9050:9050"
+      - "9051:9051"
+    volumes:
+      - /mnt/ssd2/tor/config:/home/tor/config
+      - /mnt/ssd2/tor/data:/home/tor/data
+    restart: unless-stopped
+    networks:
+      bitcoin_network:
+        ipv4_address: 172.24.0.4
 # network
 networks:
   bitcoin_network:
