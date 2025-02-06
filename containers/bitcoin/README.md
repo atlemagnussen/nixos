@@ -44,3 +44,9 @@ docker exec -it bitcoin-bitcoind-1 bitcoin-cli loadwallet wallet.dat
 ```
 
 moneyprintergobrrr
+
+## TOR
+
+https://github.com/lightningnetwork/lnd/blob/master/docs/configuring_tor.md
+
+https://docs.megalithic.me/set-up-a-lightning-node/setup-tor-with-docker/

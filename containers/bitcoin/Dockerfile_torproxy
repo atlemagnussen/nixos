@@ -1,0 +1,34 @@
+FROM debian:bookworm-slim
+
+ARG UID=1001
+ARG GID=110
+
+RUN apt-get update -y && apt-get upgrade -y
+RUN apt-get install gnupg -y
+
+RUN apt-get install iproute2 -y
+RUN apt-get install obfs4proxy -y
+RUN apt-get install wget -y
+RUN apt-get install apt-transport-https -y
+
+RUN echo "deb     [signed-by=/usr/share/keyrings/deb.torproject.org-keyring.gpg] https://deb.torproject.org/torproject.org bookworm main" > /etc/apt/sources.list.d/tor.list
+RUN echo "deb-src [signed-by=/usr/share/keyrings/deb.torproject.org-keyring.gpg] https://deb.torproject.org/torproject.org bookworm main" >> /etc/apt/sources.list.d/tor.list
+
+RUN wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --dearmor | tee /usr/share/keyrings/deb.torproject.org-keyring.gpg >/dev/null
+RUN wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --dearmor | tee /usr/share/keyrings/tor-archive-keyring.gpg >/dev/null
+
+RUN apt update -y
+RUN apt install tor deb.torproject.org-keyring -y
+
+RUN apt-get remove wget -y
+RUN apt-get autoremove -y
+RUN apt-get clean
+RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN groupadd --gid ${GID} tor \
+  && useradd --create-home --no-log-init -u ${UID} -g ${GID} tor
+
+USER tor
+EXPOSE 8853/udp 9150/tcp
+
+CMD ["/usr/bin/tor", "-f", "/etc/tor/torrc"]
