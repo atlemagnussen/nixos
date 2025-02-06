@@ -5,7 +5,8 @@ services:
       - "9050:9050"
       - "9051:9051"
     volumes:
-      - /mnt/ssd2/tor:/home/tor/config
+      - /mnt/ssd2/tor/config:/home/tor/config
+      - /mnt/ssd2/tor/data:/home/tor/data
     restart: unless-stopped
     networks:
       bitcoin_network:
