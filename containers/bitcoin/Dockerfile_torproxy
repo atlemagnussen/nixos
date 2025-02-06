@@ -7,7 +7,6 @@ RUN apt-get update -y && apt-get upgrade -y
 RUN apt-get install gnupg -y
 
 RUN apt-get install iproute2 -y
-RUN apt-get install obfs4proxy -y
 RUN apt-get install wget -y
 RUN apt-get install apt-transport-https -y
 
@@ -30,7 +29,7 @@ RUN groupadd --gid ${GID} tor \
 
 VOLUME ["/home/tor/config"]
 
-EXPOSE 8853 9050 9051
+EXPOSE 9050 9051
 
 USER tor
 

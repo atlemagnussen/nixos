@@ -1,19 +1,15 @@
 services:
-  obfs4-bridge:
+  tor-bridge:
     image: atlmag/tor-bridge:latest
-    networks:
-      - bitcoin_network
-    environment:
-      - OR_PORT=${OR_PORT:?Env var OR_PORT is not set.}
-      - PT_PORT=${PT_PORT:?Env var PT_PORT is not set.}
-      - EMAIL=${EMAIL:?Env var EMAIL is not set.}
-      - NICKNAME=torbtclnd666
+    ports:
+      - "9050:9050"
+      - "9051:9051"
     volumes:
       - /mnt/ssd2/tor:/home/tor/config
-    ports:
-      - ${OR_PORT}:${OR_PORT}
-      - ${PT_PORT}:${PT_PORT}
     restart: unless-stopped
+    networks:
+      bitcoin_network:
+        ipv4_address: 172.24.0.3
   # bitcoincore
   bitcoind:
     image: atlmag/bitcoin:latest
