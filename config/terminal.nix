@@ -49,5 +49,6 @@
     smartmontools
     parted
     lm_sensors
+    torsocks
   ];
 }
