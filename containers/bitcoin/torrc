@@ -7,43 +7,21 @@ DataDirectory /home/tor/data
 # Log debug stdout
 Log notice stdout
 
-# CookieAuthentication 1
-# CookieAuthFileGroupReadable 1
-
 # ORPort 9001
 NickName TestSmallDocker
 
-## Entry policies to allow/deny SOCKS requests based on IP address.
-## First entry that matches wins. If no SocksPolicy is set, we accept
-## all (and only) requests that reach a SocksPort. Untrusted users who
-## can access your SocksPort may be able to learn about the connections
-## you make.
 SocksPolicy accept 192.168.1.0/16
 SocksPolicy reject *
 
-## Send all messages of level 'notice' or higher to /var/log/tor/notices.log
-# Log notice file /var/log/tor/notices.log
-## Send every possible message to /var/log/tor/debug.log
-# Log debug file /var/log/tor/debug.log
-## Use the system log instead of Tor's logfiles
-# Log notice syslog
-## To send all messages to stderr:
-# Log debug stderr
-
-
-## The directory for keeping all the keys/etc. By default, we store
-## things in $HOME/.tor on Unix, and in Application Data\tor on Windows.
-# DataDirectory /var/lib/tor
-
-## If you enable the controlport, be sure to enable one of these
-## authentication methods, to prevent attackers from accessing it.
 HashedControlPassword 16:ø
 # CookieAuthentication 1
 
-# ExitPolicy accept *:6660-6667,reject *:* # allow irc ports but no more
-# ExitPolicy accept *:119 # accept nntp as well as default exit policy
 ExitPolicy reject *:* # no exits allowed
 
-# BridgeRelay 1
+# LND REST Hidden Service
+HiddenServiceDir /home/tor/data/lnd-rest
+HiddenServicePort 8080 172.24.0.3:8080
 
-PublishServerDescriptor 0
+# LND gRPC Hidden Service
+HiddenServiceDir /home/tor/data/lnd-grpc
+HiddenServicePort 10009 172.24.0.3:10009
