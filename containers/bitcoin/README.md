@@ -50,3 +50,5 @@ moneyprintergobrrr
 https://github.com/lightningnetwork/lnd/blob/master/docs/configuring_tor.md
 
 https://docs.megalithic.me/set-up-a-lightning-node/setup-tor-with-docker/
+
+https://notes.maxfa.ng/Dev/gRPC/gRPC+over+Tor
