@@ -45,6 +45,8 @@ docker exec -it bitcoin-bitcoind-1 bitcoin-cli loadwallet wallet.dat
 
 moneyprintergobrrr
 
+lncli changepassword - must be before unlock
+
 ## TOR
 
 https://github.com/lightningnetwork/lnd/blob/master/docs/configuring_tor.md
