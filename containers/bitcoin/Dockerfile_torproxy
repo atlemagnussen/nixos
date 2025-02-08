@@ -9,6 +9,7 @@ RUN apt-get install gnupg -y
 RUN apt-get install iproute2 -y
 RUN apt-get install wget -y
 RUN apt-get install apt-transport-https -y
+RUN apt-get install netcat-openbsd -y
 
 RUN echo "deb     [signed-by=/usr/share/keyrings/deb.torproject.org-keyring.gpg] https://deb.torproject.org/torproject.org bookworm main" > /etc/apt/sources.list.d/tor.list
 RUN echo "deb-src [signed-by=/usr/share/keyrings/deb.torproject.org-keyring.gpg] https://deb.torproject.org/torproject.org bookworm main" >> /etc/apt/sources.list.d/tor.list

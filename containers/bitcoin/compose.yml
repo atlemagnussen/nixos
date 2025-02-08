@@ -23,8 +23,8 @@ services:
     networks:
       bitcoin_network:
         ipv4_address: 172.24.0.3
-  tor-bridge:
-    image: atlmag/tor-bridge:latest
+  tor-proxy:
+    image: atlmag/torproxy:latest
     ports:
       - "9050:9050"
       - "9051:9051"
