@@ -35,6 +35,9 @@ services:
     networks:
       bitcoin_network:
         ipv4_address: 172.24.0.4
+  core-lightning:
+    image: elementsproject/lightningd
+
 # network
 networks:
   bitcoin_network:
