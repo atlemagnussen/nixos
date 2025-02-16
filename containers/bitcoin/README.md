@@ -54,3 +54,7 @@ https://github.com/lightningnetwork/lnd/blob/master/docs/configuring_tor.md
 https://docs.megalithic.me/set-up-a-lightning-node/setup-tor-with-docker/
 
 https://notes.maxfa.ng/Dev/gRPC/gRPC+over+Tor
+
+
+
+lightning-cli createrune -k "rune"="zzz" "restrictions"="readonly"
