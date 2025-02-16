@@ -62,6 +62,11 @@ lightning-cli createrune -k "rune"="zzz" "restrictions"="readonly"
 
 # Podman
 
+https://github.com/containers/podman/blob/main/docs/tutorials/remote_client.md
+
+
+install passt on debian
+
 podman system connection remove server.atle.guru
 
 podman system connection add server.atle.guru --identity ~/.ssh/id_ed25519 ssh://atle@server.atle.guru:2258/run/user/1000/podman/podman.sock
