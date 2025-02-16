@@ -58,3 +58,27 @@ https://notes.maxfa.ng/Dev/gRPC/gRPC+over+Tor
 
 
 lightning-cli createrune -k "rune"="zzz" "restrictions"="readonly"
+
+
+# Podman
+
+podman system connection remove server.atle.guru
+
+podman system connection add server.atle.guru --identity ~/.ssh/id_ed25519 ssh://atle@server.atle.guru:2258/run/user/1000/podman/podman.sock
+podman --remote system connection add oldserver --identity ~/.ssh/id_ed25519 ssh://atle@192.168.1.3/run/user/1000/podman/podman.sock
+podman --remote system connection add smallserver    --identity ~/.ssh/id_ed25519 ssh://atle@192.168.1.2/run/user/1000/podman/podman.sock
+
+podman system connection default server.atle.guru
+podman system connection default smallserver
+
+podman system connection ls   
+
+## setup on remove
+
+sudo apt install podman
+systemctl --user enable --now podman.socket
+sudo loginctl enable-linger $USER
+podman --remote info
+podman --remote info | grep sock
+systemctl --user status podman
+
