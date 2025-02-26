@@ -31,8 +31,16 @@ nixos-rebuild build
 # build and switch, then work after reboot
 nixos-rebuild boot
 # build and switch immediately
-nixos-rebuild switch
+sudo nixos-rebuild switch --upgrade
 
+```
+
+## cleanup
+
+for example if /boot is full
+
+```sh
+sudo nix-collect-garbage --delete-older-than 100d
 ```
 
 [UpgradeLog](./UPGRADE-log.md)
