@@ -15,10 +15,10 @@
         unzip
       ];
       
-      sessionVariables = {
-        NPM_PACKAGES = "$HOME/.npm-packages";
-        PATH = "$PATH:$HOME/bin:$NPM_PACKAGES/bin";
-      };
+      #sessionVariables = {
+      #  NPM_PACKAGES = "$HOME/.npm-packages";
+      #  PATH = "$PATH:$HOME/bin:$NPM_PACKAGES/bin";
+      #};
 
       file = {
         syncMediaFiles = {
@@ -38,7 +38,7 @@
     programs.bash = {
       enable = true;
       initExtra = ''
-          npm set prefix $NPM_PACKAGES
+          # hello home.manager
         '';
     };
 
