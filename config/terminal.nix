@@ -36,15 +36,8 @@
     git
     htop
     screen
-    silver-searcher
-    fzf
-    ripgrep
-    bat
-    fd
-    monero-cli
     tmux
     ncdu
-    mongosh
     bridge-utils
     smartmontools
     parted
