@@ -28,6 +28,7 @@ nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch 
 
 ```sh
 darwin-rebuild switch --flake ~/nix#mac-air
+darwin-rebuild build --flake ~/nix#mac-air
 ```
 
 ln -s ~/dev/nixos/machines/mac-air ~/nix

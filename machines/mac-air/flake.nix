@@ -5,21 +5,31 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:LnL7/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew }:
   let
     configuration = { pkgs, config, ... }: {
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
       environment.systemPackages =
-        [
-          pkgs.starship
-          pkgs.mkalias
-          pkgs.neovim
-          pkgs.alacritty
-          pkgs.torsocks
+      [
+        pkgs.starship
+        pkgs.mkalias
+        pkgs.neovim
+        pkgs.alacritty
+        pkgs.torsocks
+      ];
+
+      homebrew = {
+        enable = true;
+        casks = [
+          "hyper"
+          "font-hack-nerd-font"
+          "vnc-viewer"
         ];
+      };
 
       system.activationScripts.applications.text = let
         env = pkgs.buildEnv {
@@ -63,7 +73,18 @@
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#simple
     darwinConfigurations."mac-air" = nix-darwin.lib.darwinSystem {
-      modules = [ configuration ];
+      modules = [
+        configuration
+        nix-homebrew.darwinModules.nix-homebrew
+	      {
+          nix-homebrew = {
+            enable = true;
+            enableRosetta = false;
+	          user = "atle";
+	          autoMigrate = true;
+	        };
+	      }
+      ];
     };
   };
 }
