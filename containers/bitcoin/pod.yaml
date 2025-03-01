@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bitcoin-lightning
+  creationTimestamp: "2025-03-01T09:59:34Z"
+  labels:
+    app: bitcoin-lightning
+spec:
+  containers:
+  - name: torproxy
+    image: atlmag/torproxy:latest
+    volumeMounts:
+    - mountPath: /home/tor/data
+      name: tor-data-volume
+    - mountPath: /home/tor/config
+      name: tor-config-volume
+  - name: bitcoind
+    image: atlmag/bitcoin:latest
+    volumeMounts:
+    - mountPath: /home/bitcoin/.bitcoin
+      name: botcoin-data-volume
+    ports:
+    - containerPort: 8332
+      hostPort: 8332
+    - containerPort: 8333
+      hostPort: 8333
+  - name: lnd
+    image: docker.io/lightninglabs/lnd:v0.18.4-beta
+    volumeMounts:
+    - mountPath: /root/.lnd
+      name: lnd-data-volume
+    ports:
+    - containerPort: 9735
+      hostPort: 9735
+    - containerPort: 10009
+      hostPort: 10009
+  volumes:
+  - hostPath:
+      path: /mnt/ssd2/tor/config
+      type: Directory
+    name: tor-config-volume
+  - hostPath:
+      path: /mnt/ssd2/tor/data
+      type: Directory
+    name: tor-data-volume
+  - hostPath:
+      path: /mnt/ssd2/blockchain/bitcoin
+      type: Directory
+    name: botcoin-data-volume
+  - hostPath:
+      path: /mnt/ssd2/blockchain/lnd
+      type: Directory
+    name: lnd-data-volume
+  restartPolicy: never
