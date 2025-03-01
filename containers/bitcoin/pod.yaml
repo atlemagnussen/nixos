@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bitcoin-lightning
+  creationTimestamp: "2025-03-01T09:59:34Z"
+  labels:
+    app: bitcoin-lightning
+spec:
+  containers:
+  - name: debian
+    image: docker.io/library/debian:bookworm-slim
+    tty: true
+    env:
+    - name: TERM
+      value: xterm
+  - name: nginx
+    image: docker.io/nginxinc/nginx-unprivileged:latest
+    ports:
+    - containerPort: 8080
+      hostPort: 8081
+  restartPolicy: never
