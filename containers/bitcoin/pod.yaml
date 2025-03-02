@@ -32,6 +32,14 @@ spec:
       hostPort: 9735
     - containerPort: 10009
       hostPort: 10009
+  - name: cln
+    image: elementsproject/lightningd
+    volumeMounts:
+    - mountPath: /root/.lightning
+      name: cln-data-volume
+    ports:
+    - containerPort: 9736
+      hostPort: 9736
   volumes:
   - hostPath:
       path: /mnt/ssd2/tor/config
@@ -49,4 +57,8 @@ spec:
       path: /mnt/ssd2/blockchain/lnd
       type: Directory
     name: lnd-data-volume
+  - hostPath:
+      path: /mnt/ssd2/blockchain/lightning
+      type: Directory
+    name: cln-data-volume
   restartPolicy: never
