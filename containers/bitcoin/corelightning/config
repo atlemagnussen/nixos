@@ -1,0 +1,23 @@
+# Core lightning
+
+network=bitcoin
+
+rgb=f6ae99
+alias=Arosborg
+
+bitcoin-rpcuser=hello
+bitcoin-rpcpassword=world
+bitcoin-rpcconnect=127.0.0.1
+bitcoin-rpcport=8332
+
+
+proxy=127.0.0.1:9050
+always-use-proxy=true
+tor-service-password=world
+
+bind-addr=127.0.0.1:9736
+addr=statictor:127.0.0.1:9051
+grpc-port=9737
+
+clnrest-port=9738
+#clnrest-host=172.24.0.5
