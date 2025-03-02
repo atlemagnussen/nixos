@@ -56,7 +56,7 @@ spec:
       type: Directory
     name: lnd-data-volume
   - hostPath:
-      path: /mnt/ssd2/blockchain/lightning
+      path: /mnt/ssd2/blockchain/cln
       type: Directory
     name: cln-data-volume
   restartPolicy: never
