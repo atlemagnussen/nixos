@@ -20,6 +20,7 @@
         pkgs.neovim
         pkgs.alacritty
         pkgs.torsocks
+        pkgs.podman
       ];
 
       homebrew = {

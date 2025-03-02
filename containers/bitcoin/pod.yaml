@@ -23,7 +23,7 @@ spec:
     - containerPort: 8333
       hostPort: 8333
   - name: lnd
-    image: docker.io/lightninglabs/lnd:v0.18.4-beta
+    image: docker.io/lightninglabs/lnd:v0.18.5-beta
     volumeMounts:
     - mountPath: /root/.lnd
       name: lnd-data-volume

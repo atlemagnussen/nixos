@@ -41,4 +41,4 @@ EXPOSE 9050 9051
 
 USER tor
 
-CMD ["/usr/bin/tor", "-f", "/home/tor/config/torrc"]
+CMD ["/usr/bin/tor", "-f", "/home/tor/torrc"]
