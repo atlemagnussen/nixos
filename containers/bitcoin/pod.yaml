@@ -33,7 +33,7 @@ spec:
     - containerPort: 10009
       hostPort: 10009
   - name: cln
-    image: elementsproject/lightningd
+    image: docker.io/elementsproject/lightningd
     volumeMounts:
     - mountPath: /root/.lightning
       name: cln-data-volume
