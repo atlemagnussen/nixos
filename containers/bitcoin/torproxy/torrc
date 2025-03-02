@@ -1,27 +1,40 @@
 SocksPort 0.0.0.0:9050
-ControlPort 0.0.0.0:9051
+ControlPort 9051
 
 DataDirectory /home/tor/data
 
-## debug
 # Log debug stdout
 Log notice stdout
 
-# ORPort 9001
-NickName TestSmallDocker
+# CookieAuthentication 1
+# CookieAuthFileGroupReadable 1
 
-SocksPolicy accept 192.168.1.0/16
+NickName BitcoinTorProxy
+
+SocksPolicy accept 127.0.0.1
 SocksPolicy reject *
 
-HashedControlPassword 16:ø
+HashedControlPassword 16:x
 # CookieAuthentication 1
 
+# ExitPolicy accept *:6660-6667,reject *:* # allow irc ports but no more
+# ExitPolicy accept *:119 # accept nntp as well as default exit policy
 ExitPolicy reject *:* # no exits allowed
+
+# BridgeRelay 1
+
+PublishServerDescriptor 0
 
 # LND REST Hidden Service
 HiddenServiceDir /home/tor/data/lnd-rest
-HiddenServicePort 8080 172.24.0.3:8080
+HiddenServicePort 8080 127.0.0.1:8080
 
 # LND gRPC Hidden Service
 HiddenServiceDir /home/tor/data/lnd-grpc
-HiddenServicePort 10009 172.24.0.3:10009
+HiddenServicePort 10009 127.0.0.1:10009
+
+HiddenServiceDir /home/tor/data/lightning-grpc
+HiddenServicePort 9737 127.0.0.1:9737
+
+HiddenServiceDir /home/tor/data/lightning-rest
+HiddenServicePort 9738 127.0.0.1:9738
