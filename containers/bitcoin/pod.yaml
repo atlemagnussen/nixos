@@ -18,7 +18,7 @@ spec:
     image: atlmag/bitcoin:latest
     volumeMounts:
     - mountPath: /home/bitcoin/.bitcoin
-      name: botcoin-data-volume
+      name: bitcoin-data-volume
     ports:
     - containerPort: 8332
       hostPort: 8332
@@ -46,7 +46,7 @@ spec:
   - hostPath:
       path: /mnt/ssd2/blockchain/bitcoin
       type: Directory
-    name: botcoin-data-volume
+    name: bitcoin-data-volume
   - hostPath:
       path: /mnt/ssd2/blockchain/lnd
       type: Directory
