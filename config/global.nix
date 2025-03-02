@@ -11,6 +11,7 @@ in
     isNormalUser = true;
     home = "/home/atle";
     description = "Atle";
+    linger = true;
     extraGroups = [ "wheel" "networkmanager" ];
     openssh.authorizedKeys.keys = keys.trustedKeys;
   };
