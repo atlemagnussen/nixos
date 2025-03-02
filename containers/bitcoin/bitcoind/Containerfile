@@ -41,6 +41,5 @@ RUN chmod 770 "${BITCOIN_DATA}"
 VOLUME ["/home/bitcoin/.bitcoin"]
 EXPOSE 8332 8333
 
-ENTRYPOINT ["./entrypoint.sh"]
 RUN bitcoind -version | grep "Bitcoin Core version v${BITCOIN_VERSION}"
 CMD ["bitcoind"]

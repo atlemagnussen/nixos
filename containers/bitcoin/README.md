@@ -98,6 +98,6 @@ then if you create a user with GID 1001 inside container, you must add according
 atle:100000:65536
 
 meaning 1 inside container maps to 100000 on host
-1001 inside container maps to 1001000 on host
+1001 inside container maps to 101000 on host
 
 give permissions on volumes on the host accordingly
