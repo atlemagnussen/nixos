@@ -20,8 +20,6 @@ spec:
     - mountPath: /home/bitcoin/.bitcoin
       name: bitcoin-data-volume
     ports:
-    - containerPort: 8332
-      hostPort: 8332
     - containerPort: 8333
       hostPort: 8333
   - name: lnd
