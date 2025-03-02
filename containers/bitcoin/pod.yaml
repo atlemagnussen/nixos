@@ -30,8 +30,6 @@ spec:
     ports:
     - containerPort: 9735
       hostPort: 9735
-    - containerPort: 10009
-      hostPort: 10009
   - name: cln
     image: docker.io/elementsproject/lightningd
     volumeMounts:
