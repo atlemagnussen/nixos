@@ -71,7 +71,7 @@ podman system connection remove server.atle.guru
 
 podman system connection add server.atle.guru --identity ~/.ssh/id_ed25519 ssh://atle@server.atle.guru:2258/run/user/1000/podman/podman.sock
 podman --remote system connection add oldserver --identity ~/.ssh/id_ed25519 ssh://atle@192.168.1.3/run/user/1000/podman/podman.sock
-podman --remote system connection add smallserver    --identity ~/.ssh/id_ed25519 ssh://atle@192.168.1.2/run/user/1000/podman/podman.sock
+podman --remote system connection add smallserver --identity ~/.ssh/id_ed25519 ssh://atle@192.168.1.2/run/user/1000/podman/podman.sock
 
 podman system connection add server --identity ~/.ssh/id_ed25519 ssh://atle@192.168.1.21:2256/run/user/1000/podman/podman.sock
 
