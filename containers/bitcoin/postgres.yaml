@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: postgres
+  creationTimestamp: "2025-03-06T09:59:34Z"
+  labels:
+    app: postgres
+spec:
+  containers:
+  - name: cln
+    image: docker.io/postgres:14.17-bookworm
+    env:
+    - name: POSTGRES_PASSWORD
+      value: "mysecretpassword"
+    volumeMounts:
+    - mountPath: /var/lib/postgresql/data
+      name: db-volume
+    ports:
+    - containerPort: 5432
+      hostPort: 5432
+  volumes:
+  - hostPath:
+      path: /mnt/md0/database/postgres
+      type: Directory
+    name: db-volume
+  restartPolicy: never
