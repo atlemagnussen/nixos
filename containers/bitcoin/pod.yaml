@@ -27,6 +27,8 @@ spec:
     volumeMounts:
     - mountPath: /root/.lnd
       name: lnd-data-volume
+    - mountPath: /mnt
+      name: bak-volume
     ports:
     - containerPort: 9735
       hostPort: 9735
@@ -35,6 +37,8 @@ spec:
     volumeMounts:
     - mountPath: /root/.lightning
       name: cln-data-volume
+    - mountPath: /mnt
+      name: bak-volume
     ports:
     - containerPort: 9736
       hostPort: 9736
@@ -59,4 +63,8 @@ spec:
       path: /mnt/ssd2/blockchain/cln
       type: Directory
     name: cln-data-volume
+  - hostPath:
+      path: /mnt/md1/bak/opdb
+      type: Directory
+    name: bak-volume
   restartPolicy: never

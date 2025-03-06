@@ -1,6 +1,7 @@
 # Core lightning
 
 network=bitcoin
+wallet=sqlite3:///root/.lightning/bitcoin/lightningd.sqlite3:/mnt/lightningd.sqlite3
 
 rgb=f6ae99
 alias=Arosborg
