@@ -27,3 +27,19 @@ INSERT INTO TableTest1 (ID, SomeValue, AnotherValue)
 VALUES (1, 'hello', 'world')
 
 SELECT * from public.TableTest1
+
+## constr
+
+### CLN
+wallet=postgres://user:pass@localhost:5432/db_name
+
+bookkeeper-db=
+
+### LND
+
+[db]
+db.backend=postgres
+[postgres]
+ db.postgres.dsn=postgres://lnd:lnd@localhost:45432/lnd?sslmode=disable
+ db.postgres.timeout=30s
+ db.postgres.maxconnections=50
