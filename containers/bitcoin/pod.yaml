@@ -64,7 +64,7 @@ spec:
       type: Directory
     name: cln-data-volume
   - hostPath:
-      path: /mnt/md1/bak/opdb
+      path: /mnt/md1/bak/bitcoin-lightning/opdb
       type: Directory
     name: bak-volume
   restartPolicy: never
