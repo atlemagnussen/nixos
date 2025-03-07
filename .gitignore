@@ -2,3 +2,5 @@ result
 
 .env
 .DS_Store
+
+configmap.yaml

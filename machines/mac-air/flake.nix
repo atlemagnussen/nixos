@@ -21,6 +21,7 @@
         pkgs.alacritty
         pkgs.torsocks
         pkgs.podman
+        pkgs.jdk
       ];
 
       homebrew = {
