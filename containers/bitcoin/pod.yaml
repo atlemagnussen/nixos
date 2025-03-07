@@ -43,28 +43,28 @@ spec:
     - containerPort: 9736
       hostPort: 9736
   volumes:
-  - hostPath:
-    path: /mnt/ssd2/tor/config
-    type: Directory
-    name: tor-config-volume
-  - hostPath:
-    path: /mnt/ssd2/tor/data
-    type: Directory
-    name: tor-data-volume
-  - hostPath:
-    path: /mnt/ssd2/blockchain/bitcoin
-    type: Directory
-    name: bitcoin-data-volume
-  - hostPath:
-    path: /mnt/ssd2/blockchain/lnd
-    type: Directory
-    name: lnd-data-volume
-  - hostPath:
-    path: /mnt/ssd2/blockchain/cln
-    type: Directory
-    name: cln-data-volume
-  - hostPath:
-    path: /mnt/md1/bak/bitcoin-lightning/opdb
-    type: Directory
-    name: bak-volume
+  - name: tor-config-volume
+    hostPath:
+      path: /mnt/ssd2/tor/config
+      type: Directory
+  - name: tor-data-volume
+    hostPath:
+      path: /mnt/ssd2/tor/data
+      type: Directory
+  - name: bitcoin-data-volume
+    hostPath:
+      path: /mnt/ssd2/blockchain/bitcoin
+      type: Directory
+  - name: lnd-data-volume
+    hostPath:
+      path: /mnt/ssd2/blockchain/lnd
+      type: Directory
+  - name: cln-data-volume
+    hostPath:
+      path: /mnt/ssd2/blockchain/cln
+      type: Directory
+  - name: bak-volume
+    hostPath:
+      path: /mnt/md1/bak/bitcoin-lightning/opdb
+      type: Directory
   restartPolicy: never
