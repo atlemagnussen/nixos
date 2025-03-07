@@ -1,5 +1,7 @@
 # Postgres
 
+podman kube play --configmap=configmap.yaml postgres.yaml
+
 ## Initial
 
 su - postgres
