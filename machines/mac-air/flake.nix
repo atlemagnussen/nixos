@@ -21,11 +21,11 @@
         pkgs.alacritty
         pkgs.torsocks
         pkgs.podman
-        pkgs.jdk
       ];
 
       homebrew = {
         enable = true;
+        brews = [ "openjdk" ];
         casks = [
           "hyper"
           "font-hack-nerd-font"
