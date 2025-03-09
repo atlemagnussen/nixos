@@ -93,7 +93,7 @@ pgbackrest --config=/mnt/pgbackrest.conf backup --stanza=srv --log-level-console
 postgres must not be running
 
 ```sh
-pgbackrest --config=/mnt/pgbackrest.conf store --stanza=srv --log-level-console=info
+pgbackrest --config=/mnt/pgbackrest.conf restore --stanza=srv --log-level-console=info
 ```
 
 ## constr
