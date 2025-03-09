@@ -33,6 +33,12 @@ VALUES (1, 'hello', 'world')
 
 SELECT * from public.TableTest1
 
+## pgbackrest
+
+su - postgres
+
+pgbackrest stanza-create --stanza=atle --log-level-console=info
+
 ## constr
 
 ### CLN
