@@ -12,7 +12,7 @@ CREATE SCHEMA dbo (public already exists)
 
 CREATE USER atle PASSWORD 'helloworld';
 CREATE ROLE sa WITH LOGIN SUPERUSER PASSWORD 'password';
-CREATE USER username WITH SUPERUSER PASSWORD 'password';
+CREATE USER sa WITH SUPERUSER PASSWORD 'password';
 
 
 GRANT ALL ON SCHEMA dbo TO atle;
