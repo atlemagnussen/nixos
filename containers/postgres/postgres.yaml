@@ -16,6 +16,8 @@ spec:
     volumeMounts:
     - mountPath: /var/lib/postgresql/data
       name: db-volume
+    - mountPath: /mnt
+      name: bak-volume
     ports:
     - containerPort: 5432
       hostPort: 5432
