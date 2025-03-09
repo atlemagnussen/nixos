@@ -7,7 +7,7 @@ podman kube play --configmap=configmap.yaml postgres.yaml
 su - postgres
 
 psql
-
+```sql
 CREATE SCHEMA dbo (public already exists)
 
 CREATE USER atle PASSWORD 'helloworld';
@@ -18,9 +18,10 @@ CREATE USER sa WITH SUPERUSER PASSWORD 'password';
 GRANT ALL ON SCHEMA dbo TO atle;
 
 GRANT ALL ON ALL TABLES IN SCHEMA dbo TO atle;
-
+```
 ## new database and tables
 
+```sql
 CREATE DATABASE postgrelearning;
 
 CREATE TABLE TableTest1 
@@ -32,27 +33,67 @@ INSERT INTO TableTest1 (ID, SomeValue, AnotherValue)
 VALUES (1, 'hello', 'world')
 
 SELECT * from public.TableTest1
+```
 
 ## pgbackrest
 
+ALL commands must be done via postgres user
+```sh
 su - postgres
+```
 
-init as postgres user, must also own the backup folder stated in the config file
+### init
+
+Remember postgres user must also own the backup folder stated in the config file
+
 ```sh
 pgbackrest --config=/mnt/pgbackrest.conf stanza-create --stanza=srv --log-level-console=info
 ```
-set archive command in pgbackrest.conf
-```sh
-pgbackrest --config=/mnt/pgbackrest.conf --stanza=srv archive-push %p
+
+remember set archive command in pgbackrest.conf
+
+```conf
+archive_command = 'pgbackrest --config=/mnt/pgbackrest.conf --stanza=srv archive-push %p'         
 ```
 
-test
+### check and test
+
+check if values are correct
+
 ```sh
 show wal_level;
 show archive_mode;
 show archive_command;
 show max_wal_senders;
 show hot_standby;
+```
+
+Info: will show you status of all backups
+
+```sh
+pgbackrest --config=/mnt/pgbackrest.conf info
+```
+
+check to verify setup is ok
+
+```sh
+pgbackrest --config=/mnt/pgbackrest.conf check --stanza=srv --log-level-console=info
+```
+
+### Actual backup
+
+Now do a real backup. First time it will do a full, then incremental
+
+```sh
+pgbackrest --config=/mnt/pgbackrest.conf backup --stanza=srv --log-level-console=info
+```
+
+### Restore 
+
+postgres must not be running
+
+```sh
+pgbackrest --config=/mnt/pgbackrest.conf store --stanza=srv --log-level-console=info
 ```
 
 ## constr
