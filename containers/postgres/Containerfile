@@ -4,7 +4,7 @@ USER root
 
 RUN apt-get update -y && apt-get upgrade -y
 
-RUN apt install pgbackrest
+RUN apt install pgbackrest -y
 
 VOLUME /var/lib/postgresql/data
 ENTRYPOINT ["docker-entrypoint.sh"]
