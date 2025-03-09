@@ -37,7 +37,23 @@ SELECT * from public.TableTest1
 
 su - postgres
 
-pgbackrest stanza-create --stanza=atle --log-level-console=info
+init as postgres user, must also own the backup folder stated in the config file
+```sh
+pgbackrest --config=/mnt/pgbackrest.conf stanza-create --stanza=srv --log-level-console=info
+```
+set archive command in pgbackrest.conf
+```sh
+pgbackrest --config=/mnt/pgbackrest.conf --stanza=srv archive-push %p
+```
+
+test
+```sh
+show wal_level;
+show archive_mode;
+show archive_command;
+show max_wal_senders;
+show hot_standby;
+```
 
 ## constr
 
