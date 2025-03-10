@@ -6,9 +6,6 @@ metadata:
   labels:
     app: postgresRestore
 spec:
-  securityContext:
-    runAsUser: 999
-    runAsGroup: 999
   containers:
   - name: db
     image: atlmag/postgres:17

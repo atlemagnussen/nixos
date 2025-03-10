@@ -47,13 +47,13 @@ su - postgres
 Remember postgres user must also own the backup folder stated in the config file
 
 ```sh
-pgbackrest --config=/mnt/pgbackrest.conf stanza-create --stanza=srv --log-level-console=info
+pgbackrest --config=/mnt/pgbackrest.conf stanza-create --stanza=main --log-level-console=info
 ```
 
 remember set archive command in pgbackrest.conf
 
 ```conf
-archive_command = 'pgbackrest --config=/mnt/pgbackrest.conf --stanza=srv archive-push %p'         
+archive_command = 'pgbackrest --config=/mnt/pgbackrest.conf --stanza=main archive-push %p'
 ```
 
 ### check and test
@@ -61,11 +61,11 @@ archive_command = 'pgbackrest --config=/mnt/pgbackrest.conf --stanza=srv archive
 check if values are correct
 
 ```sh
-show wal_level;
-show archive_mode;
+show wal_level; # replica
+show archive_mode; #  on
 show archive_command;
-show max_wal_senders;
-show hot_standby;
+show max_wal_senders; # 10
+show hot_standby; # on
 ```
 
 Info: will show you status of all backups
@@ -77,7 +77,7 @@ pgbackrest --config=/mnt/pgbackrest.conf info
 check to verify setup is ok
 
 ```sh
-pgbackrest --config=/mnt/pgbackrest.conf check --stanza=srv --log-level-console=info
+pgbackrest --config=/mnt/pgbackrest.conf check --stanza=main --log-level-console=info
 ```
 
 ### Actual backup
@@ -85,7 +85,7 @@ pgbackrest --config=/mnt/pgbackrest.conf check --stanza=srv --log-level-console=
 Now do a real backup. First time it will do a full, then incremental
 
 ```sh
-pgbackrest --config=/mnt/pgbackrest.conf backup --stanza=srv --log-level-console=info
+pgbackrest --config=/mnt/pgbackrest.conf backup --stanza=main --log-level-console=info
 ```
 
 ### Restore 
@@ -93,7 +93,7 @@ pgbackrest --config=/mnt/pgbackrest.conf backup --stanza=srv --log-level-console
 postgres must not be running
 
 ```sh
-pgbackrest --config=/mnt/pgbackrest.conf restore --stanza=srv --log-level-console=info
+pgbackrest --config=/mnt/pgbackrest.conf restore --stanza=main --log-level-console=info
 ```
 
 ## constr
