@@ -14,6 +14,8 @@ spec:
         name: postgresconf
         optional: false
     volumeMounts:
+    - mountPath: /etc/postgresql/postgres.conf
+      name: pg-conf-file
     - mountPath: /var/lib/postgresql/data
       name: db-volume
     - mountPath: /mnt
@@ -21,7 +23,12 @@ spec:
     ports:
     - containerPort: 5432
       hostPort: 5432
+    args: [ "-c", "config_file=/etc/postgresql/postgres.conf" ]
   volumes:
+  - name: pg-conf-file
+    hostPath:
+      path: ./postgres.conf
+      type: File
   - name: db-volume
     hostPath:
       path: /mnt/md0/databases/postgres
@@ -32,3 +39,4 @@ spec:
       type: Directory
 
   restartPolicy: never
+
