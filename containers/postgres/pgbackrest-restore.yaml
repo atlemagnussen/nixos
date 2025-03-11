@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
   - name: db
-    image: atlmag/pgbackrest:17
+    image: atlmag/postgres:17
     envFrom:
     - configMapRef:
         name: postgresconf
