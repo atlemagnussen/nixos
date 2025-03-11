@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
   - name: db
-    image: atlmag/postgres:17
+    image: atlmag/pgbackrest:17
     envFrom:
     - configMapRef:
         name: postgresconf
@@ -22,7 +22,7 @@ spec:
     - containerPort: 5432
       hostPort: 5432
     command: [ "runuser" ]
-    args: [ "-l", "postgres", "-c", "'pgbackrest --config=/mnt/pgbackrest.conf --stanza=srv --log-level-console=info restore'" ]
+    args: [ "-l", "postgres", "-c", "'pgbackrest", "--config=/mnt/pgbackrest.conf", "--stanza=srv", "--log-level-console=info", "restore'" ]
   volumes:
   - name: db-volume
     hostPath:
