@@ -22,7 +22,7 @@ spec:
     - containerPort: 5432
       hostPort: 5432
     command: [ "gosu" ]
-    args: [ "postgres", "bash", "-c", "'pgbackrest --config=/mnt/pgbackrest.conf --stanza=srv --log-level-console=info restore'" ]
+    args: [ "postgres", "bash", "-c", "'pgbackrest --config=/mnt/pgbackrest.conf --stanza=main --log-level-console=info restore'" ]
   volumes:
   - name: db-volume
     hostPath:
