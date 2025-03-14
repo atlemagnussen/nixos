@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: postgresconf
-data:
-  PGDATA: "/var/lib/postgresql/data/olddata"
