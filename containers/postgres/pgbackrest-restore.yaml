@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
   - name: db
-    image: atlmag/postgres:17
+    image: atlmag/pgbackrest:latest
     envFrom:
     - configMapRef:
         name: postgresconf
@@ -18,9 +18,6 @@ spec:
       name: db-volume
     - mountPath: /mnt
       name: bak-volume
-    ports:
-    - containerPort: 5432
-      hostPort: 5432
     command:
     - /bin/sh
     - -c
