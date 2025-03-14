@@ -1,0 +1,19 @@
+FROM debian:bookworm-slim
+
+ARG UID=999
+ARG GID=999
+
+RUN groupadd --gid ${GID} postgres
+RUN useradd --create-home --no-log-init -u ${UID} -g ${GID} postgres
+
+RUN apt update -y && apt upgrade -y
+RUN apt install pgbackrest -y
+
+ARG PGDATA=/var/lib/postgresql/data
+
+RUN mkdir -p "${PGDATA}"
+RUN chown -R postgres:postgres "${PGDATA}"
+
+VOLUME /var/lib/postgresql/data
+
+CMD [ "echo", "hello", "world" ]
