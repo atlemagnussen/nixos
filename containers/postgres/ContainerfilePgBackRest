@@ -8,6 +8,7 @@ RUN useradd --create-home --no-log-init -u ${UID} -g ${GID} postgres
 
 RUN apt update -y && apt upgrade -y
 RUN apt install pgbackrest -y
+RUN apt install gosu -y
 
 ARG PGDATA=/var/lib/postgresql/data
 
