@@ -48,6 +48,10 @@ Remember postgres user must also own the backup folder stated in the config file
 
 ```sh
 pgbackrest --config=/mnt/pgbackrest.conf stanza-create --stanza=main --log-level-console=info
+# rm 
+pgbackrest --config=/mnt/pgbackrest.conf --stanza=srv --log-level-console=info stop
+pgbackrest --config=/mnt/pgbackrest.conf --stanza=srv --log-level-console=info stanza-delete
+
 ```
 
 remember set archive command in pgbackrest.conf

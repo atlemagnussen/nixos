@@ -21,8 +21,13 @@ spec:
     ports:
     - containerPort: 5432
       hostPort: 5432
-    command: [ "/bin/sh" ]
-    args: [ "-c", "gosu postgres pgbackrest --config=/mnt/pgbackrest.conf --stanza=main --log-level-console=info restore" ]
+    command:
+    - /bin/sh
+    - -c
+    - |
+      gosu postgres pgbackrest --config=/mnt/pgbackrest.conf --stanza=main --log-level-console=info restore
+      echo "done"
+      exit 0
   volumes:
   - name: db-volume
     hostPath:
