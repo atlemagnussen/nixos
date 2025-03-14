@@ -17,4 +17,7 @@ RUN chown -R postgres:postgres "${PGDATA}"
 
 VOLUME /var/lib/postgresql/data
 
-CMD [ "echo", "hello", "world" ]
+WORKDIR /home/postgres
+COPY pgbackrestore.sh .
+USER postgres
+CMD [ "pgbackrestore.sh" ]
