@@ -24,6 +24,22 @@ spec:
     - containerPort: 5432
       hostPort: 5432
     args: [ "-c", "config_file=/etc/postgresql/postgres.conf" ]
+  initContainers:
+  - name: restore
+    image: atlmag/postgres:17
+    envFrom:
+    - configMapRef:
+        name: postgresconf
+        optional: false
+    volumeMounts:
+    - mountPath: /var/lib/postgresql/data
+      name: db-volume
+    - mountPath: /mnt
+      name: bak-volume
+    command: |
+      echo "pgbackrest restore "
+      gosu postgres pgbackrest --config=/mnt/pgbackrest.conf --stanza=main --log-level-console=info restore
+      echo "done pgbackrest"
   volumes:
   - name: pg-conf-file
     hostPath:
@@ -39,4 +55,3 @@ spec:
       type: Directory
 
   restartPolicy: never
-
