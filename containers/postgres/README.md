@@ -1,6 +1,11 @@
 # Postgres
 
-podman kube play --configmap=configmap.yaml postgres.yaml
+to restore start a new pod
+```sh
+podman kube play postgres.yaml --configmap=configmap.yaml
+```
+
+pgbackrest will run in initContainer and restore if dbdata folder is empty
 
 ## Initial
 
