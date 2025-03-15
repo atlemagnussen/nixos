@@ -37,7 +37,7 @@ spec:
     - mountPath: /mnt
       name: bak-volume
     command: |
-      echo "pgbackrest restore "
+      echo "pgbackrest restore"
       gosu postgres pgbackrest --config=/mnt/pgbackrest.conf --stanza=main --log-level-console=info restore
       echo "done pgbackrest"
   volumes:

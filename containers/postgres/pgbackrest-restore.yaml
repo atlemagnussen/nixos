@@ -18,10 +18,7 @@ spec:
       name: db-volume
     - mountPath: /mnt
       name: bak-volume
-    command: |
-      echo "pgbackrest restore "
-      gosu postgres pgbackrest --config=/mnt/pgbackrest.conf --stanza=main --log-level-console=info restore
-      echo "done pgbackrest"
+    command: [ 'sh', '-c', 'echo "pgbackrest restore" && gosu postgres pgbackrest --config=/mnt/pgbackrest.conf --stanza=main --log-level-console=info restore && echo "done pgbackrest"' ]
   volumes:
   - name: db-volume
     hostPath:
