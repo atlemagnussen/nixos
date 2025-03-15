@@ -4,6 +4,9 @@ USER root
 
 RUN apt-get update -y && apt-get upgrade -y
 RUN apt install pgbackrest -y
+RUN apt install iproute2 -y
+RUN apt install curl -y
+RUN apt install -y iputils-ping
 
 VOLUME /var/lib/postgresql/data
 ENTRYPOINT ["docker-entrypoint.sh"]
