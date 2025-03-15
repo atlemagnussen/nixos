@@ -1,10 +1,9 @@
 # Postgres
 
-to restore start a new pod
+to restore db - remove dbdata folder, start a new pod
 ```sh
 podman kube play postgres.yaml --configmap=configmap.yaml
 ```
-
 pgbackrest will run in initContainer and restore if dbdata folder is empty
 
 ## Initial
@@ -53,13 +52,13 @@ Remember postgres user must also own the backup folder stated in the config file
 
 ```sh
 pgbackrest --config=/mnt/pgbackrest.conf stanza-create --stanza=main --log-level-console=info
-# rm 
+# rm - usually we never do this
 pgbackrest --config=/mnt/pgbackrest.conf --stanza=srv --log-level-console=info stop
 pgbackrest --config=/mnt/pgbackrest.conf --stanza=srv --log-level-console=info stanza-delete
 
 ```
 
-remember set archive command in pgbackrest.conf
+Remember set archive command in pgbackrest.conf
 
 ```conf
 archive_command = 'pgbackrest --config=/mnt/pgbackrest.conf --stanza=main archive-push %p'
@@ -86,7 +85,7 @@ pgbackrest --config=/mnt/pgbackrest.conf info
 check to verify setup is ok
 
 ```sh
-pgbackrest --config=/mnt/pgbackrest.conf check --stanza=main --log-level-console=info
+pgbackrest --config=/mnt/pgbackrest.conf --stanza=main --log-level-console=info check
 ```
 
 ### Actual backup
@@ -94,7 +93,7 @@ pgbackrest --config=/mnt/pgbackrest.conf check --stanza=main --log-level-console
 Now do a real backup. First time it will do a full, then incremental
 
 ```sh
-pgbackrest --config=/mnt/pgbackrest.conf backup --stanza=main --log-level-console=info
+pgbackrest --config=/mnt/pgbackrest.conf --stanza=main --log-level-console=info backup
 ```
 
 ### Restore 
