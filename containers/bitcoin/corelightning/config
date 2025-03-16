@@ -1,23 +1,23 @@
 # Core lightning
 
 network=bitcoin
-wallet=sqlite3:///root/.lightning/bitcoin/lightningd.sqlite3:/mnt/lightningd.sqlite3
 
-rgb=f6ae99
-alias=Arosborg
+wallet=postgres://user:pass@host.containers.internal:5432/cln
+
+bookkeeper-db=postgres://user:pass@host.containers.internal:5432/cln_bkpr
+
+rgb=f6ae99 alias=Arosborg
 
 bitcoin-rpcuser=hello
+
 bitcoin-rpcpassword=world
+
 bitcoin-rpcconnect=127.0.0.1
+
 bitcoin-rpcport=8332
 
+proxy=127.0.0.1:9050 always-use-proxy=true tor-service-password=einherjer57
 
-proxy=127.0.0.1:9050
-always-use-proxy=true
-tor-service-password=einherjer57
-
-bind-addr=127.0.0.1:9736
-addr=statictor:127.0.0.1:9051
-grpc-port=9737
+bind-addr=127.0.0.1:9736 addr=statictor:127.0.0.1:9051 grpc-port=9737
 
 clnrest-port=9738

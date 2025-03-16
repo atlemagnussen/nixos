@@ -8,7 +8,4 @@ gosu postgres pgbackrest --config=/mnt/pgbackrest.conf --stanza=main --log-level
 
 #pgbackrest --config=/mnt/pgbackrest.conf --stanza=main --log-level-console=info restore
 
-
 echo "done"
-cat /mnt/pgbackrest.conf
-exit 0

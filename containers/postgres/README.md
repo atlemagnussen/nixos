@@ -26,7 +26,9 @@ GRANT ALL ON ALL TABLES IN SCHEMA dbo TO atle;
 ## new database and tables
 
 ```sql
-CREATE DATABASE postgrelearning;
+CREATE DATABASE cln;
+GRANT ALL ON SCHEMA public TO cln;
+GRANT CREATE ON SCHEMA public TO cln;
 
 CREATE TABLE TableTest1 
     (ID int NOT NULL, 
