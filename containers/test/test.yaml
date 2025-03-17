@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: debian-test
+  creationTimestamp: "2025-03-16T09:59:34Z"
+  labels:
+    app: debian-test
+spec:
+  containers:
+  - name: db
+    image: debian:bookworm-slim
+    envFrom:
+    - configMapRef:
+        name: postgresconf
+        optional: false
+    volumeMounts:
+    - mountPath: /mnt
+      name: bak-volume
+    command: [ 'sh', 'ls /mnt' ]
+  volumes:
+  - name: bak-volume
+    configMap:
+      name: volume-mounts
+  restartPolicy: never
+
