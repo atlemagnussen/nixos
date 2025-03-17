@@ -33,7 +33,7 @@ spec:
         optional: false
     volumeMounts:
     - mountPath: /var/lib/postgresql/data
-      name: db-volume
+      name: db-volume-pvc
     - mountPath: /mnt
       name: bak-volume
     command: [ 'sh', '/mnt/pgbackrestore.sh' ]
@@ -42,13 +42,11 @@ spec:
     hostPath:
       path: ./postgres.conf
       type: File
-  - name: db-volume
-    hostPath:
-      path: /mnt/md0/databases/postgres
-      type: Directory
-  - name: bak-volume
-    hostPath:
-      path: /mnt/md1/bak/postgres
-      type: Directory
+  - name: db-volume-pvc
+    persistentVolumeClaim:
+      claimName: db-volume
+  - name: bak-volume-pvc
+    persistentVolumeClaim:
+      claimName: bak-volume
 
   restartPolicy: never
