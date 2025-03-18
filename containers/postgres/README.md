@@ -30,15 +30,14 @@ CREATE DATABASE cln;
 GRANT ALL ON SCHEMA public TO cln;
 GRANT CREATE ON SCHEMA public TO cln;
 
-CREATE TABLE TableTest1 
+CREATE TABLE TableTest 
     (ID int NOT NULL, 
-    SomeValue varchar(50) NOT NULL, 
-    AnotherValue varchar(30) NULL);
+    SomeValue varchar(50) NOT NULL
 
-INSERT INTO TableTest1 (ID, SomeValue, AnotherValue)
-VALUES (1, 'hello', 'world')
+INSERT INTO TableTest (ID, SomeValue, AnotherValue)
+VALUES (1, 'hello')
 
-SELECT * from public.TableTest1
+SELECT * from public.TableTest
 ```
 
 ## pgbackrest
