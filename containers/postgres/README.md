@@ -6,6 +6,8 @@ podman kube play postgres.yaml --configmap=configmap.yaml
 ```
 pgbackrest will run in initContainer and restore if dbdata folder is empty
 
+if setup on new machine. Remember to let user 100998 own postgres dbdata and backup folder
+
 ## Initial
 
 su - postgres
