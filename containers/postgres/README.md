@@ -34,9 +34,9 @@ GRANT CREATE ON SCHEMA public TO cln;
 
 CREATE TABLE TableTest 
     (ID int NOT NULL, 
-    SomeValue varchar(50) NOT NULL
+    SomeValue varchar(50) NOT NULL)
 
-INSERT INTO TableTest (ID, SomeValue, AnotherValue)
+INSERT INTO TableTest (ID, SomeValue)
 VALUES (1, 'hello')
 
 SELECT * from public.TableTest
