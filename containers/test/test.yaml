@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: debian-test
+  creationTimestamp: "2025-03-16T09:59:34Z"
+  labels:
+    app: debian-test
+spec:
+  containers:
+  - name: db
+    image: atlmag/debiantest
+    envFrom:
+    - configMapRef:
+        name: postgresconf
+        optional: false
+    volumeMounts:
+    - mountPath: /mnt
+      name: myvol-pvc
+    command: [ 'sh', 'ls /mnt' ]
+  volumes:
+  - name: myvol-pvc
+    persistentVolumeClaim:
+      claimName: mycustomvol
+  restartPolicy: never
+

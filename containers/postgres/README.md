@@ -1,6 +1,12 @@
 # Postgres
 
-podman kube play --configmap=configmap.yaml postgres.yaml
+to restore db - remove dbdata folder, start a new pod
+```sh
+podman kube play postgres.yaml --configmap=configmap.yaml
+```
+pgbackrest will run in initContainer and restore if dbdata folder is empty
+
+if setup on new machine. Remember to let user 100998 own postgres dbdata and backup folder
 
 ## Initial
 
@@ -22,17 +28,18 @@ GRANT ALL ON ALL TABLES IN SCHEMA dbo TO atle;
 ## new database and tables
 
 ```sql
-CREATE DATABASE postgrelearning;
+CREATE DATABASE cln;
+GRANT ALL ON SCHEMA public TO cln;
+GRANT CREATE ON SCHEMA public TO cln;
 
-CREATE TABLE TableTest1 
+CREATE TABLE TableTest 
     (ID int NOT NULL, 
-    SomeValue varchar(50) NOT NULL, 
-    AnotherValue varchar(30) NULL);
+    SomeValue varchar(50) NOT NULL)
 
-INSERT INTO TableTest1 (ID, SomeValue, AnotherValue)
-VALUES (1, 'hello', 'world')
+INSERT INTO TableTest (ID, SomeValue)
+VALUES (1, 'hello')
 
-SELECT * from public.TableTest1
+SELECT * from public.TableTest
 ```
 
 ## pgbackrest
@@ -47,13 +54,17 @@ su - postgres
 Remember postgres user must also own the backup folder stated in the config file
 
 ```sh
-pgbackrest --config=/mnt/pgbackrest.conf stanza-create --stanza=srv --log-level-console=info
+pgbackrest --config=/mnt/pgbackrest.conf stanza-create --stanza=main --log-level-console=info
+# rm - usually we never do this
+pgbackrest --config=/mnt/pgbackrest.conf --stanza=srv --log-level-console=info stop
+pgbackrest --config=/mnt/pgbackrest.conf --stanza=srv --log-level-console=info stanza-delete
+
 ```
 
-remember set archive command in pgbackrest.conf
+Remember set archive command in pgbackrest.conf
 
 ```conf
-archive_command = 'pgbackrest --config=/mnt/pgbackrest.conf --stanza=srv archive-push %p'         
+archive_command = 'pgbackrest --config=/mnt/pgbackrest.conf --stanza=main archive-push %p'
 ```
 
 ### check and test
@@ -61,11 +72,11 @@ archive_command = 'pgbackrest --config=/mnt/pgbackrest.conf --stanza=srv archive
 check if values are correct
 
 ```sh
-show wal_level;
-show archive_mode;
+show wal_level; # replica
+show archive_mode; #  on
 show archive_command;
-show max_wal_senders;
-show hot_standby;
+show max_wal_senders; # 10
+show hot_standby; # on
 ```
 
 Info: will show you status of all backups
@@ -77,7 +88,7 @@ pgbackrest --config=/mnt/pgbackrest.conf info
 check to verify setup is ok
 
 ```sh
-pgbackrest --config=/mnt/pgbackrest.conf check --stanza=srv --log-level-console=info
+pgbackrest --config=/mnt/pgbackrest.conf --stanza=main --log-level-console=info check
 ```
 
 ### Actual backup
@@ -85,7 +96,7 @@ pgbackrest --config=/mnt/pgbackrest.conf check --stanza=srv --log-level-console=
 Now do a real backup. First time it will do a full, then incremental
 
 ```sh
-pgbackrest --config=/mnt/pgbackrest.conf backup --stanza=srv --log-level-console=info
+pgbackrest --config=/mnt/pgbackrest.conf --stanza=main --log-level-console=info backup
 ```
 
 ### Restore 
@@ -93,7 +104,7 @@ pgbackrest --config=/mnt/pgbackrest.conf backup --stanza=srv --log-level-console
 postgres must not be running
 
 ```sh
-pgbackrest --config=/mnt/pgbackrest.conf restore --stanza=srv --log-level-console=info
+pgbackrest --config=/mnt/pgbackrest.conf restore --stanza=main --log-level-console=info
 ```
 
 ## constr

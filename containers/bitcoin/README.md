@@ -91,6 +91,8 @@ systemctl --user status podman
 
 ## Podman rootless mount/volume permissions
 
+https://github.com/containers/podman/blob/main/docs/tutorials/rootless_tutorial.md
+
 If running podman rootless but with root inside container, it will map to your user on host
 
 if running podman rootless and nonroot inside container, it will map to user namespace

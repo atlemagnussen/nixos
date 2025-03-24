@@ -11,14 +11,17 @@ spec:
     image: atlmag/torproxy:latest
     volumeMounts:
     - mountPath: /home/tor/data
-      name: tor-data-volume
+      name: tor-volume-pvc
+      subPath: data
     - mountPath: /home/tor/config
-      name: tor-config-volume
+      name: tor-volume-pvc
+      subPath: config
   - name: bitcoind
     image: atlmag/bitcoin:latest
     volumeMounts:
     - mountPath: /home/bitcoin/.bitcoin
-      name: bitcoin-data-volume
+      name: blockchain-volume-pvc
+      subPath: bitcoin
     ports:
     - containerPort: 8333
       hostPort: 8333
@@ -26,9 +29,8 @@ spec:
     image: docker.io/lightninglabs/lnd:v0.18.5-beta
     volumeMounts:
     - mountPath: /root/.lnd
-      name: lnd-data-volume
-    - mountPath: /mnt
-      name: bak-volume
+      name: blockchain-volume-pvc
+      subPath: lnd
     ports:
     - containerPort: 9735
       hostPort: 9735
@@ -36,35 +38,16 @@ spec:
     image: docker.io/elementsproject/lightningd
     volumeMounts:
     - mountPath: /root/.lightning
-      name: cln-data-volume
-    - mountPath: /mnt
-      name: bak-volume
+      name: blockchain-volume-pvc
+      subPath: cln
     ports:
     - containerPort: 9736
       hostPort: 9736
   volumes:
-  - name: tor-config-volume
-    hostPath:
-      path: /mnt/ssd2/tor/config
-      type: Directory
-  - name: tor-data-volume
-    hostPath:
-      path: /mnt/ssd2/tor/data
-      type: Directory
-  - name: bitcoin-data-volume
-    hostPath:
-      path: /mnt/ssd2/blockchain/bitcoin
-      type: Directory
-  - name: lnd-data-volume
-    hostPath:
-      path: /mnt/ssd2/blockchain/lnd
-      type: Directory
-  - name: cln-data-volume
-    hostPath:
-      path: /mnt/ssd2/blockchain/cln
-      type: Directory
-  - name: bak-volume
-    hostPath:
-      path: /mnt/md1/bak/bitcoin-lightning/opdb
-      type: Directory
+  - name: tor-volume-pvc
+    persistentVolumeClaim:
+      claimName: tor-volume
+  - name: blockchain-volume-pvc
+    persistentVolumeClaim:
+      claimName: blockchain-volume
   restartPolicy: never
