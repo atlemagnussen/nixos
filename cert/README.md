@@ -11,6 +11,9 @@ sudo certbot certonly --manual --preferred-challenges dns
 
 *.atle.guru
 
+Then use REST API to domeneshop
+
+
 verify:
 
 dig -t txt +short _acme-challenge.atle.guru

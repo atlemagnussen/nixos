@@ -1,0 +1,25 @@
+meta {
+  name: Create DNS atle.guru
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseApiUrl}}/domains/1844163/dns
+  body: json
+  auth: basic
+}
+
+auth:basic {
+  username: {{user}}
+  password: {{secret}}
+}
+
+body:json {
+  {
+    "host": "_acme-challenge",
+    "ttl": 3600,
+    "type": "TXT",
+    "data": "xxx"
+  }
+}
