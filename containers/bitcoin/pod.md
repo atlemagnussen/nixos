@@ -33,3 +33,10 @@ tor: gtrlbqw2s4k2ugjstek6e5boozogbjm2uqrot4d5a6m3n3ajtb7cs5yd.onion:9735
 
 rest: qtkqb7w6c5a3s3htrsd2d4xkyuk5v7qncs4w45kq6tiffydsrgtgs4id.onion
 grpc: tvc2sg3vk7fyv5qxwaomlqne6f4ce2wpmmiln2wfxlr67bgd2whdgwqd.onion
+
+
+curl -6 https://ifconfig.co
+
+2a01:799:422:e701:76d4:35ff:fee6:3c64
+2a01:799:422:e701:363f:cf6e:39ef:f8a1
+92.221.31.213

@@ -36,3 +36,11 @@ https://certbot.eff.org/instructions?ws=nginx&os=pip&commit=%3E
 sudo certbot certonly --manual --preferred-challenges dns
 
 sudo openssl x509 -in /etc/letsencrypt/live/atle.guru/fullchain.pem
+
+
+podman network create --ipv6 --subnet fda9:9699:faa:cda6::/64 podman_ipv6
+
+fd00::/80 podman_ipv6
+
+
+fda9:9699:faa:cda6::21
