@@ -11,7 +11,7 @@ spec:
     image: codeberg.org/forgejo/forgejo:10.0.3
     volumeMounts:
     - mountPath: /data
-      name: db-volume-pvc
+      name: data-volume-pvc
     ports:
     - containerPort: 2222
       hostPort: 2222
