@@ -7,42 +7,19 @@ metadata:
     app: forgejo
 spec:
   containers:
-  - name: db
+  - name: git
     image: codeberg.org/forgejo/forgejo:10.0.3
-    envFrom:
-    - configMapRef:
-        name: postgresconf
-        optional: false
     volumeMounts:
-    - mountPath: /var/lib/postgresql/data
+    - mountPath: /data
       name: db-volume-pvc
     ports:
-    - containerPort: 5432
-      hostPort: 5432
-    args: [ "-c", "config_file=/etc/postgresql/postgres.conf" ]
-  initContainers:
-  - name: restore
-    image: atlmag/postgres:17
-    envFrom:
-    - configMapRef:
-        name: postgresconf
-        optional: false
-    volumeMounts:
-    - mountPath: /var/lib/postgresql/data
-      name: db-volume-pvc
-    - mountPath: /mnt
-      name: bak-volume-pvc
-    command: [ 'sh', '/mnt/pgbackrestore.sh' ]
+    - containerPort: 2222
+      hostPort: 2222
+    - containerPort: 3000
+      hostPort: 3000
   volumes:
-  - name: pg-conf-file
-    hostPath:
-      path: ./postgres.conf
-      type: File
-  - name: db-volume-pvc
+  - name: data-volume-pvc
     persistentVolumeClaim:
-      claimName: db-volume
-  - name: bak-volume-pvc
-    persistentVolumeClaim:
-      claimName: bak-volume
+      claimName: data-volume
 
   restartPolicy: never
