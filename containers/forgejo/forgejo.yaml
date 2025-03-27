@@ -8,10 +8,17 @@ metadata:
 spec:
   containers:
   - name: git
-    image: codeberg.org/forgejo/forgejo:10.0.3
+    image: codeberg.org/forgejo/forgejo:10.0.3-rootless
     volumeMounts:
     - mountPath: /data
       name: data-volume-pvc
+      subPath: data
+    - mountPath: /etc/gitea
+      name: data-volume-pvc
+      subPath: conf
+    - mountPath: /var/lib/gitea
+      name: data-volume-pvc
+      subPath: repos
     ports:
     - containerPort: 2222
       hostPort: 2222
