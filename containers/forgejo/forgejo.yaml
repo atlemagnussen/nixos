@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: forgejo
+  creationTimestamp: "2025-03-27T09:59:34Z"
+  labels:
+    app: forgejo
+spec:
+  containers:
+  - name: db
+    image: codeberg.org/forgejo/forgejo:10.0.3
+    envFrom:
+    - configMapRef:
+        name: postgresconf
+        optional: false
+    volumeMounts:
+    - mountPath: /var/lib/postgresql/data
+      name: db-volume-pvc
+    ports:
+    - containerPort: 5432
+      hostPort: 5432
+    args: [ "-c", "config_file=/etc/postgresql/postgres.conf" ]
+  initContainers:
+  - name: restore
+    image: atlmag/postgres:17
+    envFrom:
+    - configMapRef:
+        name: postgresconf
+        optional: false
+    volumeMounts:
+    - mountPath: /var/lib/postgresql/data
+      name: db-volume-pvc
+    - mountPath: /mnt
+      name: bak-volume-pvc
+    command: [ 'sh', '/mnt/pgbackrestore.sh' ]
+  volumes:
+  - name: pg-conf-file
+    hostPath:
+      path: ./postgres.conf
+      type: File
+  - name: db-volume-pvc
+    persistentVolumeClaim:
+      claimName: db-volume
+  - name: bak-volume-pvc
+    persistentVolumeClaim:
+      claimName: bak-volume
+
+  restartPolicy: never
