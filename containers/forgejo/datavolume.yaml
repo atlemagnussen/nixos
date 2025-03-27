@@ -1,9 +1,9 @@
-# node1
+# forgejo
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   annotations:
-    volume.podman.io/device: /mnt/ssd1/forgejo/
+    volume.podman.io/device: /mnt/ssd1/data/
     volume.podman.io/driver: local
     volume.podman.io/mount-options: bind
   creationTimestamp: "2025-03-17T21:38:37Z"
