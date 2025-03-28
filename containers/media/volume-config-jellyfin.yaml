@@ -2,11 +2,11 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   annotations:
-    volume.podman.io/device: /mnt/md1/config
+    volume.podman.io/device: /mnt/md1/config/jellyfin
     volume.podman.io/driver: local
     volume.podman.io/mount-options: bind
   creationTimestamp: "2025-03-29T21:38:37Z"
-  name: media-config-volume
+  name: media-config-jellyfin-volume
 spec:
   accessModes:
   - ReadWriteOnce
