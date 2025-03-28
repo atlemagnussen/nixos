@@ -17,7 +17,7 @@ spec:
       runAsUser: 1000
     volumeMounts:
     - mountPath: /config
-      name: media-config-volume-pvc
+      name: media-config-jellyfin-volume-pvc
       subPath: jellyfin
     - mountPath: /media
       name: media-data-volume-pvc
@@ -25,9 +25,9 @@ spec:
       name: media-cache-volume-pvc
   hostUsers: false
   volumes:
-  - name: media-config-volume-pvc
+  - name: media-config-jellyfin-volume-pvc
     persistentVolumeClaim:
-      claimName: media-config-volume
+      claimName: media-config-jellyfin-volume
   - name: media-data-volume-pvc
     persistentVolumeClaim:
       claimName: media-data-volume
