@@ -19,10 +19,8 @@ spec:
       name: media-volume-pvc
       subPath: repos
     ports:
-    - containerPort: 2222
-      hostPort: 2222
-    - containerPort: 3000
-      hostPort: 3000
+    - containerPort: 8096
+      hostPort: 8096
   volumes:
   - name: config-volume-pvc
     persistentVolumeClaim:
