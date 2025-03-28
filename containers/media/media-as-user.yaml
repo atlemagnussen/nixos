@@ -18,7 +18,6 @@ spec:
     volumeMounts:
     - mountPath: /config
       name: media-config-jellyfin-volume-pvc
-      subPath: jellyfin
     - mountPath: /media
       name: media-data-volume-pvc
     - mountPath: /cache
