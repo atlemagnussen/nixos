@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: media
+  creationTimestamp: "2025-03-28T09:59:34Z"
+  labels:
+    app: media
+spec:
+  containers:
+  - name: git
+    image: jellyfin/jellyfin
+    volumeMounts:
+    - mountPath: /config
+      name: config-volume-pvc
+      subPath: jellyfin
+    - mountPath: /cache
+      name: media-cache-volume
+    - mountPath: /media
+      name: media-volume-pvc
+      subPath: repos
+    ports:
+    - containerPort: 2222
+      hostPort: 2222
+    - containerPort: 3000
+      hostPort: 3000
+  volumes:
+  - name: config-volume-pvc
+    persistentVolumeClaim:
+      claimName: media-config-volume
+  - name: cache-volume-pvc
+    persistentVolumeClaim:
+      claimName: media-cache-volume
+  - name: media-volume-pvc
+    persistentVolumeClaim:
+      claimName: media-data-volume
+  restartPolicy: never
