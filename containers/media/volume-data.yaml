@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   annotations:
-    volume.podman.io/device: /mnt/md1/data/media
+    volume.podman.io/device: /mnt/md1/data
     volume.podman.io/driver: local
     volume.podman.io/mount-options: bind
   creationTimestamp: "2025-03-29T21:38:37Z"
