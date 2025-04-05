@@ -5,4 +5,4 @@ metadata:
 data:
   TITLE: "srv.atle.guru lib"
   PORT: 8000
-  LIBPATHS: "{'Audio': '/data/Audio','AudioBooks': '/data/AudioBooks', 'Music': '/data/Music', 'Books': '/data/Books'}"
+  LIBPATHS: "Audio,AudioBooks,Music,Books"
