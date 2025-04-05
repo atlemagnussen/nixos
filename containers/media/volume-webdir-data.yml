@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  annotations:
+    volume.podman.io/device: /mnt/md1/Media
+    volume.podman.io/driver: local
+    volume.podman.io/mount-options: bind
+  creationTimestamp: "2025-05-05T21:38:37Z"
+  name: webdir-data-volume
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+status: {}
