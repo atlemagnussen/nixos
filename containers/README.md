@@ -18,6 +18,7 @@ docker compose pull
 docker compose up -d
 ```
 
+use podman kube play instead of docker-compose
 
 works
 docker run --rm -it --device=nvidia.com/gpu=all ubuntu:latest nvidia-smi
