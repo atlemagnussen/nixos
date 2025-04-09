@@ -25,7 +25,14 @@
 
       homebrew = {
         enable = true;
-        brews = [ "openjdk" ];
+        taps = [
+          "azure/functions"
+        ];
+        brews = [ 
+          "openjdk"
+          "azure-cli"
+          "azure-functions-core-tools@4"
+        ];
         casks = [
           "hyper"
           "font-hack-nerd-font"
