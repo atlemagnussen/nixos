@@ -66,6 +66,26 @@ spec:
       subPath: sonarr
     - mountPath: /data
       name: media-data-volume-pvc
+  - name: radarr
+    image: ghcr.io/hotio/radarr
+    env:
+    - name: TZ
+      value: "Etc/UTC"
+    - name: UMASK
+      value: "002"
+    - name: PUID
+      value: 0
+    - name: PGID
+      value: 0
+    ports:
+    - containerPort: 7878
+      hostPort: 7878
+    volumeMounts:
+    - mountPath: /config
+      name: media-config-volume-pvc
+      subPath: radarr
+    - mountPath: /data
+      name: media-data-volume-pvc
   volumes:
   - name: media-config-volume-pvc
     persistentVolumeClaim:
