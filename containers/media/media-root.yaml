@@ -56,6 +56,10 @@ spec:
       value: "Etc/UTC"
     - name: UMASK
       value: "002"
+    - name: PUID
+      value: 0
+    - name: PGID
+      value: 0
     ports:
     - containerPort: 8989
       hostPort: 8989
