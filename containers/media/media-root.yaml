@@ -23,6 +23,13 @@ spec:
       hostPort: 8096
   - name: deluge
     image: lscr.io/linuxserver/deluge:latest
+    env:
+    - name: TZ
+      value: "Etc/UTC"
+    - name: PUID
+      value: 0
+    - name: PGID
+      value: 0
     volumeMounts:
     - mountPath: /config
       name: media-config-volume-pvc
