@@ -40,6 +40,25 @@ spec:
       protocol: UDP
     - containerPort: 58846
       hostPort: 58846
+  - name: prowlarr
+    image: lscr.io/linuxserver/prowlarr:latest
+    ports:
+    - containerPort: 9696
+      hostPort: 9696
+    - mountPath: /config
+      name: media-config-volume-pvc
+      subPath: prowlarr
+  - name: sonarr
+    image: ghcr.io/hotio/sonarr
+    ports:
+      containerPort: 8989
+      hostPort: 8989
+    volumeMounts:
+    - mountPath: /config
+      name: media-config-volume-pvc
+      subPath: sonarr
+    - mountPath: /data
+      name: media-data-volume-pvc
   volumes:
   - name: media-config-volume-pvc
     persistentVolumeClaim:
