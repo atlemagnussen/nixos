@@ -48,9 +48,6 @@ spec:
       subPath: prowlarr
   - name: sonarr
     image: ghcr.io/hotio/sonarr
-    securityContext:
-      runAsGroup: 0
-      runAsUser: 0
     env:
     - name: TZ
       value: "Etc/UTC"
