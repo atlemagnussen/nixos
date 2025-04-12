@@ -39,6 +39,13 @@ spec:
       hostPort: 58846
   - name: prowlarr
     image: lscr.io/linuxserver/prowlarr:latest
+    env:
+    - name: TZ
+      value: "Etc/UTC"
+    - name: PUID
+      value: 0
+    - name: PGID
+      value: 0
     ports:
     - containerPort: 9696
       hostPort: 9696
