@@ -45,13 +45,14 @@ spec:
     ports:
     - containerPort: 9696
       hostPort: 9696
+    volumeMounts:
     - mountPath: /config
       name: media-config-volume-pvc
       subPath: prowlarr
   - name: sonarr
     image: ghcr.io/hotio/sonarr
     ports:
-      containerPort: 8989
+    - containerPort: 8989
       hostPort: 8989
     volumeMounts:
     - mountPath: /config
