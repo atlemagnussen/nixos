@@ -35,9 +35,6 @@ spec:
       hostPort: 8112
     - containerport: 6881
       hostPort: 6881
-    - containerport: 6881
-      hostPort: 6881
-      protocol: UDP
     - containerPort: 58846
       hostPort: 58846
   - name: prowlarr
