@@ -11,13 +11,13 @@ services:
       - /mnt/md1/config/email:/data
     networks:
       media_network:
-        ipv4_address: 172.23.0.2
+        ipv4_address: 172.24.0.2
 
 # network
 networks:
   media_network:
-    driver: bridge
+    driver: email
     ipam:
      config:
-       - subnet: 172.23.0.0/16
-         gateway: 172.23.0.1
+       - subnet: 172.24.0.0/16
+         gateway: 172.24.0.1
