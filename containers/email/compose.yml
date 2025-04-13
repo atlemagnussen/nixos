@@ -1,0 +1,23 @@
+services:
+  # email service
+  maddy:
+    image: docker.io/foxcpp/maddy
+    ports:
+      - "25:25"
+      - "143:143"
+      - "587:587"
+      - "993:993"
+    volumes:
+      - /mnt/md1/config/email:/data
+    networks:
+      media_network:
+        ipv4_address: 172.23.0.2
+
+# network
+networks:
+  media_network:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 172.23.0.0/16
+         gateway: 172.23.0.1
