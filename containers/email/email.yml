@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2025-04-13T20:12:24Z"
+  labels:
+    app: emailpod
+  name: emailpod
+spec:
+  containers:
+  - name: jellyfin
+    image: docker.io/foxcpp/maddy
+    ports:
+    - containerPort: 25
+      hostPort: 25
+    - containerPort: 143
+      hostPort: 143
+    - containerPort: 587
+      hostPort: 587
+    - containerPort: 993
+      hostPort: 993
+    volumeMounts:
+    - mountPath: /data
+      name: email-data-volume-pvc
+  volumes:
+  - name: email-data-volume-pvc
+    persistentVolumeClaim:
+      claimName: email-data-volume
