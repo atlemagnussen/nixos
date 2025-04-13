@@ -10,13 +10,13 @@ services:
     volumes:
       - /mnt/md1/config/email:/data
     networks:
-      media_network:
+      email_network:
         ipv4_address: 172.24.0.2
 
 # network
 networks:
-  media_network:
-    driver: email
+  email_network:
+    driver: bridge
     ipam:
      config:
        - subnet: 172.24.0.0/16
