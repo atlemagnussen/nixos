@@ -37,6 +37,7 @@
           "hyper"
           "font-hack-nerd-font"
           "vnc-viewer"
+          "gimp"
         ];
       };
 
