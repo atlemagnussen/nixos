@@ -27,7 +27,7 @@
     chromium
     virt-manager
     virtiofsd
-    gimp3-with-plugins
+    gimp-with-plugins
     gimpPlugins.gmic
   ];
 
