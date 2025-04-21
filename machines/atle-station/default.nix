@@ -27,6 +27,8 @@
     chromium
     virt-manager
     virtiofsd
+    gimp3-with-plugins
+    gimpPlugins.gmic
   ];
 
   # Enable the OpenSSH daemon.
