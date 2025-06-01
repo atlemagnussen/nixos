@@ -19,12 +19,13 @@ cd nix
 nix flake init -t nix-darwin --extra-experimental-features "nix-command flakes"
 ```
 
-from home folder
+to activate from home folder
 
 ```sh
 nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake ~/nix#mac-air
 ```
 
+to update
 
 ```sh
 darwin-rebuild switch --flake ~/nix#mac-air
