@@ -93,10 +93,20 @@ pgbackrest --config=/mnt/pgbackrest.conf --stanza=main --log-level-console=info 
 
 ### Actual backup
 
-Now do a real backup. First time it will do a full, then incremental
+Now do a real backup. First time it will default do a full, then incremental
 
 ```sh
 pgbackrest --config=/mnt/pgbackrest.conf --stanza=main --log-level-console=info backup
+```
+
+### Full backup
+
+!IMPORTANT!
+
+You should do full backups in between to expire WAL files according to pgbackrest.conf settings
+
+```sh
+pgbackrest --config=/mnt/pgbackrest.conf --stanza=main --log-level-console=info --type=full backup
 ```
 
 ### Restore 
