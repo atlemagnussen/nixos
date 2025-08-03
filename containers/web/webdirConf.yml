@@ -6,9 +6,9 @@ data:
   TITLE: "srv.atle.guru lib"
   LIBPATHS: "Audio,AudioBooks,Music,Books"
   FileServerConfig__Title: "srv.atle.guru fileserver"
-  FileServerConfig__Audio: "/data/Audio"
-  FileServerConfig__AudioBooks: "/data/AudioBooks"
-  FileServerConfig__Books: "/data/Books"
-  FileServerConfig__Music: "/data/Music"
+  FileServerConfig__Paths__Audio: "/data/Audio"
+  FileServerConfig__Paths__AudioBooks: "/data/AudioBooks"
+  FileServerConfig__Paths__Books: "/data/Books"
+  FileServerConfig__Paths__Music: "/data/Music"
   Logging__LogLevel__Default: "Debug"
   ASPNETCORE_FORWARDEDHEADERS_ENABLED: true
