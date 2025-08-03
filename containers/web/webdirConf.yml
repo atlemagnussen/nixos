@@ -7,4 +7,6 @@ data:
   LIBPATHS: "Audio,AudioBooks,Music,Books"
   FileServerConfig__Title: "srv.atle.guru fileserver"
   FileServerConfig__Audio: "/data/Audio"
+  FileServerConfig__AudioBooks: "/data/AudioBooks"
   FileServerConfig__Books: "/data/Books"
+  FileServerConfig__Music: "/data/Music"
