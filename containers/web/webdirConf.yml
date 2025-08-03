@@ -10,3 +10,4 @@ data:
   FileServerConfig__AudioBooks: "/data/AudioBooks"
   FileServerConfig__Books: "/data/Books"
   FileServerConfig__Music: "/data/Music"
+  Logging__LogLevel__Default: "Debug"
