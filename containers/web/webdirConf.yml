@@ -11,3 +11,4 @@ data:
   FileServerConfig__Books: "/data/Books"
   FileServerConfig__Music: "/data/Music"
   Logging__LogLevel__Default: "Debug"
+  ASPNETCORE_FORWARDEDHEADERS_ENABLED: true
