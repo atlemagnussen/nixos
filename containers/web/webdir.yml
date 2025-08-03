@@ -19,6 +19,18 @@ spec:
     ports:
     - containerPort: 8000
       hostPort: 8000
+  - name: listing-net
+    image: atlmag/web-dir-listing.net
+    envFrom:
+    - configMapRef:
+        name: webDirConf
+        optional: false
+    volumeMounts:
+    - mountPath: /data
+      name: data-volume-pvc
+    ports:
+    - containerPort: 8080
+      hostPort: 8001
   volumes:
   - name: data-volume-pvc
     persistentVolumeClaim:

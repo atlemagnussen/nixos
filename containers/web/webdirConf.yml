@@ -4,5 +4,7 @@ metadata:
   name: webDirConf
 data:
   TITLE: "srv.atle.guru lib"
-  PORT: 8000
   LIBPATHS: "Audio,AudioBooks,Music,Books"
+  FileServerConfig__Title: "srv.atle.guru fileserver"
+  FileServerConfig__Audio: "/data/Audio"
+  FileServerConfig__Books: "/data/Books"
