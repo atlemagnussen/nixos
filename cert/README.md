@@ -32,3 +32,7 @@ verify nginx
 
 sudo nginx -t
 sudo nginx -s reload
+
+# port scan
+sudo nmap -sU -p 161 id.atle.guru
+ snmpwalk -v 2c -c public id.atle.guru
