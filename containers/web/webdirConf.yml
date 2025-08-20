@@ -4,5 +4,11 @@ metadata:
   name: webDirConf
 data:
   TITLE: "srv.atle.guru lib"
-  PORT: 8000
   LIBPATHS: "Audio,AudioBooks,Music,Books"
+  FileServerConfig__Title: "srv.atle.guru fileserver"
+  FileServerConfig__Paths__Audio: "/data/Audio"
+  FileServerConfig__Paths__AudioBooks: "/data/AudioBooks"
+  FileServerConfig__Paths__Books: "/data/Books"
+  FileServerConfig__Paths__Music: "/data/Music"
+  Logging__LogLevel__Default: "Debug"
+  ASPNETCORE_FORWARDEDHEADERS_ENABLED: true
