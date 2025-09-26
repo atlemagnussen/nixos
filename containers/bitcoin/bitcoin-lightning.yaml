@@ -43,6 +43,8 @@ spec:
     ports:
     - containerPort: 9736
       hostPort: 9736
+    - containerPort: 9738
+      hostPort: 9738
   volumes:
   - name: tor-volume-pvc
     persistentVolumeClaim:
