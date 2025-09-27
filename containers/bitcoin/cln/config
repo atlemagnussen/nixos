@@ -25,5 +25,11 @@ tor-service-password=einherjer57
 bind-addr=127.0.0.1:9736 addr=statictor:127.0.0.1:9051 grpc-port=9737
 
 clnrest-port=9738
+clnrest-protocol=https
+clnrest-host=0.0.0.0
+
+# or
+# clnrest-certs=/root/.lightning/cert/fullchain.pem:/root/.lightning/cert/privkey.pem
+# clnrest-host=*.yourdomain.com 
 
 database-upgrade=true
