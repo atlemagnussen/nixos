@@ -34,6 +34,8 @@ spec:
     ports:
     - containerPort: 9736
       hostPort: 9736
+    - containerPort: 9737
+      hostPort: 9737
     - containerPort: 9738
       hostPort: 9738
   volumes:
