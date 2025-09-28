@@ -22,7 +22,10 @@ always-use-proxy=true
 
 tor-service-password=einherjer57
 
-bind-addr=127.0.0.1:9736 addr=statictor:127.0.0.1:9051 grpc-port=9737
+bind-addr=127.0.0.1:9736
+addr=statictor:127.0.0.1:9051
+grpc-port=9737
+grpc-host=0.0.0.0
 
 clnrest-port=9738
 clnrest-protocol=https
