@@ -1,0 +1,23 @@
+{
+  "version": "1",
+  "name": "CLNgRPC",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ],
+  "size": 0,
+  "filesCount": 0,
+  "clientCertificates": {
+    "enabled": true,
+    "certs": [
+      {
+        "domain": "clngrpc://192.168.1.21:9737",
+        "type": "cert",
+        "certFilePath": "../client.pem",
+        "keyFilePath": "../client-key.pem",
+        "passphrase": ""
+      }
+    ]
+  }
+}

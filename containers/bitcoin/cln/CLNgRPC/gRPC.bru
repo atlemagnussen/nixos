@@ -1,0 +1,21 @@
+meta {
+  name: gRPC
+  type: grpc
+  seq: 1
+}
+
+grpc {
+  url: clngrpc://192.168.1.21:9737
+  method: /cln.Node/Getinfo
+  body: grpc
+  protoPath: ../cln.proto
+  auth: inherit
+  methodType: unary
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {}
+  '''
+}
