@@ -28,7 +28,7 @@
         taps = [
           "azure/functions"
         ];
-        brews = [ 
+        brews = [
           "openjdk"
           "azure-cli"
           "azure-functions-core-tools@4"
@@ -39,6 +39,8 @@
           "vnc-viewer"
           "gimp"
           "bruno"
+          "opencode"
+          "zed"
         ];
       };
 
