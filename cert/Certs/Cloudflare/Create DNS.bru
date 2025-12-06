@@ -5,7 +5,7 @@ meta {
 }
 
 post {
-  url: https://api.cloudflare.com/client/v4/zones/{{ZONE_ID}}/dns_records
+  url: {{baseApiUrl}}/zones/{{ZONE_ID}}/dns_records
   body: json
   auth: bearer
 }
