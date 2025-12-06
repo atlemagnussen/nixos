@@ -1,0 +1,31 @@
+meta {
+  name: Create DNS
+  type: http
+  seq: 2
+}
+
+post {
+  url: https://api.cloudflare.com/client/v4/zones/{{ZONE_ID}}/dns_records
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{API_TOKEN}}
+}
+
+body:json {
+  {
+    "name": "_acme-challenge.logout.work",
+    "ttl": 3600,
+    "type": "TXT",
+    "comment": "Domain verification record",
+    "content": "xxx",
+    "proxied": false
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
