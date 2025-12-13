@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  annotations:
+    volume.podman.io/device: /mnt/md1/config/yarp
+    volume.podman.io/driver: local
+    volume.podman.io/mount-options: bind
+  creationTimestamp: "2025-12-12T21:38:37Z"
+  name: yarp-config-volume
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+status: {}

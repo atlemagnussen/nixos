@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: yarpConf
+data:
+  DetailedErrors: true
+  Logging__LogLevel__Default: Debug
+  Logging__LogLevel__Microsoft.AspNetCore: Debug
+  AUTH_SERVER: https://id.logout.work
+  AUTH_CLIENT: web
+  ASPNETCORE_FORWARDEDHEADERS_ENABLED: tru
