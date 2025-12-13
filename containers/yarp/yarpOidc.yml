@@ -22,4 +22,4 @@ spec:
   volumes:
   - name: data-volume-pvc
     persistentVolumeClaim:
-      claimName: webdir-data-volume
+      claimName: yarp-config-volume
