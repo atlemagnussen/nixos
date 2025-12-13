@@ -9,4 +9,3 @@ data:
   AUTH_SERVER: https://id.logout.work
   AUTH_CLIENT: web
   YARP_CONFIG_PATH: /data/yarp.json
-  ASPNETCORE_FORWARDEDHEADERS_ENABLED: tru
