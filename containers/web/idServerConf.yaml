@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: idServerConf
+data:
+  ConnectionStrings__AuthDb=Server: host.containers.internal;Database=db;User Id=x; Password=x
+  Authentication__EnableRegistration: false
+  Authentication__PublicUrl: https://id.example.com
+  Authentication__Google__ClientId: x
+  Authentication__Google__ClientSecret: x
+  Authentication__EntraId__ClientId: x
+  Authentication__EntraId__ClientSecret: x
+  Email__Server: mx.atle.guru
+  Email__Port: 587
+  Email__From: hello@atle.guru
+  Email__Password: x
