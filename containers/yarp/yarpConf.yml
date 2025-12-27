@@ -6,7 +6,7 @@ data:
   DetailedErrors: true
   Logging__LogLevel__Default: Debug
   Logging__LogLevel__Microsoft.AspNetCore: Debug
-  AUTH_SERVER: https://id.logout.work
-  AUTH_CLIENT: web
+  OIDC_SERVER: https://id.logout.work
+  OIDC_CLIENT: web
   YARP_CONFIG_PATH: /data/yarp.json
   STATIC_FOLDER_PATH: /data/www
