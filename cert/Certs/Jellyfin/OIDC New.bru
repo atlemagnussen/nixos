@@ -1,0 +1,43 @@
+meta {
+  name: OIDC New
+  type: http
+  seq: 1
+}
+
+post {
+  url: https://jelly.logout.work/sso/OID/Add/LogoutWork?api_key={{apiKey}}
+  body: json
+  auth: inherit
+}
+
+params:query {
+  api_key: {{apiKey}}
+}
+
+body:json {
+  {
+    "oidEndpoint": "https://id.logout.work",
+    "oidClientId": "web",
+    "enabled": true,
+    "enableAuthorization": true,
+    "enableAllFolders": false,
+    "enabledFolders": [], 
+    "adminRoles": ["jellyfin-admin"], 
+    "roles": ["allowed-to-use-jellyfin"], 
+    "enableFolderRoles": true, 
+    "folderRoleMapping": [
+      {"role": "allowed-to-watch-movies", 
+       "folders": ["cc7df17e2f3509a4b5fc1d1ff0a6c4d0", 
+                   "f137a2dd21bbc1b99aa5c0f6bf02a805"
+                  ]
+      }
+    ], 
+    "roleClaim": "realm_access", 
+    "oidScopes" : [""]
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

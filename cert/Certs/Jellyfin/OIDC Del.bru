@@ -1,0 +1,20 @@
+meta {
+  name: OIDC Del
+  type: http
+  seq: 3
+}
+
+get {
+  url: https://jelly.logout.work/sso/OID/Del/LogoutWork?api_key={{apiKey}}
+  body: none
+  auth: inherit
+}
+
+params:query {
+  api_key: {{apiKey}}
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -1,0 +1,20 @@
+meta {
+  name: OIDC GET
+  type: http
+  seq: 2
+}
+
+get {
+  url: https://jelly.logout.work/sso/OID/Get?api_key={{apiKey}}
+  body: none
+  auth: inherit
+}
+
+params:query {
+  api_key: {{apiKey}}
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
