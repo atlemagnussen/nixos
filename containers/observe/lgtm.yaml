@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2026-02-07T20:12:24Z"
+  labels:
+    app: lgtm
+  name: lgtmpod
+spec:
+  containers:
+  - name: lgtm
+    image: grafana/otel-lgtm
+    ports:
+    - containerPort: 3000
+      hostPort: 3000
+    - containerPort: 4317
+      hostPort: 4317
+    - containerPort: 4318
+      hostPort: 4318
