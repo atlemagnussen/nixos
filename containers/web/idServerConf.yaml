@@ -10,6 +10,7 @@ data:
   Authentication__Google__ClientSecret: x
   Authentication__EntraId__ClientId: x
   Authentication__EntraId__ClientSecret: x
+  OTEL_EXPORTER_OTLP_ENDPOINT: http://localhost:4317
   Email__Server: mx.atle.guru
   Email__Port: 587
   Email__From: hello@atle.guru
