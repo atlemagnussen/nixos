@@ -16,3 +16,12 @@ spec:
     ports:
     - containerPort: 8080
       hostPort: 8080
+  - name: usermanager
+    image: atlmag/useradmin
+    envFrom:
+    - configMapRef:
+        name: idServerConf
+        optional: false
+    ports:
+    - containerPort: 8080
+      hostPort: 8081
