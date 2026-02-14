@@ -3,16 +3,16 @@ kind: Pod
 metadata:
   creationTimestamp: "2025-06-12T20:12:24Z"
   labels:
-    app: idserverpod
-  name: idserverpod
+    app: useradminpod
+  name: useradminpod
 spec:
   containers:
-  - name: idserver
-    image: atlmag/aspauth
+  - name: app
+    image: atlmag/useradmin
     envFrom:
     - configMapRef:
         name: idServerConf
         optional: false
     ports:
     - containerPort: 8080
-      hostPort: 8080
+      hostPort: 8081
