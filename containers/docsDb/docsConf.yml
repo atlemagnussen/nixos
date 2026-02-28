@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: docsConf
+data:
+  ConnectionStrings__DocumentDb=Server: host.containers.internal;Database=db;User Id=x; Password=x
+  OTEL_EXPORTER_OTLP_ENDPOINT: http://localhost:4317

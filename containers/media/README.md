@@ -2,7 +2,7 @@
 
 use root version as it is easier to map to own user
 
-podman kube play media-root.yaml 
+podman kube play media-root.yaml
 
 ## Jellyfin SSO
 
