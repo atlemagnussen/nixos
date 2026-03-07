@@ -9,16 +9,16 @@ dont need this again
 
 sudo certbot certonly --manual --preferred-challenges dns
 
-*.atle.guru
+*.logout.work
 
 Then use REST API to domeneshop
 
 
 verify:
 
-dig -t txt +short _acme-challenge.atle.guru
+dig -t txt +short @8.8.8.8 _acme-challenge.logout.work
 
-dig +nocmd +noall +answer @8.8.8.8 api.digilean.tools
+dig +nocmd +noall +answer @8.8.8.8 _acme-challenge.logout.work
 
 
 Certificate is saved at: /etc/letsencrypt/live/atle.guru/fullchain.pem

@@ -5,9 +5,13 @@ meta {
 }
 
 get {
-  url: {{baseApiUrl}}/zones/{{ZONE_ID}}/dns_records
+  url: {{baseApiUrl}}/zones/{{ZONE_ID}}/dns_records?type=TXT
   body: none
   auth: bearer
+}
+
+params:query {
+  type: TXT
 }
 
 auth:bearer {
