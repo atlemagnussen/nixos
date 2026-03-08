@@ -4,6 +4,12 @@ to restore db - remove dbdata folder, start a new pod
 ```sh
 podman kube play postgres.yaml --configmap=configmap.yaml
 ```
+
+## Create volumes
+
+podman kube play ./volumes/node1.db-volume.yaml
+podman kube play ./volumes/node1.bak-volume.yaml
+
 pgbackrest will run in initContainer and restore if dbdata folder is empty
 
 if setup on new machine. Remember to let user 100998 own postgres dbdata and backup folder
