@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2026-04-02T20:12:24Z"
+  labels:
+    app: pdfpod
+  name: pdfpod
+spec:
+  containers:
+  - name: marker
+    image: xiaoyao9184/marker:master
+    ports:
+    - containerPort: 8501
+      hostPort: 8501
+    - containerPort: 7860
+      hostPort: 7860
