@@ -105,3 +105,14 @@ meaning 1 inside container maps to 100000 on host
 1001 inside container maps to 101000 on host
 
 give permissions on volumes on the host accordingly
+
+For the tor volume, Tor requires the hidden service directories to be owned by the container user and set to mode 0700.
+
+Example host fix for a rootless bind mount:
+
+```sh
+sudo chown -R 101000:101000 ./tor/data ./tor/config
+sudo chmod 755 ./tor/config
+sudo chmod 644 ./tor/config/torrc
+sudo chmod -R 700 ./tor/data
+```
