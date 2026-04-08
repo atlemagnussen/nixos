@@ -10,7 +10,7 @@
         }
       },
       "routeSonarr": {
-        "AuthorizationPolicy": "Protection",
+        "AuthorizationPolicy": "Anonymous",
         "ClusterId": "Sonarr",
         "Match": {
           "Path": "{**catch-all}",
