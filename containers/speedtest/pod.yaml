@@ -9,6 +9,13 @@ spec:
   containers:
   - name: test
     image: lscr.io/linuxserver/speedtest-tracker:latest
+    env:
+    - name: PUID
+      value: 1000
+    - name: PGID
+      value: 1000
+    - name: TZ
+      value: Etc/UTC
     ports:
     - containerPort: 8080
       hostPort: 8080
