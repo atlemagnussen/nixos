@@ -8,8 +8,15 @@ podman run --rm \
   -v /tmp:/data \
   marker-api:latest
 
-
+podman run --rm -it --pull=never --device nvidia.com/gpu=all atlmag/marker-api:latest bash
   
+
+
+
+
+
+
+## Crap
 
 
 podman pull xiaoyao9184/marker:master

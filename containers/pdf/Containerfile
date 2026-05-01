@@ -21,20 +21,48 @@ RUN apt-get update && apt-get install -y \
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.11 1 && \
     update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1
 
-# Upgrade pip
+# Create an isolated virtualenv so OS-level python packages cannot interfere.
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:${PATH}"
+
+# Upgrade packaging tools inside venv.
 RUN python -m pip install --upgrade pip setuptools wheel
 
-# Install PyTorch with CUDA 12.1 support
-RUN pip install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+# Pin a known-good CUDA 12.1 torch stack and keep it locked during marker install.
+RUN printf '%s\n' \
+    'torch==2.4.1+cu121' \
+    'torchvision==0.19.1+cu121' \
+    'torchaudio==2.4.1+cu121' > /tmp/constraints.txt
 
-# Install marker with all optional dependencies
-RUN pip install --no-cache-dir marker-pdf[full]
-
-# Install FastAPI and uvicorn for the API server
+# Install marker and API deps with enforced torch constraints.
 RUN pip install --no-cache-dir \
+    --constraint /tmp/constraints.txt \
+    --extra-index-url https://download.pytorch.org/whl/cu121 \
+    marker-pdf[full] \
     uvicorn[standard] \
     fastapi \
     python-multipart
+
+# Force reinstall pinned torch stack last as a final guard against resolver drift.
+RUN pip install --no-cache-dir --force-reinstall \
+    --index-url https://download.pytorch.org/whl/cu121 \
+    torch==2.4.1+cu121 \
+    torchvision==0.19.1+cu121 \
+    torchaudio==2.4.1+cu121
+
+# Fail build early if imports and torchvision ops are healthy.
+RUN python - <<'PY'
+import torch
+import torchvision
+from torchvision.ops import nms
+from marker.scripts.server import server_cli
+
+print('torch', torch.__version__)
+print('torchvision', torchvision.__version__)
+print('cuda_available', torch.cuda.is_available())
+print('nms_ok', callable(nms))
+print('marker_server_import_ok', callable(server_cli))
+PY
 
 WORKDIR /data
 
