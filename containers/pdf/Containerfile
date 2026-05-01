@@ -13,9 +13,26 @@ RUN apt-get update && apt-get install -y \
     libxext6 \
     && rm -rf /var/lib/apt/lists/*
 
+# Upgrade pip and install compatible versions
+RUN pip install --upgrade pip setuptools wheel
+
+# Install PyTorch ecosystem with compatible versions
+RUN pip install --no-cache-dir \
+    torch==2.2.1 \
+    torchvision==0.17.1 \
+    torchaudio==2.2.1
+
+# Install transformers with compatible version
+RUN pip install --no-cache-dir \
+    transformers==4.40.0 \
+    pillow>=10.0.0
+
+# Install marker and its dependencies
+RUN pip install --no-cache-dir \
+    marker-pdf[full]
+
 # Install FastAPI and uvicorn for the API server
 RUN pip install --no-cache-dir \
-    marker-pdf[full] \
     uvicorn \
     fastapi \
     python-multipart

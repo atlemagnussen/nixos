@@ -1,5 +1,17 @@
 # PDF converters
 
+podman build -f Containerfile -t atlmag/marker-api:latest .
+
+podman run --rm \
+  --device nvidia.com/gpu=all \
+  -p 8000:8000 \
+  -v /tmp:/data \
+  marker-api:latest
+
+
+  
+
+
 podman pull xiaoyao9184/marker:master
 
 podman run -d --name marker \
