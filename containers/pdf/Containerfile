@@ -6,13 +6,27 @@ RUN apt-get update && apt-get install -y \
     libmagic1 \
     poppler-utils \
     tesseract-ocr \
+    libtesseract-dev \
     git \
+    ffmpeg \
+    libsm6 \
+    libxext6 \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Marker
-RUN pip install --no-cache-dir marker-pdf
+# Install FastAPI and uvicorn for the API server
+RUN pip install --no-cache-dir \
+    marker-pdf[full] \
+    uvicorn \
+    fastapi \
+    python-multipart
 
 WORKDIR /data
 
-# Use marker_single for one-off book conversions
-ENTRYPOINT ["marker_single"]
+# Expose the API port
+EXPOSE 8000
+
+# Set environment to use GPU
+ENV TORCH_DEVICE=cuda
+
+# Start the marker API server
+ENTRYPOINT ["marker_server", "--port", "8000", "--host", "0.0.0.0"]
