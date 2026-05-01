@@ -35,7 +35,7 @@ RUN printf '%s\n' \
     'torchvision==0.19.1+cu121' \
     'torchaudio==2.4.1+cu121' \
     'Pillow==10.4.0' \
-    'transformers==4.55.4' > /tmp/constraints.txt
+    'transformers==4.45.2' > /tmp/constraints.txt
 
 # Install marker and API deps with enforced torch constraints.
 RUN pip install --no-cache-dir \
@@ -57,7 +57,7 @@ RUN pip install --no-cache-dir --force-reinstall \
 RUN pip install --no-cache-dir --force-reinstall Pillow==10.4.0
 
 # Keep transformers compatible with the marker/surya versions resolved in this image.
-RUN pip install --no-cache-dir --force-reinstall transformers==4.55.4
+RUN pip install --no-cache-dir --force-reinstall transformers==4.45.2
 
 # Fail build early if imports and torchvision ops are healthy.
 RUN python - <<'PY'
