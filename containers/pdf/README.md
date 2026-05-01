@@ -10,7 +10,11 @@ podman run --rm \
 
 podman run --rm -it --pull=never --device nvidia.com/gpu=all atlmag/marker-api:latest bash
   
-
+podman run -d --name marker-api --replace --pull=never \
+  --network=host \
+  --device nvidia.com/gpu=all \
+  -v /tmp:/data \
+  localhost/atlmag/marker-api:latest --port 8008 --host 0.0.0.0
 
 
 
