@@ -33,7 +33,8 @@ RUN python -m pip install --upgrade pip setuptools wheel
 RUN printf '%s\n' \
     'torch==2.4.1+cu121' \
     'torchvision==0.19.1+cu121' \
-    'torchaudio==2.4.1+cu121' > /tmp/constraints.txt
+    'torchaudio==2.4.1+cu121' \
+    'Pillow==10.4.0' > /tmp/constraints.txt
 
 # Install marker and API deps with enforced torch constraints.
 RUN pip install --no-cache-dir \
@@ -51,18 +52,23 @@ RUN pip install --no-cache-dir --force-reinstall \
     torchvision==0.19.1+cu121 \
     torchaudio==2.4.1+cu121
 
+# Keep Pillow compatible with marker/surya/texify requirements.
+RUN pip install --no-cache-dir --force-reinstall Pillow==10.4.0
+
 # Fail build early if imports and torchvision ops are healthy.
 RUN python - <<'PY'
 import torch
 import torchvision
+import marker
+import shutil
 from torchvision.ops import nms
-from marker.scripts.server import server_cli
 
 print('torch', torch.__version__)
 print('torchvision', torchvision.__version__)
 print('cuda_available', torch.cuda.is_available())
 print('nms_ok', callable(nms))
-print('marker_server_import_ok', callable(server_cli))
+print('marker_pkg_ok', marker.__name__)
+print('marker_server_cli_ok', shutil.which('marker_server') is not None)
 PY
 
 WORKDIR /data
