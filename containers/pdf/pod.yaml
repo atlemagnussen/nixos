@@ -2,8 +2,8 @@ apiVersion: v1
 kind: Pod
 metadata:
   labels:
-    app: marker-api
-  name: marker-api
+    app: pdfPod
+  name: pdfPod
 spec:
   restartPolicy: Always
   containers:
