@@ -86,5 +86,6 @@ EXPOSE 8000
 ENV TORCH_DEVICE=cuda
 ENV PYTHONUNBUFFERED=1
 
-# Start the marker API server
-ENTRYPOINT ["marker_server", "--port", "8000", "--host", "0.0.0.0"]
+# Start the marker API server (CMD allows easy port/host overrides at runtime)
+ENTRYPOINT ["marker_server"]
+CMD ["--port", "8000", "--host", "0.0.0.0"]
