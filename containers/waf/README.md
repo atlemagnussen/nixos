@@ -41,8 +41,8 @@ Rootless cannot bind privileged ports by default. BunkerWeb needs host ports 80 
 Option A (recommended): allow unprivileged low ports on host
 
 ```bash
-sudo sysctl net.ipv4.ip_unprivileged_port_start=1
-echo 'net.ipv4.ip_unprivileged_port_start=1' | sudo tee /etc/sysctl.d/99-rootless-lowports.conf
+sudo sysctl net.ipv4.ip_unprivileged_port_start=80
+echo 'net.ipv4.ip_unprivileged_port_start=80' | sudo tee /etc/sysctl.d/99-rootless-lowports.conf
 sudo sysctl --system
 ```
 
