@@ -1,6 +1,11 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  annotations:
+    volume.podman.io/device: /mnt/Media/config/bunkerweb
+    volume.podman.io/driver: local
+    volume.podman.io/mount-options: bind
+  creationTimestamp: "2025-03-17T21:38:37Z"
   name: bw-data
 spec:
   accessModes:
