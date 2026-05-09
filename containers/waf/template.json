@@ -38,6 +38,8 @@
     "CLIENT_CACHE_CONTROL": "public, max-age=15552000",
     "USE_CORS": "yes",
     "CORS_ALLOW_ORIGIN": "*",
+    "CORS_ALLOW_HEADERS": "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization,Accept,Origin",
+    "CORS_ALLOW_CREDENTIALS": "yes",
     "BLACKLIST_COUNTRY": "",
     "WHITELIST_COUNTRY": "NO",
     "USE_CUSTOM_SSL": "no",
@@ -280,7 +282,9 @@
         "MTLS_FORWARD_CLIENT_HEADERS",
         "PROXY_BUFFERS",
         "PROXY_BUFFER_SIZE",
-        "PROXY_BUSY_BUFFERS_SIZE"
+        "PROXY_BUSY_BUFFERS_SIZE",
+        "CORS_ALLOW_HEADERS",
+        "CORS_ALLOW_CREDENTIALS"
       ],
       "configs": [],
       "subtitle": "white"
