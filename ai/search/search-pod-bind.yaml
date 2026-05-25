@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ai-product-search
+spec:
+  containers:
+  - name: ollama
+    image: ollama/ollama:latest
+    ports:
+    - containerPort: 11434
+      hostPort: 11434
+      protocol: TCP
+    volumeMounts:
+    - name: ollama-data
+      mountPath: /root/.ollama
+    env:
+    - name: NVIDIA_VISIBLE_DEVICES
+      value: "all"
+    - name: NVIDIA_DRIVER_CAPABILITIES
+      value: "compute,utility"
+    securityContext:
+      privileged: true
+
+  - name: searxng
+    image: searxng/searxng:latest
+    ports:
+    - containerPort: 8080
+      hostPort: 8091
+      protocol: TCP
+    volumeMounts:
+    - name: searxng-config
+      mountPath: /etc/searxng
+    env:
+    - name: BASE_URL
+      value: "http://localhost:8091/"
+    - name: INSTANCE_NAME
+      value: "Local Search"
+
+  - name: search-agent
+    image: localhost/ai-search-agent:latest
+    ports:
+    - containerPort: 8000
+      hostPort: 8090
+      protocol: TCP
+    volumeMounts:
+    - name: search-db
+      mountPath: /app/db
+    env:
+    - name: OLLAMA_BASE_URL
+      value: "http://localhost:11434"
+    - name: SEARXNG_BASE_URL
+      value: "http://localhost:8080"
+    - name: DB_PATH
+      value: "/app/db/products.db"
+    - name: MODEL_NAME
+      value: "qwen:instruct"
+
+  volumes:
+  - name: ollama-data
+    hostPath:
+      path: /mnt/ssd2/ai/search/ollama
+      type: DirectoryOrCreate
+  - name: searxng-config
+    hostPath:
+      path: /mnt/ssd2/ai/search/searxng
+      type: DirectoryOrCreate
+  - name: search-db
+    hostPath:
+      path: /mnt/ssd2/ai/search/db
+      type: DirectoryOrCreate
