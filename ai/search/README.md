@@ -123,3 +123,33 @@ podman exec $OLLAMA_ID ollama pull qwen:instruct
 - Web UI: **http://localhost:8090/static/index.html**
 - API Docs: **http://localhost:8090/docs**
 - CLI: `python cli.py search "your query"`
+
+## Troubleshooting: "No results found"
+
+If the UI responds quickly with no results, verify these two dependencies first.
+
+### 1. Check SearXNG is actually running
+
+```bash
+# Replace with your pod/container names if needed
+podman ps --format '{{.ID}} {{.Names}}' | grep -i searxng
+podman logs $(podman ps --format '{{.ID}} {{.Names}}' | grep -i searxng | awk '{print $1}') | tail -n 120
+
+# JSON endpoint should return a number > 0 for a normal query
+curl -s "http://localhost:8091/search?q=monitor&format=json" | jq '.results | length'
+```
+
+### 2. Ensure Ollama model exists
+
+```bash
+podman exec -it $(podman ps --format '{{.ID}} {{.Names}}' | grep -i ollama | awk '{print $1}') ollama list
+podman exec -it $(podman ps --format '{{.ID}} {{.Names}}' | grep -i ollama | awk '{print $1}') ollama pull qwen:instruct
+```
+
+### 3. Recopy SearXNG config and restart pod
+
+```bash
+cp /data/code/nixos/ai/search/config/searxng-settings.yml /mnt/ssd2/ai/search/searxng/settings.yml
+podman play kube --down search-pod.yaml
+podman play kube search-pod.yaml
+```
