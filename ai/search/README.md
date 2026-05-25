@@ -19,6 +19,30 @@
 
 All components have been implemented and are ready to deploy with podman on your stationary system.
 
+## Initial Steps
+
+Before running the pod, create the host folders used by bind mounts and place the SearXNG settings file there.
+
+```bash
+# Create host folders used by search-pod.yaml
+sudo mkdir -p /mnt/ssd2/ai/search/ollama
+sudo mkdir -p /mnt/ssd2/ai/search/searxng
+sudo mkdir -p /mnt/ssd2/ai/search/db
+
+# Optional: make your user the owner
+sudo chown -R "$USER":"$USER" /mnt/ssd2/ai/search
+
+# Copy SearXNG config into the mounted config folder
+cp /data/code/nixos/ai/search/config/searxng-settings.yml /mnt/ssd2/ai/search/searxng/settings.yml
+```
+
+Then run the pod using the single pod file:
+
+```bash
+cd /data/code/nixos/ai/search
+podman play kube search-pod.yaml
+```
+
 ### Quick Start with Podman
 
 ```bash
@@ -32,7 +56,7 @@ podman play kube search-pod.yaml
 podman exec <ollama-container-id> ollama pull qwen:instruct
 
 # 4. Access web interface
-# http://localhost:8000/static/index.html
+# http://localhost:8090/static/index.html
 ```
 
 ## 📚 Documentation
@@ -96,6 +120,6 @@ podman exec $OLLAMA_ID ollama pull qwen:instruct
 ```
 
 ### Step 4: Access Interface
-- Web UI: **http://localhost:8000/static/index.html**
-- API Docs: **http://localhost:8000/docs**
+- Web UI: **http://localhost:8090/static/index.html**
+- API Docs: **http://localhost:8090/docs**
 - CLI: `python cli.py search "your query"`

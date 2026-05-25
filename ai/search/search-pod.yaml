@@ -2,25 +2,22 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: ai-product-search
-  namespace: default
 spec:
   containers:
   - name: ollama
     image: ollama/ollama:latest
     ports:
     - containerPort: 11434
+      hostPort: 11434
       protocol: TCP
-    volumes:
+    volumeMounts:
     - name: ollama-data
       mountPath: /root/.ollama
-    environment:
+    env:
     - name: NVIDIA_VISIBLE_DEVICES
       value: "all"
     - name: NVIDIA_DRIVER_CAPABILITIES
       value: "compute,utility"
-    resources:
-      limits:
-        nvidia.com/gpu: "1"
     securityContext:
       privileged: true
 
@@ -28,11 +25,12 @@ spec:
     image: searxng/searxng:latest
     ports:
     - containerPort: 8080
+      hostPort: 8091
       protocol: TCP
-    volumes:
+    volumeMounts:
     - name: searxng-config
       mountPath: /etc/searxng
-    environment:
+    env:
     - name: BASE_URL
       value: "http://localhost:8091/"
     - name: INSTANCE_NAME
@@ -42,74 +40,31 @@ spec:
     image: localhost/ai-search-agent:latest
     ports:
     - containerPort: 8000
+      hostPort: 8090
       protocol: TCP
-    volumes:
+    volumeMounts:
     - name: search-db
       mountPath: /app/db
-    environment:
+    env:
     - name: OLLAMA_BASE_URL
-      value: "http://ollama:11434"
+      value: "http://localhost:11434"
     - name: SEARXNG_BASE_URL
-      value: "http://searxng:8080"
+      value: "http://localhost:8080"
     - name: DB_PATH
       value: "/app/db/products.db"
     - name: MODEL_NAME
       value: "qwen:instruct"
-    depends_on:
-    - ollama
-    - searxng
 
   volumes:
   - name: ollama-data
-    persistentVolumeClaim:
-      claimName: ollama-pvc
+    hostPath:
+      path: /mnt/ssd2/ai/search/ollama
+      type: DirectoryOrCreate
   - name: searxng-config
-    configMap:
-      name: searxng-config
+    hostPath:
+      path: /mnt/ssd2/ai/search/searxng
+      type: DirectoryOrCreate
   - name: search-db
-    persistentVolumeClaim:
-      claimName: search-db-pvc
-
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: ollama-pvc
-spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 50Gi
-
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: search-db-pvc
-spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 10Gi
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: ai-search-service
-spec:
-  selector:
-    name: ai-product-search
-  ports:
-  - name: web
-    port: 8090
-    targetPort: 8000
-  - name: ollama
-    port: 11434
-    targetPort: 11434
-  - name: search
-    port: 8091
-    targetPort: 8080
-  type: ClusterIP
+    hostPath:
+      path: /mnt/ssd2/ai/search/db
+      type: DirectoryOrCreate

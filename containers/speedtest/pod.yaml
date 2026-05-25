@@ -16,8 +16,6 @@ spec:
       value: 1000
     - name: TZ
       value: Etc/UTC
-    - name: APP_KEY
-      value: base64:mPtW412n9feqhcCAlxnLHdSFbcNL6MaNwmLMtyLaQgQ=
     - name APP_URL:
       -value: http://small.logout.work:8080
     - name: DB_CONNECTION
