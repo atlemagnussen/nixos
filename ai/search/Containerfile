@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
 # Copy application files
 COPY app /app
 COPY config /app/config
+COPY web /app/web
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r /app/requirements.txt
@@ -20,7 +21,7 @@ RUN pip install --no-cache-dir -r /app/requirements.txt
 RUN playwright install chromium
 
 # Create directories
-RUN mkdir -p /app/db /app/web
+RUN mkdir -p /app/db
 
 # Expose port
 EXPOSE 8000

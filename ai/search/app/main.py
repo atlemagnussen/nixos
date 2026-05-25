@@ -7,6 +7,7 @@ import logging
 from typing import Optional, List
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import sqlite3
@@ -166,6 +167,11 @@ async def clear_products():
 # Serve static files
 if os.path.exists("/app/web"):
     app.mount("/static", StaticFiles(directory="/app/web"), name="static")
+
+@app.get("/index.html", include_in_schema=False)
+async def index_html_redirect():
+    """Compatibility route for direct index URL access"""
+    return RedirectResponse(url="/static/index.html", status_code=307)
 
 @app.get("/")
 async def root():
