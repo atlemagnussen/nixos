@@ -1,0 +1,101 @@
+# AI Product Search - Local Deal Finder
+
+## Original Requirements ✅
+
+- ✅ Ollama for LLM inference
+- ✅ Custom Python script (FastAPI service)
+- ✅ Playwright support (in search_agent)
+- ✅ SearXNG for web search aggregation
+- ✅ Qwen instruct model
+- ✅ SQLite database for products, results, and comparisons
+- ✅ Podman pod YAML configuration (`search-pod.yaml`)
+- ✅ Web interface for prompting and results display
+- ✅ CLI interface as fallback
+- ✅ Example: "Find 27-inch 4K monitors under 500 EUR with USB-C and VESA"
+
+**Target System**: i7 CPU, 32GB RAM, Nvidia 1060 6GB (GPU acceleration enabled)
+
+## ✅ Implementation Complete
+
+All components have been implemented and are ready to deploy with podman on your stationary system.
+
+### Quick Start with Podman
+
+```bash
+# 1. Build the container image
+podman build -t ai-search-agent:latest -f Containerfile .
+
+# 2. Start with podman play kube
+podman play kube search-pod.yaml
+
+# 3. Download the Qwen model
+podman exec <ollama-container-id> ollama pull qwen:instruct
+
+# 4. Access web interface
+# http://localhost:8000/static/index.html
+```
+
+## 📚 Documentation
+
+- **QUICKSTART.md** - Getting started (adapt for podman)
+- **IMPLEMENTATION.md** - Full technical documentation
+- **SETUP_COMPLETE.md** - Complete overview of all components
+- **QUICK_REFERENCE.md** - Quick reference card
+
+## 📁 Project Contents
+
+```
+app/                        - FastAPI web service
+  ├── main.py              - REST API endpoints
+  ├── services/
+  │   ├── search_agent.py  - LLM-powered search logic
+  │   └── db_manager.py    - SQLite operations
+  └── requirements.txt     - Python dependencies
+
+web/                        - Frontend
+  └── index.html          - Modern web interface
+
+config/                     - Configurations
+  └── searxng-settings.yml - Search engine config
+
+Containerfile               - Container build spec
+search-pod.yaml            - Podman pod configuration ⭐
+docker-compose.yaml        - Alternative Docker Compose setup
+cli.py                     - Command-line interface
+
+Scripts:
+  ├── build.sh             - Build container image
+  ├── download-model.sh    - Download Qwen model
+  └── deploy-nixos.sh      - NixOS deployment help
+```
+
+## 🎯 Build & Deploy Steps
+
+### Step 1: Build the Image
+```bash
+cd /data/code/nixos/ai/search
+podman build -t ai-search-agent:latest -f Containerfile .
+```
+
+### Step 2: Deploy with Podman
+```bash
+# Option A: Using podman play kube (Kubernetes-style)
+podman play kube search-pod.yaml
+
+# Option B: Using podman compose
+podman compose up -d
+```
+
+### Step 3: Download Model
+```bash
+# Get the ollama container ID
+OLLAMA_ID=$(podman ps | grep ollama | awk '{print $1}')
+
+# Download Qwen model
+podman exec $OLLAMA_ID ollama pull qwen:instruct
+```
+
+### Step 4: Access Interface
+- Web UI: **http://localhost:8000/static/index.html**
+- API Docs: **http://localhost:8000/docs**
+- CLI: `python cli.py search "your query"`

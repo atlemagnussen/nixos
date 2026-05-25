@@ -33,3 +33,21 @@ sudo apt install -y \
     tesseract-ocr \
     libtesseract-dev \
     ghostscrip
+
+
+podman run -it \
+    --device nvidia.com/gpu=all \
+    -v /mnt/md1/Media/Books:/data \
+    marker-gpu:latest \
+    marker /data/LesserKey.pdf --output_dir /data/markdown
+
+
+podman run -it --rm \
+    --device /dev/nvidia0:/dev/nvidia0 \
+    --device /dev/nvidiactl:/dev/nvidiactl \
+    --device /dev/nvidia-uvm:/dev/nvidia-uvm \
+    --device /dev/nvidia-uvm-tools:/dev/nvidia-uvm-tools \
+    -v /usr/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu \
+    -v /path/to/books:/data:Z \
+    marker-server \
+    /data/book.pdf --output_dir /data/output

@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    restart: unless-stopped
+
+  searxng:
+    image: searxng/searxng:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./config/searxng:/etc/searxng:ro
+    environment:
+      - BASE_URL=http://localhost:8080/
+      - INSTANCE_NAME=Local Product Search
+    restart: unless-stopped
+
+  search-agent:
+    build:
+      context: .
+      dockerfile: Containerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - search_db:/app/db
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - SEARXNG_BASE_URL=http://searxng:8080
+      - DB_PATH=/app/db/products.db
+      - MODEL_NAME=qwen:instruct
+    depends_on:
+      - ollama
+      - searxng
+    restart: unless-stopped
+
+volumes:
+  ollama_data:
+  search_db:
+
+networks:
+  default:
+    name: ai-search-network
