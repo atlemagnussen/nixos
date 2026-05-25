@@ -40,7 +40,7 @@ app.add_middleware(
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 SEARXNG_BASE_URL = os.getenv("SEARXNG_BASE_URL", "http://localhost:8080")
 DB_PATH = os.getenv("DB_PATH", "/app/db/products.db")
-MODEL_NAME = os.getenv("MODEL_NAME", "qwen:instruct")
+MODEL_NAME = os.getenv("MODEL_NAME", "qwen2.5:3b-instruct")
 
 # Initialize services
 db_manager = DatabaseManager(DB_PATH)

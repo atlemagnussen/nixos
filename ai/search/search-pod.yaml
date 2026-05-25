@@ -53,7 +53,7 @@ spec:
     - name: DB_PATH
       value: "/app/db/products.db"
     - name: MODEL_NAME
-      value: "qwen:instruct"
+      value: "qwen2.5:3b-instruct"
 
   volumes:
   - name: ollama-data

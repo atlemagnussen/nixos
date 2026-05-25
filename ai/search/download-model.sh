@@ -21,7 +21,7 @@ if [ -z "$OLLAMA_CONTAINER" ]; then
     exit 1
 fi
 
-$DOCKER_CMD exec $OLLAMA_CONTAINER ollama pull qwen:instruct
+$DOCKER_CMD exec $OLLAMA_CONTAINER ollama pull qwen2.5:3b-instruct
 
 echo ""
 echo "✅ Model downloaded successfully!"

@@ -53,7 +53,7 @@ podman build -t ai-search-agent:latest -f Containerfile .
 podman play kube search-pod.yaml
 
 # 3. Download the Qwen model
-podman exec <ollama-container-id> ollama pull qwen:instruct
+podman exec <ollama-container-id> ollama pull qwen2.5:3b-instruct
 
 # 4. Access web interface
 # http://localhost:8090/static/index.html
@@ -116,7 +116,7 @@ podman compose up -d
 OLLAMA_ID=$(podman ps | grep ollama | awk '{print $1}')
 
 # Download Qwen model
-podman exec $OLLAMA_ID ollama pull qwen:instruct
+podman exec $OLLAMA_ID ollama pull qwen2.5:3b-instruct
 ```
 
 ### Step 4: Access Interface
@@ -143,7 +143,7 @@ curl -s "http://localhost:8091/search?q=monitor&format=json" | jq '.results | le
 
 ```bash
 podman exec -it $(podman ps --format '{{.ID}} {{.Names}}' | grep -i ollama | awk '{print $1}') ollama list
-podman exec -it $(podman ps --format '{{.ID}} {{.Names}}' | grep -i ollama | awk '{print $1}') ollama pull qwen:instruct
+podman exec -it $(podman ps --format '{{.ID}} {{.Names}}' | grep -i ollama | awk '{print $1}') ollama pull qwen2.5:3b-instruct
 ```
 
 ### 3. Recopy SearXNG config and restart pod
