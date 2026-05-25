@@ -10,7 +10,7 @@ from datetime import datetime
 from typing import List, Optional, Dict, Any
 import requests
 from bs4 import BeautifulSoup
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 from playwright.async_api import async_playwright
 
 logger = logging.getLogger(__name__)
@@ -30,6 +30,18 @@ class SearchAgent:
             searxng_url,
             ["http://localhost:8080", "http://127.0.0.1:8080", "http://searxng:8080", "http://localhost:8091"]
         )
+        self.norwegian_domains = [
+            "finn.no",
+            "prisjakt.no",
+            "prisguiden.no",
+            "komplett.no",
+            "elkjop.no",
+            "power.no",
+            "proshop.no",
+            "multicom.no",
+            "netonnet.no",
+            "dustin.no",
+        ]
 
     def _build_url_candidates(self, primary: str, fallbacks: List[str]) -> List[str]:
         """Build a de-duplicated ordered list of base URLs to try."""
@@ -98,15 +110,21 @@ class SearchAgent:
         start_time = time.time()
         
         try:
+            search_profile = self._build_search_profile(filters)
+
             # Step 1: Parse query using LLM to extract search criteria
             logger.info(f"Parsing query: {query}")
             search_criteria = await self._parse_query_with_llm(query)
             search_criteria = self._normalize_criteria(search_criteria)
+            if search_profile["prefer_country"] == "NO" and not search_criteria.get("currency"):
+                search_criteria["currency"] = "NOK"
             logger.info(f"Extracted criteria: {search_criteria}")
+
+            queries = self._build_search_queries(query, search_criteria, search_profile)
             
             # Step 2: Perform web search using SearXNG
             logger.info("Searching with SearXNG...")
-            search_results = await self._search_with_searxng(query, max_results)
+            search_results = await self._multi_query_search(queries, max_results, search_profile)
 
             if not search_results:
                 fallback_query = search_criteria.get("product_type") or query
@@ -124,7 +142,9 @@ class SearchAgent:
             # If filtering is too strict, return extracted products sorted by price relevance.
             if not filtered_products and products:
                 logger.info("Filtering removed all products, returning unfiltered candidates")
-                filtered_products = sorted(products, key=self._price_sort_key)
+                filtered_products = products
+
+            filtered_products = self._rank_products(filtered_products, search_profile)
             
             # Step 5: Store in database
             logger.info("Storing results in database...")
@@ -212,6 +232,129 @@ JSON response only, no other text:"""
 
         return normalized
 
+    def _build_search_profile(self, filters: Optional[Dict[str, Any]]) -> Dict[str, Any]:
+        """Build runtime search preferences with Norway-first defaults."""
+        source = filters or {}
+        profile = {
+            "prefer_country": str(source.get("prefer_country", "NO")).upper(),
+            "include_used": bool(source.get("include_used", True)),
+            "include_new": bool(source.get("include_new", True)),
+            "country_only": bool(source.get("country_only", True)),
+        }
+        return profile
+
+    def _build_search_queries(self, query: str, criteria: Dict[str, Any], profile: Dict[str, Any]) -> List[str]:
+        """Create targeted query variants for country and used-market preference."""
+        queries = [query]
+        product_type = criteria.get("product_type", "").strip()
+
+        if profile.get("prefer_country") == "NO":
+            # Boost Norway-wide search results.
+            if profile.get("country_only"):
+                queries.append(f"{query} site:.no")
+            else:
+                queries.append(f"{query} norway")
+
+            # Boost used-market focus on Finn.
+            if profile.get("include_used"):
+                used_seed = product_type or query
+                queries.append(f"{used_seed} site:finn.no brukt")
+                queries.append(f"{used_seed} finn.no til salgs")
+
+            # Boost Norwegian retail sources.
+            if profile.get("include_new"):
+                retail_seed = product_type or query
+                queries.append(f"{retail_seed} site:prisjakt.no")
+
+        # Deduplicate while preserving order.
+        deduped = []
+        seen = set()
+        for q in queries:
+            cleaned = re.sub(r"\s+", " ", q).strip()
+            if cleaned and cleaned not in seen:
+                seen.add(cleaned)
+                deduped.append(cleaned)
+
+        # Keep request count bounded.
+        return deduped[:4]
+
+    async def _multi_query_search(self, queries: List[str], max_results: int, profile: Dict[str, Any]) -> List[Dict]:
+        """Run multiple query variants and merge unique results."""
+        merged: List[Dict[str, Any]] = []
+        seen_urls = set()
+
+        per_query_limit = max(6, max_results)
+        for q in queries:
+            results = await self._search_with_searxng(q, per_query_limit)
+            for item in results:
+                url = (item.get("url") or "").strip()
+                if not url or url in seen_urls:
+                    continue
+                seen_urls.add(url)
+                merged.append(item)
+                if len(merged) >= max_results * 3:
+                    break
+            if len(merged) >= max_results * 3:
+                break
+
+        return merged
+
+    def _is_norway_listing(self, url: str, text: str = "") -> bool:
+        """Best-effort check if listing is Norwegian."""
+        host = ""
+        try:
+            host = urlparse(url).netloc.lower()
+        except Exception:
+            host = ""
+
+        if host.endswith(".no") or ".no:" in host:
+            return True
+
+        combined = text.lower()
+        return any(token in combined for token in ["norge", "norway", "kr", "nok"])
+
+    def _is_used_listing(self, url: str, title: str, description: str) -> bool:
+        """Best-effort check for used marketplace listings."""
+        haystack = f"{url} {title} {description}".lower()
+        used_tokens = ["finn.no", "brukt", "til salgs", "second hand", "pre-owned", "bruktmarked"]
+        return any(token in haystack for token in used_tokens)
+
+    def _rank_products(self, products: List[Dict], profile: Dict[str, Any]) -> List[Dict]:
+        """Rank products with preference for Norwegian and used-market listings."""
+        ranked: List[Dict[str, Any]] = []
+
+        for product in products:
+            title = product.get("name", "")
+            desc = product.get("description", "")
+            url = product.get("url", "")
+
+            score = 0.0
+            is_no = self._is_norway_listing(url, f"{title} {desc}")
+            is_used = self._is_used_listing(url, title, desc)
+
+            if profile.get("prefer_country") == "NO" and is_no:
+                score += 6.0
+
+            if profile.get("include_used") and is_used:
+                score += 3.0
+
+            if "finn.no" in url.lower():
+                score += 4.0
+
+            host = urlparse(url).netloc.lower() if url else ""
+            if any(host.endswith(domain) for domain in self.norwegian_domains):
+                score += 2.0
+
+            # Small preference for products with explicit price information.
+            if product.get("price") is not None:
+                score += 0.8
+
+            product["rank_score"] = round(score, 3)
+            ranked.append(product)
+
+        ranked.sort(key=lambda p: (-float(p.get("rank_score", 0.0)), self._price_sort_key(p)))
+        return ranked
+
     async def _search_with_searxng(self, query: str, max_results: int) -> List[Dict]:
         """Search using SearXNG"""
         params = {
@@ -269,9 +412,12 @@ JSON response only, no other text:"""
                 }
                 
                 # Try to extract price
-                price = self._extract_price(result.get("content", ""))
+                merged_text = result.get("title", "") + " " + result.get("content", "")
+                price = self._extract_price(merged_text)
                 if price:
                     product["price"] = price
+
+                product["currency"] = self._detect_currency(merged_text, product["currency"])
                 
                 if product["name"]:
                     products.append(product)
@@ -285,6 +431,9 @@ JSON response only, no other text:"""
         """Extract price from text"""
         # Look for price patterns like €500 or EUR 500 or $500
         patterns = [
+            r'NOK\s*(\d+(?:[\s.]\d{3})*(?:[.,]\d{2})?)',  # NOK 4 999
+            r'kr\s*(\d+(?:[\s.]\d{3})*(?:[.,]\d{2})?)',   # kr 4 999
+            r'(\d+(?:[\s.]\d{3})*(?:[.,]\d{2})?)\s*kr',   # 4 999 kr
             r'€\s*(\d+(?:[.,]\d{2})?)',  # €500 or € 500
             r'EUR\s*(\d+(?:[.,]\d{2})?)',  # EUR 500
             r'\$\s*(\d+(?:[.,]\d{2})?)',  # $500
@@ -295,13 +444,27 @@ JSON response only, no other text:"""
         for pattern in patterns:
             match = re.search(pattern, text, re.IGNORECASE)
             if match:
-                price_str = match.group(1).replace(',', '.')
+                price_str = match.group(1)
+                price_str = re.sub(r"\s", "", price_str)
+                price_str = price_str.replace('.', '') if ',' in price_str else price_str
+                price_str = price_str.replace(',', '.')
                 try:
                     return float(price_str)
                 except ValueError:
                     pass
         
         return None
+
+    def _detect_currency(self, text: str, fallback: str) -> str:
+        """Infer currency from listing text."""
+        lowered = (text or "").lower()
+        if " nok" in lowered or "kr" in lowered:
+            return "NOK"
+        if " eur" in lowered or "€" in lowered:
+            return "EUR"
+        if "$" in lowered or " usd" in lowered:
+            return "USD"
+        return fallback
 
     async def _extract_specs_with_llm(
         self,

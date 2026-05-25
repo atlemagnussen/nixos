@@ -124,6 +124,54 @@ podman exec $OLLAMA_ID ollama pull qwen2.5:3b-instruct
 - API Docs: **http://localhost:8090/docs**
 - CLI: `python cli.py search "your query"`
 
+## Norway-First Search Mode
+
+The backend now defaults to Norway-first behavior and boosts used listings (especially Finn).
+
+Default behavior:
+- Prefer Norwegian domains (`.no`)
+- Prioritize used listings (`brukt`, `til salgs`, `finn.no`)
+- Rank domestic shops and marketplaces higher
+
+You can control behavior via `filters` in `/search`:
+
+```json
+{
+  "prefer_country": "NO",
+  "country_only": true,
+  "include_used": true,
+  "include_new": true
+}
+```
+
+Example API request:
+
+```bash
+curl -X POST http://localhost:8090/search \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "27-inch 4K monitor USB-C VESA under 5000 NOK",
+    "max_results": 10,
+    "filters": {
+      "prefer_country": "NO",
+      "country_only": true,
+      "include_used": true,
+      "include_new": true
+    }
+  }'
+```
+
+Used-only mode:
+
+```json
+{
+  "prefer_country": "NO",
+  "country_only": true,
+  "include_used": true,
+  "include_new": false
+}
+```
+
 ## Troubleshooting: "No results found"
 
 If the UI responds quickly with no results, verify these two dependencies first.
