@@ -22,6 +22,52 @@ class SearchAgent:
         self.model_name = model_name
         self.db_manager = db_manager
         self.last_processing_time = 0.0
+        self.ollama_urls = self._build_url_candidates(
+            ollama_url,
+            ["http://localhost:11434", "http://127.0.0.1:11434", "http://ollama:11434"]
+        )
+        self.searxng_urls = self._build_url_candidates(
+            searxng_url,
+            ["http://localhost:8080", "http://127.0.0.1:8080", "http://searxng:8080", "http://localhost:8091"]
+        )
+
+    def _build_url_candidates(self, primary: str, fallbacks: List[str]) -> List[str]:
+        """Build a de-duplicated ordered list of base URLs to try."""
+        ordered = [primary] + fallbacks
+        seen = set()
+        normalized = []
+        for url in ordered:
+            clean = (url or "").strip().rstrip("/")
+            if not clean or clean in seen:
+                continue
+            seen.add(clean)
+            normalized.append(clean)
+        return normalized
+
+    def _ollama_generate(self, prompt: str, timeout: int = 60) -> Optional[str]:
+        """Try configured Ollama endpoints until one responds successfully."""
+        payload = {
+            "model": self.model_name,
+            "prompt": prompt,
+            "stream": False,
+            "temperature": 0.3
+        }
+
+        for base_url in self.ollama_urls:
+            try:
+                response = requests.post(
+                    f"{base_url}/api/generate",
+                    json=payload,
+                    timeout=timeout
+                )
+                if response.status_code == 200:
+                    result = response.json()
+                    return result.get("response", "")
+                logger.warning("Ollama returned status %s from %s", response.status_code, base_url)
+            except Exception as e:
+                logger.warning("Ollama unavailable at %s: %s", base_url, str(e))
+
+        return None
         
     async def search(
         self,
@@ -95,27 +141,13 @@ Return JSON with:
 JSON response only, no other text:"""
 
         try:
-            response = requests.post(
-                f"{self.ollama_url}/api/generate",
-                json={
-                    "model": self.model_name,
-                    "prompt": prompt,
-                    "stream": False,
-                    "temperature": 0.3
-                },
-                timeout=60
-            )
-            
-            if response.status_code == 200:
-                result = response.json()
-                text = result.get("response", "")
-                
+            text = self._ollama_generate(prompt, timeout=60)
+            if text:
                 # Try to extract JSON from response
                 json_match = re.search(r'\{[\s\S]*\}', text)
                 if json_match:
                     criteria = json.loads(json_match.group())
                     return criteria
-                    
         except Exception as e:
             logger.error(f"LLM query parsing failed: {str(e)}")
         
@@ -163,25 +195,34 @@ JSON response only, no other text:"""
 
     async def _search_with_searxng(self, query: str, max_results: int) -> List[Dict]:
         """Search using SearXNG"""
-        try:
-            response = requests.get(
-                f"{self.searxng_url}/search",
-                params={
-                    "q": query,
-                    "format": "json",
-                    "pageno": 1,
-                    "results_on_new_tab": True
-                },
-                timeout=30
-            )
-            
-            if response.status_code == 200:
+        params = {
+            "q": query,
+            "format": "json",
+            "pageno": 1,
+            "results_on_new_tab": True,
+        }
+
+        for base_url in self.searxng_urls:
+            try:
+                response = requests.get(
+                    f"{base_url}/search",
+                    params=params,
+                    timeout=30,
+                    headers={"Accept": "application/json"}
+                )
+
+                if response.status_code != 200:
+                    logger.warning("SearXNG returned status %s from %s", response.status_code, base_url)
+                    continue
+
                 data = response.json()
                 results = data.get("results", [])
-                return results[:max_results]
-                
-        except Exception as e:
-            logger.error(f"SearXNG search failed: {str(e)}")
+                if results:
+                    return results[:max_results]
+
+                logger.warning("SearXNG returned empty results from %s", base_url)
+            except Exception as e:
+                logger.warning("SearXNG unavailable at %s: %s", base_url, str(e))
         
         return []
 
@@ -260,26 +301,12 @@ Nice to haves: {criteria.get('nice_to_haves', [])}
 Return JSON with matched specifications:"""
 
         try:
-            response = requests.post(
-                f"{self.ollama_url}/api/generate",
-                json={
-                    "model": self.model_name,
-                    "prompt": prompt,
-                    "stream": False,
-                    "temperature": 0.3
-                },
-                timeout=30
-            )
-            
-            if response.status_code == 200:
-                result = response.json()
-                text = result.get("response", "")
-                
-                json_match = re.search(r'\{[\s\S]*\}', text)
+            response_text = self._ollama_generate(prompt, timeout=30)
+            if response_text:
+                json_match = re.search(r'\{[\s\S]*\}', response_text)
                 if json_match:
                     specs = json.loads(json_match.group())
                     return specs
-                    
         except Exception as e:
             logger.error(f"Specs extraction failed: {str(e)}")
         
