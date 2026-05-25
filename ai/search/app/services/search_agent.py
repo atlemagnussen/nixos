@@ -68,6 +68,25 @@ class SearchAgent:
                 logger.warning("Ollama unavailable at %s: %s", base_url, str(e))
 
         return None
+
+    def _price_sort_key(self, product: Dict[str, Any]) -> float:
+        """Return a stable numeric key for price sorting.
+
+        Missing or invalid prices are pushed to the end.
+        """
+        value = product.get("price")
+        if value is None:
+            return float("inf")
+        if isinstance(value, (int, float)):
+            return float(value)
+        if isinstance(value, str):
+            cleaned = value.strip().replace(" ", "")
+            cleaned = re.sub(r"[^\d.,]", "", cleaned).replace(",", ".")
+            try:
+                return float(cleaned)
+            except ValueError:
+                return float("inf")
+        return float("inf")
         
     async def search(
         self,
@@ -105,7 +124,7 @@ class SearchAgent:
             # If filtering is too strict, return extracted products sorted by price relevance.
             if not filtered_products and products:
                 logger.info("Filtering removed all products, returning unfiltered candidates")
-                filtered_products = sorted(products, key=lambda p: p.get("price", float("inf")))
+                filtered_products = sorted(products, key=self._price_sort_key)
             
             # Step 5: Store in database
             logger.info("Storing results in database...")
@@ -351,6 +370,6 @@ Return JSON with matched specifications:"""
             filtered.append(product)
         
         # Sort by price (ascending)
-        filtered.sort(key=lambda p: p.get("price", float('inf')))
+        filtered.sort(key=self._price_sort_key)
         
         return filtered
