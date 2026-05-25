@@ -34,7 +34,7 @@ spec:
       mountPath: /etc/searxng
     environment:
     - name: BASE_URL
-      value: "http://localhost:8080/"
+      value: "http://localhost:8091/"
     - name: INSTANCE_NAME
       value: "Local Search"
 
@@ -104,12 +104,12 @@ spec:
     name: ai-product-search
   ports:
   - name: web
-    port: 8000
+    port: 8090
     targetPort: 8000
   - name: ollama
     port: 11434
     targetPort: 11434
   - name: search
-    port: 8080
+    port: 8091
     targetPort: 8080
   type: ClusterIP
