@@ -6,6 +6,7 @@ import json
 import logging
 import time
 import re
+from datetime import datetime
 from typing import List, Optional, Dict, Any
 import requests
 from bs4 import BeautifulSoup
@@ -35,11 +36,17 @@ class SearchAgent:
             # Step 1: Parse query using LLM to extract search criteria
             logger.info(f"Parsing query: {query}")
             search_criteria = await self._parse_query_with_llm(query)
+            search_criteria = self._normalize_criteria(search_criteria)
             logger.info(f"Extracted criteria: {search_criteria}")
             
             # Step 2: Perform web search using SearXNG
             logger.info("Searching with SearXNG...")
             search_results = await self._search_with_searxng(query, max_results)
+
+            if not search_results:
+                fallback_query = search_criteria.get("product_type") or query
+                logger.info(f"Primary search returned no results, trying fallback query: {fallback_query}")
+                search_results = await self._search_with_searxng(fallback_query, max_results)
             
             # Step 3: Extract and parse product information
             logger.info("Extracting product information...")
@@ -48,11 +55,18 @@ class SearchAgent:
             # Step 4: Filter results based on criteria
             logger.info("Filtering results...")
             filtered_products = self._filter_products(products, search_criteria)
+
+            # If filtering is too strict, return extracted products sorted by price relevance.
+            if not filtered_products and products:
+                logger.info("Filtering removed all products, returning unfiltered candidates")
+                filtered_products = sorted(products, key=lambda p: p.get("price", float("inf")))
             
             # Step 5: Store in database
             logger.info("Storing results in database...")
             for product in filtered_products:
-                self.db_manager.add_product(product)
+                product_id = self.db_manager.add_product(product)
+                product["id"] = product_id
+                product["found_at"] = datetime.utcnow().isoformat()
             
             self.last_processing_time = time.time() - start_time
             logger.info(f"Search completed in {self.last_processing_time:.2f}s")
@@ -115,6 +129,37 @@ JSON response only, no other text:"""
             "must_haves": [],
             "nice_to_haves": []
         }
+
+    def _normalize_criteria(self, criteria: Dict[str, Any]) -> Dict[str, Any]:
+        """Normalize LLM criteria shape to predictable types."""
+        normalized = dict(criteria or {})
+
+        for key in ("must_haves", "nice_to_haves", "specifications"):
+            value = normalized.get(key, [])
+            if isinstance(value, str):
+                value = [v.strip() for v in re.split(r",|;|\n", value) if v.strip()]
+            elif not isinstance(value, list):
+                value = []
+            normalized[key] = [str(v).strip() for v in value if str(v).strip()]
+
+        for key in ("budget_min", "budget_max"):
+            value = normalized.get(key)
+            if isinstance(value, str):
+                value = value.strip().replace(" ", "")
+                value = re.sub(r"[^\d.,]", "", value)
+                value = value.replace(",", ".")
+            try:
+                normalized[key] = float(value) if value not in (None, "") else None
+            except (TypeError, ValueError):
+                normalized[key] = None
+
+        if not normalized.get("product_type"):
+            normalized["product_type"] = ""
+
+        if not normalized.get("currency"):
+            normalized["currency"] = "EUR"
+
+        return normalized
 
     async def _search_with_searxng(self, query: str, max_results: int) -> List[Dict]:
         """Search using SearXNG"""
@@ -251,6 +296,9 @@ Return JSON with matched specifications:"""
         budget_min = criteria.get("budget_min")
         budget_max = criteria.get("budget_max")
         must_haves = criteria.get("must_haves", [])
+
+        # Keep requirements concise; LLM can return long phrases that are too strict as hard filters.
+        must_haves = [m for m in must_haves if 1 <= len(m) <= 24]
         
         for product in products:
             # Filter by price
@@ -262,9 +310,15 @@ Return JSON with matched specifications:"""
             
             # Filter by must-haves
             if must_haves:
-                product_text = (product.get("name", "") + " " + 
-                               product.get("description", "")).lower()
-                if not all(have.lower() in product_text for have in must_haves):
+                product_text = (
+                    product.get("name", "") + " " +
+                    product.get("description", "") + " " +
+                    json.dumps(product.get("specs", {}))
+                ).lower()
+
+                match_count = sum(1 for have in must_haves if have.lower() in product_text)
+                min_required = max(1, len(must_haves) // 2)
+                if match_count < min_required:
                     continue
             
             filtered.append(product)

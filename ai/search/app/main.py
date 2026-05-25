@@ -61,14 +61,14 @@ class SearchQuery(BaseModel):
     filters: Optional[dict] = None
 
 class ProductResult(BaseModel):
-    id: int
+    id: Optional[int] = None
     name: str
-    price: float
+    price: Optional[float] = None
     currency: str
     url: str
     source: str
     specs: dict
-    found_at: str
+    found_at: Optional[str] = None
 
 class SearchResponse(BaseModel):
     query: str
