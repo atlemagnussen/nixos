@@ -1,0 +1,300 @@
+{
+  "id": "web-medium",
+  "name": "Web medium TLS",
+  "settings": {
+    "SERVER_NAME": "www.example.com",
+    "SECURITY_MODE": "block",
+    "USE_ANTIBOT": "javascript",
+    "ANTIBOT_URI": "/challenge",
+    "ANTIBOT_RECAPTCHA_SCORE": "0.7",
+    "ANTIBOT_RECAPTCHA_SITEKEY": "",
+    "ANTIBOT_RECAPTCHA_SECRET": "",
+    "ANTIBOT_HCAPTCHA_SITEKEY": "",
+    "ANTIBOT_HCAPTCHA_SECRET": "",
+    "ANTIBOT_TURNSTILE_SITEKEY": "",
+    "ANTIBOT_TURNSTILE_SECRET": "",
+    "USE_AUTH_BASIC": "no",
+    "AUTH_BASIC_LOCATION": "sitewide",
+    "AUTH_BASIC_USER": "changeme",
+    "AUTH_BASIC_PASSWORD": "changeme",
+    "AUTH_BASIC_TEXT": "Restricted area",
+    "USE_BAD_BEHAVIOR": "yes",
+    "BAD_BEHAVIOR_STATUS_CODES": "400 401 403 404 405 429 444",
+    "BAD_BEHAVIOR_THRESHOLD": "15",
+    "BAD_BEHAVIOR_COUNT_TIME": "60",
+    "BAD_BEHAVIOR_BAN_TIME": "14200",
+    "USE_BLACKLIST": "yes",
+    "BLACKLIST_COMMUNITY_LISTS": "ip:danmeuk-tor-exit ua:mitchellkrogza-bad-user-agents",
+    "BLACKLIST_IP": "",
+    "BLACKLIST_RDNS": ".shodan.io .censys.io",
+    "BLACKLIST_ASN": "",
+    "BLACKLIST_USER_AGENT": "",
+    "BLACKLIST_URI": "",
+    "BLACKLIST_IP_URLS": "",
+    "BLACKLIST_RDNS_URLS": "",
+    "BLACKLIST_ASN_URLS": "",
+    "BLACKLIST_USER_AGENT_URLS": "",
+    "BLACKLIST_URI_URLS": "",
+    "CLIENT_CACHE_CONTROL": "public, max-age=15552000",
+    "USE_CORS": "yes",
+    "CORS_ALLOW_ORIGIN": "*",
+    "CORS_ALLOW_HEADERS": "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization,Accept,Origin",
+    "CORS_ALLOW_CREDENTIALS": "yes",
+    "BLACKLIST_COUNTRY": "",
+    "WHITELIST_COUNTRY": "NO",
+    "USE_CUSTOM_SSL": "no",
+    "CUSTOM_SSL_CERT_PRIORITY": "file",
+    "CUSTOM_SSL_CERT": "",
+    "CUSTOM_SSL_KEY": "",
+    "CUSTOM_SSL_CERT_DATA": "",
+    "CUSTOM_SSL_KEY_DATA": "",
+    "USE_DNSBL": "no",
+    "KEEP_UPSTREAM_HEADERS": "*",
+    "COOKIE_FLAGS": "* SameSite=Lax",
+    "CONTENT_SECURITY_POLICY": "object-src 'none'; form-action 'self'; frame-ancestors 'self';",
+    "REFERRER_POLICY": "strict-origin-when-cross-origin",
+    "PERMISSIONS_POLICY": "accelerometer=(), ambient-light-sensor=(), attribution-reporting=(), autoplay=(), bluetooth=(), browsing-topics=(), camera=(), compute-pressure=(), display-capture=(), encrypted-media=(), fullscreen=(), geolocation=(), gyroscope=(), hid=(), identity-credentials-get=(), idle-detection=(), local-fonts=(), magnetometer=(), microphone=(), midi=(), otp-credentials=(), payment=(), picture-in-picture=(), publickey-credentials-create=(self), publickey-credentials-get=(self), screen-wake-lock=(), serial=(), storage-access=(self), usb=(self), web-share=(), window-management=(), xr-spatial-tracking=(), aria-notify=(), captured-surface-control=(), cross-origin-isolated=(), deferred-fetch=(), deferred-fetch-minimal=(), on-device-speech-recognition=(), summarizer=(), wildcards=(), private-state-token-issuance=(), private-state-token-redemption=(), ch-ua-high-entropy-values=(), gamepad=(), interest-cohort=()",
+    "AUTO_LETS_ENCRYPT": "yes",
+    "LETS_ENCRYPT_SERVER": "letsencrypt",
+    "LETS_ENCRYPT_ZEROSSL_API_KEY": "",
+    "LETS_ENCRYPT_ZEROSSL_API_RETRY": "3",
+    "LETS_ENCRYPT_ZEROSSL_API_RETRY_DELAY": "2",
+    "LETS_ENCRYPT_ZEROSSL_API_CONNECT_TIMEOUT": "5",
+    "LETS_ENCRYPT_ZEROSSL_API_MAX_TIME": "20",
+    "LETS_ENCRYPT_CHALLENGE": "dns",
+    "LETS_ENCRYPT_DNS_PROVIDER": "cloudflare",
+    "LETS_ENCRYPT_DNS_PROPAGATION": "default",
+    "LETS_ENCRYPT_DNS_CREDENTIAL_ITEM": "api_token xxx",
+    "USE_LETS_ENCRYPT_WILDCARD": "yes",
+    "USE_LETS_ENCRYPT_STAGING": "no",
+    "USE_LIMIT_REQ": "yes",
+    "LIMIT_REQ_URL": "/",
+    "LIMIT_REQ_RATE": "4r/s",
+    "USE_LIMIT_CONN": "yes",
+    "LIMIT_CONN_MAX_HTTP1": "20",
+    "LIMIT_CONN_MAX_HTTP2": "150",
+    "LIMIT_CONN_MAX_HTTP3": "150",
+    "ALLOWED_METHODS": "GET|POST|HEAD|OPTIONS|PUT|DELETE|PATCH",
+    "MAX_CLIENT_SIZE": "50m",
+    "HTTP2": "yes",
+    "HTTP3": "yes",
+    "USE_MODSECURITY": "yes",
+    "USE_MODSECURITY_CRS_PLUGINS": "yes",
+    "MODSECURITY_CRS_VERSION": "4",
+    "MODSECURITY_CRS_PLUGINS": "",
+    "MTLS_FORWARD_CLIENT_HEADERS": "yes",
+    "USE_REVERSE_PROXY": "yes",
+    "REVERSE_PROXY_HOST": "http://upstream-server:8080",
+    "REVERSE_PROXY_URL": "/",
+    "REVERSE_PROXY_WS": "no",
+    "REVERSE_PROXY_KEEPALIVE": "no",
+    "REVERSE_PROXY_CUSTOM_HOST": "",
+    "REVERSE_PROXY_SSL_SNI": "no",
+    "REVERSE_PROXY_SSL_SNI_NAME": "",
+    "PROXY_BUFFERS": "4 32k",
+    "PROXY_BUFFER_SIZE": "32k",
+    "PROXY_BUSY_BUFFERS_SIZE": "32k",
+    "USE_REVERSE_SCAN": "no",
+    "REVERSE_SCAN_PORTS": "22 80 443",
+    "SSL_PROTOCOLS": "TLSv1.2 TLSv1.3",
+    "WHITELIST_URI": ""
+  },
+  "steps": [
+    {
+      "title": "Web service - Front service",
+      "settings": [
+        "SERVER_NAME",
+        "SECURITY_MODE",
+        "AUTO_LETS_ENCRYPT",
+        "USE_LETS_ENCRYPT_STAGING",
+        "USE_LETS_ENCRYPT_WILDCARD",
+        "LETS_ENCRYPT_SERVER",
+        "LETS_ENCRYPT_ZEROSSL_API_KEY",
+        "LETS_ENCRYPT_ZEROSSL_API_RETRY",
+        "LETS_ENCRYPT_ZEROSSL_API_RETRY_DELAY",
+        "LETS_ENCRYPT_ZEROSSL_API_CONNECT_TIMEOUT",
+        "LETS_ENCRYPT_ZEROSSL_API_MAX_TIME",
+        "LETS_ENCRYPT_CHALLENGE",
+        "LETS_ENCRYPT_DNS_PROVIDER",
+        "LETS_ENCRYPT_DNS_PROPAGATION",
+        "LETS_ENCRYPT_DNS_CREDENTIAL_ITEM",
+        "USE_CUSTOM_SSL",
+        "CUSTOM_SSL_CERT_PRIORITY",
+        "CUSTOM_SSL_CERT",
+        "CUSTOM_SSL_KEY",
+        "CUSTOM_SSL_CERT_DATA",
+        "CUSTOM_SSL_KEY_DATA"
+      ],
+      "configs": [],
+      "subtitle": "Configure your web service facing your clients"
+    },
+    {
+      "title": "Web service - Upstream server",
+      "settings": [
+        "USE_REVERSE_PROXY",
+        "REVERSE_PROXY_HOST",
+        "REVERSE_PROXY_URL",
+        "REVERSE_PROXY_CUSTOM_HOST",
+        "REVERSE_PROXY_SSL_SNI",
+        "REVERSE_PROXY_SSL_SNI_NAME",
+        "REVERSE_PROXY_WS",
+        "REVERSE_PROXY_KEEPALIVE"
+      ],
+      "configs": [],
+      "subtitle": "Configure the upstream server to be protected by BunkerWeb"
+    },
+    {
+      "title": "HTTP - General",
+      "settings": [
+        "ALLOWED_METHODS",
+        "MAX_CLIENT_SIZE",
+        "HTTP2",
+        "HTTP3",
+        "SSL_PROTOCOLS"
+      ],
+      "configs": [],
+      "subtitle": "Configure the settings related to the HTTP(S) protocol"
+    },
+    {
+      "title": "HTTP - Headers",
+      "settings": [
+        "COOKIE_FLAGS",
+        "CONTENT_SECURITY_POLICY",
+        "PERMISSIONS_POLICY",
+        "KEEP_UPSTREAM_HEADERS",
+        "REFERRER_POLICY",
+        "USE_CORS",
+        "CORS_ALLOW_ORIGIN",
+        "CLIENT_CACHE_CONTROL"
+      ],
+      "configs": [],
+      "subtitle": "Configure the settings related to the HTTP headers"
+    },
+    {
+      "title": "Security - Bad behavior",
+      "settings": [
+        "USE_BAD_BEHAVIOR",
+        "BAD_BEHAVIOR_STATUS_CODES",
+        "BAD_BEHAVIOR_BAN_TIME",
+        "BAD_BEHAVIOR_THRESHOLD",
+        "BAD_BEHAVIOR_COUNT_TIME"
+      ],
+      "configs": [],
+      "subtitle": "Configure the settings related to the automatic ban when a bad behavior is detected."
+    },
+    {
+      "title": "Security - Blacklisting",
+      "settings": [
+        "USE_BLACKLIST",
+        "USE_DNSBL",
+        "BLACKLIST_COMMUNITY_LISTS",
+        "BLACKLIST_IP",
+        "BLACKLIST_RDNS",
+        "BLACKLIST_ASN",
+        "BLACKLIST_USER_AGENT",
+        "BLACKLIST_URI",
+        "BLACKLIST_IP_URLS",
+        "BLACKLIST_RDNS_URLS",
+        "BLACKLIST_ASN_URLS",
+        "BLACKLIST_USER_AGENT_URLS",
+        "BLACKLIST_URI_URLS"
+      ],
+      "configs": [],
+      "subtitle": "Configure the settings related to the external blacklists."
+    },
+    {
+      "title": "Security - Limiting",
+      "settings": [
+        "USE_LIMIT_CONN",
+        "LIMIT_CONN_MAX_HTTP1",
+        "LIMIT_CONN_MAX_HTTP2",
+        "LIMIT_CONN_MAX_HTTP3",
+        "USE_LIMIT_REQ",
+        "LIMIT_REQ_URL",
+        "LIMIT_REQ_RATE"
+      ],
+      "configs": [],
+      "subtitle": "Configure the settings related to limiting requests and connections."
+    },
+    {
+      "title": "Security - Antibot",
+      "settings": [
+        "USE_ANTIBOT",
+        "ANTIBOT_URI",
+        "ANTIBOT_RECAPTCHA_SCORE",
+        "ANTIBOT_RECAPTCHA_SITEKEY",
+        "ANTIBOT_RECAPTCHA_SECRET",
+        "ANTIBOT_HCAPTCHA_SITEKEY",
+        "ANTIBOT_HCAPTCHA_SECRET",
+        "ANTIBOT_TURNSTILE_SITEKEY",
+        "ANTIBOT_TURNSTILE_SECRET"
+      ],
+      "configs": [],
+      "subtitle": "Configure the settings about bot detection"
+    },
+    {
+      "title": "Security - Auth basic",
+      "settings": [
+        "USE_AUTH_BASIC",
+        "AUTH_BASIC_LOCATION",
+        "AUTH_BASIC_USER",
+        "AUTH_BASIC_PASSWORD",
+        "AUTH_BASIC_TEXT"
+      ],
+      "configs": [],
+      "subtitle": "Configure HTTP basic authentication"
+    },
+    {
+      "title": "Security - Country",
+      "settings": [
+        "BLACKLIST_COUNTRY",
+        "WHITELIST_COUNTRY"
+      ],
+      "configs": [],
+      "subtitle": "Configure the settings about country access policy"
+    },
+    {
+      "title": "Security - Reverse scan",
+      "settings": [
+        "USE_REVERSE_SCAN",
+        "REVERSE_SCAN_PORTS"
+      ],
+      "configs": [],
+      "subtitle": "Configure the settings about scanning clients ports"
+    },
+    {
+      "title": "Security - ModSecurity",
+      "settings": [
+        "USE_MODSECURITY",
+        "USE_MODSECURITY_CRS_PLUGINS",
+        "MODSECURITY_CRS_VERSION",
+        "MODSECURITY_CRS_PLUGINS"
+      ],
+      "configs": [
+        "modsec/anomaly_score.conf"
+      ],
+      "subtitle": "Configure the settings related to the ModSecurity WAF"
+    },
+    {
+      "title": "Diverse",
+      "settings": [
+        "WHITELIST_URI",
+        "MTLS_FORWARD_CLIENT_HEADERS",
+        "PROXY_BUFFERS",
+        "PROXY_BUFFER_SIZE",
+        "PROXY_BUSY_BUFFERS_SIZE",
+        "CORS_ALLOW_HEADERS",
+        "CORS_ALLOW_CREDENTIALS"
+      ],
+      "configs": [],
+      "subtitle": "white"
+    }
+  ],
+  "configs": [
+    {
+      "type": "modsec",
+      "name": "anomaly_score",
+      "data": "SecAction \\\n  \"id:900110,\\\n  phase:1,\\\n  pass,\\\n  t:none,\\\n  nolog,\\\n  tag:'OWASP_CRS',\\\n  setvar:tx.inbound_anomaly_score_threshold=5,\\\n  setvar:tx.outbound_anomaly_score_threshold=4\"\n"
+    }
+  ]
+}

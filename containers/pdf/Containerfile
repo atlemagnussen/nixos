@@ -1,18 +1,91 @@
-FROM pytorch/pytorch:2.2.1-cuda12.1-cudnn8-runtime
+FROM nvidia/cuda:12.1.0-runtime-ubuntu22.04
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
+    python3.11 \
+    python3.11-dev \
+    python3.11-venv \
+    python3-pip \
     libgl1-mesa-glx \
     libmagic1 \
     poppler-utils \
     tesseract-ocr \
+    libtesseract-dev \
     git \
+    ffmpeg \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Marker
-RUN pip install --no-cache-dir marker-pdf
+# Update alternatives to use python3.11
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.11 1 && \
+    update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1
+
+# Create an isolated virtualenv so OS-level python packages cannot interfere.
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:${PATH}"
+
+# Upgrade packaging tools inside venv.
+RUN python -m pip install --upgrade pip setuptools wheel
+
+# Pin a known-good CUDA 12.1 torch stack and keep it locked during marker install.
+RUN printf '%s\n' \
+    'torch==2.4.1+cu121' \
+    'torchvision==0.19.1+cu121' \
+    'torchaudio==2.4.1+cu121' \
+    'Pillow==10.4.0' \
+    'transformers==4.45.2' > /tmp/constraints.txt
+
+# Install marker and API deps with enforced torch constraints.
+RUN pip install --no-cache-dir \
+    --constraint /tmp/constraints.txt \
+    --extra-index-url https://download.pytorch.org/whl/cu121 \
+    marker-pdf[full] \
+    uvicorn[standard] \
+    fastapi \
+    python-multipart
+
+# Force reinstall pinned torch stack last as a final guard against resolver drift.
+RUN pip install --no-cache-dir --force-reinstall \
+    --index-url https://download.pytorch.org/whl/cu121 \
+    torch==2.4.1+cu121 \
+    torchvision==0.19.1+cu121 \
+    torchaudio==2.4.1+cu121
+
+# Keep Pillow compatible with marker/surya/texify requirements.
+RUN pip install --no-cache-dir --force-reinstall Pillow==10.4.0
+
+# Keep transformers compatible with the marker/surya versions resolved in this image.
+RUN pip install --no-cache-dir --force-reinstall transformers==4.45.2
+
+# Fail build early if imports and torchvision ops are healthy.
+RUN python - <<'PY'
+import torch
+import torchvision
+import marker
+import shutil
+import transformers
+from torchvision.ops import nms
+
+print('torch', torch.__version__)
+print('torchvision', torchvision.__version__)
+print('transformers', transformers.__version__)
+print('cuda_available', torch.cuda.is_available())
+print('nms_ok', callable(nms))
+print('marker_pkg_ok', marker.__name__)
+print('marker_server_cli_ok', shutil.which('marker_server') is not None)
+PY
 
 WORKDIR /data
 
-# Use marker_single for one-off book conversions
-ENTRYPOINT ["marker_single"]
+# Expose the API port
+EXPOSE 8000
+
+# Set environment to use GPU
+ENV TORCH_DEVICE=cuda
+ENV PYTHONUNBUFFERED=1
+
+# Start the marker API server (CMD allows easy port/host overrides at runtime)
+ENTRYPOINT ["marker_server"]
+CMD ["--port", "8000", "--host", "0.0.0.0"]
