@@ -48,6 +48,12 @@ VALUES (1, 'hello')
 SELECT * from public.TableTest
 ```
 
+## Grant the maintenance role
+
+```sql
+GRANT pg_maintain TO cln;
+```
+
 ## pgbackrest
 
 ALL commands must be done via postgres user
@@ -138,3 +144,15 @@ db.backend=postgres
  db.postgres.dsn=postgres://lnd:lnd@localhost:45432/lnd?sslmode=disable
  db.postgres.timeout=30s
  db.postgres.maxconnections=50
+
+
+
+ ## DUMP
+
+ ```sh
+pg_dump -U my_user -d my_database -f backup.sql
+
+
+pg_dump -U postgres -F c -b -v -f cln.dump cln
+pg_dump -U postgres -F c -b -v -f cln_bkpr.dump cln_bkpr
+ ```
