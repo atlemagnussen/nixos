@@ -1,5 +1,5 @@
 FROM debian:bookworm-slim
-ARG version=28.1
+ARG version=31.0
 ARG datadir=/home/bitcoin/.bitcoin
 
 ARG UID=1001

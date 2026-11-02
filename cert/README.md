@@ -17,6 +17,7 @@ Then use REST API to domeneshop
 verify:
 
 dig -t txt +short @8.8.8.8 _acme-challenge.logout.work
+dig -t txt +short @8.8.8.8 _acme-challenge.internal.digilean.no
 
 dig +nocmd +noall +answer @8.8.8.8 _acme-challenge.logout.work
 
