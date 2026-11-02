@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
+set -euo pipefail
+VERSION=${1:-32.1}
 git pull
-podman rmi atlmag/bitcoin
-podman rmi atlmag/bitcoin:28.1
-podman build --tag atlmag/bitcoin:latest --tag atlmag/bitcoin:28.1 .
+podman build --build-arg version="$VERSION" \
+  --tag atlmag/bitcoin:latest --tag atlmag/bitcoin:"$VERSION" .
