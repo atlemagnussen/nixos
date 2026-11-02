@@ -1,6 +1,6 @@
 # ---- fetch & verify ----
 FROM debian:trixie-slim AS fetch
-ARG version=31.2
+ARG version=32.1
 ARG arch=x86_64-linux-gnu
 # minimum number of good builder signatures on SHA256SUMS
 ARG min_sigs=3
@@ -24,7 +24,7 @@ RUN set -eux; \
 
 # ---- runtime ----
 FROM debian:trixie-slim
-ARG version=31.2
+ARG version=32.1
 ARG datadir=/home/bitcoin/.bitcoin
 ARG UID=1001
 ARG GID=1001
