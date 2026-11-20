@@ -1,5 +1,5 @@
-podman pod stop webdirpod
+#podman pod stop webdirpod
+#podman pod rm webdirpod
+#podman kube play webdir.yml --configmap webdirConf.yml
+podman kube play --replace webdir.yml --configmap webdirConf.yml
 
-podman pod rm webdirpod
-
-podman kube play webdir.yml --configmap webdirConf.yml
