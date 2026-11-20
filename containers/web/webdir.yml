@@ -20,7 +20,7 @@ spec:
       name: data-volume-pvc
       subPath: .webdirlisting
     ports:
-    - containerPort: 8000
+    - containerPort: 8080
       hostPort: 8000
   # - name: listing-net
   #   image: atlmag/web-dir-listing.net
