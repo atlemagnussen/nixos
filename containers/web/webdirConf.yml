@@ -3,12 +3,11 @@ kind: ConfigMap
 metadata:
   name: webDirConf
 data:
-  TITLE: "srv.atle.guru lib"
-  LIBPATHS: "Audio,AudioBooks,Music,Books"
-  FileServerConfig__Title: "srv.atle.guru fileserver"
-  FileServerConfig__Paths__Audio: "/data/Audio"
-  FileServerConfig__Paths__AudioBooks: "/data/AudioBooks"
-  FileServerConfig__Paths__Books: "/data/Books"
-  FileServerConfig__Paths__Music: "/data/Music"
-  Logging__LogLevel__Default: "Debug"
+  TITLE: "srv lib"
+  Library__Title: "fileserver"
+  Library__Paths__Audiobooks: "/data/Audio"
+  Library__Paths__Audio: "/data/AudioBooks"
+  Library__Paths__Books: "/data/Books"
+  Library__Paths__Music: "/data/Music"
+  Logging__LogLevel__Default: "Error"
   ASPNETCORE_FORWARDEDHEADERS_ENABLED: true
