@@ -5,8 +5,8 @@ metadata:
 data:
   TITLE: "srv lib"
   Library__Title: "fileserver"
-  Library__Paths__Audiobooks: "/data/Audio"
-  Library__Paths__Audio: "/data/AudioBooks"
+  Library__Paths__Audiobooks: "/data/AudioBooks"
+  Library__Paths__Audio: "/data/Audio"
   Library__Paths__Books: "/data/Books"
   Library__Paths__Music: "/data/Music"
   Logging__LogLevel__Default: "Error"
