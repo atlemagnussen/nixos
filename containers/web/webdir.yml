@@ -16,6 +16,9 @@ spec:
     volumeMounts:
     - mountPath: /data
       name: data-volume-pvc
+    - mountPath: /state
+      name: data-volume-pvc
+      subPath: state
     ports:
     - containerPort: 8000
       hostPort: 8000
@@ -28,9 +31,6 @@ spec:
     volumeMounts:
     - mountPath: /data
       name: data-volume-pvc
-    - mountPath: /state
-      name: data-volume-pvc
-      subPath: state
     ports:
     - containerPort: 8080
       hostPort: 8001
