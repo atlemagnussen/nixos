@@ -9,5 +9,6 @@ data:
   Library__Paths__Audio: "/data/Audio"
   Library__Paths__Books: "/data/Books"
   Library__Paths__Music: "/data/Music"
+  Oidc_Authority: "https://id.logout.work"
   Logging__LogLevel__Default: "Error"
   ASPNETCORE_FORWARDEDHEADERS_ENABLED: true
